@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <?php include("./res/common/head.php"); ?>
+        <script src="js/loadEvento.js"></script>
+    </head>
+    <body>
+        <?php include("./res/common/nav.php"); ?>
+        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+	<div class="jumbotron">
+		
+	</div>
+ <!-- Informações que deveram ser exibidas:
+ - Horario e 
+            Data do Evento - Nome do Local - Endereço do Local - 
+            Organizador - Valor do ingresso ou informações sobre entrada 
+            - Quadro de avisos dos administradores - Pessoas que 
+            compareceram (marcados pelo organizador na compra de 
+            ingresso) e quem perseguiu - Denunciar para os 
+            administradores de região - Informar algum problema ao 
+            organizador
+
+            Discussão:
+            - Publicações dos Administradores
+            - Publicações dos perseguidores
+            - Galeria
+        -->
+        </main>
+        <?php include("./res/common/modal.php"); ?>
+    </body>
+</html>
