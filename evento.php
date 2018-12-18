@@ -14,6 +14,7 @@
 		<h5>Rua Natal, 340 - Jd. Paulistano - Sorocaba</h5>
 		<h6>Organizado por: Unidade 016</h6>
 	</div>
+	<?php include("./res/common/evento-nav.php"); ?>
 	<div class="jumbotron" style="background-color: #00ff00;">
 		<h2>Ingressos</h2>
 		<h4>R$15,00 + Um quilo de alimento</h4>
@@ -80,26 +81,7 @@
 			</div>
 		</div>
 	</div>
-        <!--
-            Informações que deveram ser exibidas (Inicio):
-x            - Nome do Evento
-x            - Horario e Data do Evento
-x            - Nome do Local
-x            - Endereço do Local
-x            - Organizador
-
-x            - Valor do ingresso ou informações sobre entrada
-x            - Quadro de avisos dos administradores
-x            - Pessoas que compareceram (marcados pelo organizador na compra de ingresso) e quem perseguiu
-?            - Denunciar para os administradores de região
-?            - Informar algum problema ao organizador
-
-            Discussão:
-            - Publicações dos Administradores
-            - Publicações dos perseguidores
-            - Galeria
-        -->
-        </main>
-        <?php include("./res/common/modal.php"); ?>
+    </main>
+    <?php include("./res/common/modal.php"); ?>
     </body>
 </html>

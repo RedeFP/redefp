@@ -7,6 +7,14 @@
 	<body>
 		<?php include("./res/common/nav.php"); ?>
 		<main class="container" role="main" style="margin-top: 71px; padding-top: 10px;">
+		<div class="jumbotron" style="background-color: #e30613;">
+			<h1 class="display-4">Nome do Evento</h1>
+			<h3>25/12/2018 23:59</h3>
+			<h4>Quadra da ETEC Fernando Prestes</h6>
+			<h5>Rua Natal, 340 - Jd. Paulistano - Sorocaba</h5>
+			<h6>Organizado por: Unidade 016</h6>
+		</div>
+		<?php include("./res/common/evento-nav.php"); ?>
 			<h1>Publicações dos administradores</h1>
 			<div class="container post" data-id="1">
 				<a href="profile.php?id-15">
