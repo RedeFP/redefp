@@ -25,10 +25,10 @@
 				<button class="hitbox" onclick="likePost(1);" data-id="1">
 					<img class="hitpic" src="./vendor/custom-icons/like.png">10
 				</button>
-				<button class="hitbox" onclick="deslikePost(1);" data-id"1">
+				<button class="hitbox" onclick="deslikePost(1);" data-id="1">
 					<img class="hitpic" src="./vendor/custom-icons/deslike.png">10
 				</button>
-				<buttom class="hitbox comment" onclick="montaModal(1)">
+				<button class="hitbox comment" onclick="montaModal(1)">
 					<img class="hitpic" src="./vendor/custom-icons/comment.png">
 				</button>
 			</div>
@@ -43,10 +43,10 @@
                                 <button class="hitbox" onclick="likePost(1);" data-id="1">
                                         <img class="hitpic" src="./vendor/custom-icons/like.png">10
                                 </button>
-                                <button class="hitbox" onclick="deslikePost(1);" data-id"1">
+                                <button class="hitbox" onclick="deslikePost(1);" data-id="1">
                                         <img class="hitpic" src="./vendor/custom-icons/deslike.png">10
                                 </button>  
-                                <buttom class="hitbox comment" onclick="montaModal(1)">
+                                <button class="hitbox comment" onclick="montaModal(1)">
                                         <img class="hitpic" src="./vendor/custom-icons/comment.png">
                                 </button>
                         </div>
@@ -77,7 +77,7 @@
 					<span class="sr-only">Previous</span>
 				</a>
 				<a class="carousel-control-next" href="#carouselGaleria" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden"true"></span>
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
 				</a>
 			</div>

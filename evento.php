@@ -8,11 +8,11 @@
         <?php include("./res/common/nav.php"); ?>
         <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
 	<div class="jumbotron" style="background-color: #e30613;">
-		<h1 class="display-4">Nome do Evento</h1>
-		<h3>25/12/2018 23:59</h3>
-		<h4>Quadra da ETEC Fernando Prestes</h6>
-		<h5>Rua Natal, 340 - Jd. Paulistano - Sorocaba</h5>
-		<h6>Organizado por: Unidade 016</h6>
+		<h1 class="display-4" id="event-name">Nome do Evento</h1>
+		<h3 id="event-date">25/12/2018 23:59</h3>
+		<h4 id="place-name">Quadra da ETEC Fernando Prestes</h6>
+		<h5 id="place-address">Rua Natal, 340 - Jd. Paulistano - Sorocaba</h5>
+		<h6 id="event-owner">Organizado por: Unidade 016</h6>
 	</div>
 	<?php include("./res/common/evento-nav.php"); ?>
 	<div class="jumbotron" style="background-color: #00ff00;">
