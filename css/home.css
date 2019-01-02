@@ -168,3 +168,10 @@ div.comunity-list-group {
     height: 122px; 
     width: 100%;
 }
+
+div.18rw {
+	width: 18rem;
+}
+div.card {
+	max-width: 300px;
+}

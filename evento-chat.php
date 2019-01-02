@@ -8,48 +8,20 @@
 		<?php include("./res/common/nav.php"); ?>
 		<main class="container" role="main" style="margin-top: 71px; padding-top: 10px;">
 		<div class="jumbotron" style="background-color: #e30613;">
-			<h1 class="display-4">Nome do Evento</h1>
-			<h3>25/12/2018 23:59</h3>
-			<h4>Quadra da ETEC Fernando Prestes</h6>
-			<h5>Rua Natal, 340 - Jd. Paulistano - Sorocaba</h5>
-			<h6>Organizado por: Unidade 016</h6>
+			<h1 id="event-name" class="display-4">Nome do Evento</h1>
+			<h3 id="event-date">25/12/2018 23:59</h3>
+			<h4 id="place-name">Quadra da ETEC Fernando Prestes</h6>
+			<h5 id="place-address">Rua Natal, 340 - Jd. Paulistano - Sorocaba</h5>
+			<h6 id="event-owner">Organizado por: Unidade 016</h6>
 		</div>
 		<?php include("./res/common/evento-nav.php"); ?>
-			<h1>Publicações dos administradores</h1>
-			<div class="container post" data-id="1">
-				<a href="profile.php?id-15">
-					<img src="./css/user.png" class="user-icon">Alberto Benedito de Morais Trevisan
-				</a>
-				<br />
-				<textarea class="form-control-plaintext" readonly width="100vh">Edelson é demais! sz</textarea>
-				<button class="hitbox" onclick="likePost(1);" data-id="1">
-					<img class="hitpic" src="./vendor/custom-icons/like.png">10
-				</button>
-				<button class="hitbox" onclick="deslikePost(1);" data-id="1">
-					<img class="hitpic" src="./vendor/custom-icons/deslike.png">10
-				</button>
-				<button class="hitbox comment" onclick="montaModal(1)">
-					<img class="hitpic" src="./vendor/custom-icons/comment.png">
-				</button>
+			<h1 >Publicações dos administradores</h1>
+			<div class="container-fluid" id="import1">
 			</div>
 			<br>
 			<h1>Publicações dos membros</h1>
-			<div class="container post" data-id="1">
-                                <a href="profile.php?id-15">     
-                                        <img src="./css/user.png" class="user-icon">Alberto Benedito de Morais Trevisan
-                                </a>
-                                <br />
-                                <textarea class="form-control-plaintext" readonly width="100vh">Edelson é demais! sz</textarea>
-                                <button class="hitbox" onclick="likePost(1);" data-id="1">
-                                        <img class="hitpic" src="./vendor/custom-icons/like.png">10
-                                </button>
-                                <button class="hitbox" onclick="deslikePost(1);" data-id="1">
-                                        <img class="hitpic" src="./vendor/custom-icons/deslike.png">10
-                                </button>  
-                                <button class="hitbox comment" onclick="montaModal(1)">
-                                        <img class="hitpic" src="./vendor/custom-icons/comment.png">
-                                </button>
-                        </div>
+			<div class="container-fluid" id="import2">
+			</div>
 			<h1>Galeria de fotos</h1>
 			<div id="carouselGaleria" class="carousel slide" data-ride="carousel" height="100px">
 				<ol class="carousel-indicators">
