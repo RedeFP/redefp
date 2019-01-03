@@ -1,6 +1,6 @@
-# Project Title
+# RedeFP
 
-One Paragraph of project description goes here
+Nosso projeto é para melhorar a produtividade, comunicação
 
 ## Getting Started
 
