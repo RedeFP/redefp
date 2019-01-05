@@ -12,3 +12,4 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/home.css">
         <link rel="icon" href="css/logo.png">
+	<link rel="shortcut icon" href="/css/logo.png">
