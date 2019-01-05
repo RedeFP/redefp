@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-
-[Enter code here]
-
-=======
-
-[Enter code here]
-
->>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
