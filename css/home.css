@@ -169,9 +169,14 @@ div.comunity-list-group {
     width: 100%;
 }
 
-div.18rw {
+div.18rw{
 	width: 18rem;
 }
+
 div.card {
 	max-width: 300px;
+}
+
+div.evento{
+    width: calc(9% - 2px);
 }

@@ -2,9 +2,9 @@
 
 Nosso projeto é para melhorar a produtividade, comunicação
 
-## Getting Started
+## Responsabilidades
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Por este ser um projeto de código fechado, não permitimos cópias não autorizadas, por favor se deseja participar do projeto/partes de código, envie um e-mail para d3cr1pt(mineplay152@gmail.com)
 
 ### Prerequisites
 

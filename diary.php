@@ -11,18 +11,7 @@
             <div class="col-12" id="import1">
                 <h1>Eventinhos que persigo</h1>
                 <div class="row">
-                    <div class="col-3 evento " style=" width: calc(9% - 2px)">
-                        <div class="row">
-                            <div class="col-12" style="background-color: lightblue; border-radius: 10px; padding: 3px">
-                                <center>
-                                    <h6>Oscar 2018</h6>
-                                    <img src="./uploads/oscar2018capa.jpg" width="100%" style="margin-bottom: 5px">
-                                    <br>
-                                    <button class="btn btn-primary" onclick="window.location = 'evento.php'">Detalhes</button>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-3 evento " style=" width: calc(99% - 2px)">
                         <div class="row">
                             <div class="col-12" style="background-color: lightblue; border-radius: 10px; padding: 2px">
