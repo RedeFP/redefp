@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 # minimalist openssl.cnf file for use with phpseclib
 
 HOME			= .
 RANDFILE		= $ENV::HOME/.rnd
 
 [ v3_ca ]
+=======
+# minimalist openssl.cnf file for use with phpseclib
+
+HOME			= .
+RANDFILE		= $ENV::HOME/.rnd
+
+[ v3_ca ]
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4

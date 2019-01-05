@@ -79,6 +79,16 @@ function searchProfile($id)
     }
 }
 
+<<<<<<< HEAD
+=======
+function retornaCurso($id)
+{
+	global $bd;
+	$query = mysqli_query($bd, "SELECT * FROM curso WHERE id='$id'");
+	if($query) { $obj = mysqli_fetch_assoc($query); return $obj; }
+}
+
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 function retornaProfile($id)
 {
     global $bd;
@@ -87,7 +97,12 @@ function retornaProfile($id)
     if($query)
     {
         while ($row = mysqli_fetch_assoc($query)) {
+<<<<<<< HEAD
             return $row;
+=======
+            $row['curso'] = retornaCurso($row['curso']);
+			return $row;
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
         }
     }
     else
@@ -510,6 +525,209 @@ function loadProdutosComunidades($id)
     if($query) { while($row=mysqli_fetch_assoc($query)) { $array[]=$row; } echo json_encode($array); }
 }
 
+<<<<<<< HEAD
+=======
+function retornaLocal($id)
+{
+    global $bd;
+    $query = mysqli_query($bd,"SELECT * FROM evento_local WHERE id_local='$id'");
+    if($query){ $obj = mysqli_fetch_assoc($query); return $obj;}
+}
+
+function retornaOrganizador($id)
+{
+    global $bd;
+    $query = mysqli_query($bd,"SELECT * FROM evento_organizador WHERE id_organizador='$id'");
+    if($query){ $obj = mysqli_fetch_assoc($query); return $obj;}
+}
+
+function retornaEventoAvisos($id)
+{
+    global $bd;
+    $array = [];
+    $query = mysqli_query($bd, "SELECT * FROM evento_avisos WHERE id_evento = '$id'");
+    if($query) { 
+        while($row = mysqli_fetch_assoc($query))
+        {
+			if($row['tp_responsavel'] == 0){
+				$row['id_responsavel'] = retornaProfile($row['id_responsavel']);
+			}
+            $array[]=$row;
+        }
+        return $array;
+    }
+}
+
+function retornaEventoPubAdm($id)
+{
+    global $bd;
+    $array = [];
+    $query = mysqli_query($bd, "SELECT * FROM evento_pub_adm WHERE id_evento = '$id'");
+    if($query) { 
+        while($row = mysqli_fetch_assoc($query))
+        {
+			if($row['tp_responsavel'] == 0){
+				$row['id_responsavel'] = retornaProfile($row['id_responsavel']);
+			}
+            $array[]=$row;
+        }
+        return $array;
+    }
+}
+
+function retornaEventoPubMem($id)
+{
+    global $bd;
+    $array = [];
+    $query = mysqli_query($bd, "SELECT * FROM evento_pub_mem WHERE id_evento = '$id'");
+    if($query) { 
+        while($row = mysqli_fetch_assoc($query))
+        {
+			if($row['tp_responsavel'] == 0){
+				$row['id_responsavel'] = retornaProfile($row['id_responsavel']);
+			}
+            $array[]=$row;
+        }
+        return $array;
+    }
+}
+
+function retornaProduto($id)
+{
+	global $bd;
+	$query = mysqli_query($bd, "SELECT * FROM vendas_produtos WHERE id = '$id'");
+	if($query){ return mysqli_fetch_assoc($query); }
+}
+
+function retornaVendedor($id)
+{
+	global $bd;
+	$query = mysqli_query($bd, "SELECT * FROM vendas_vendedor WHERE id = '$id'");
+	if($query) { return mysqli_fetch_assoc($query); }
+}
+
+function retornaVenda($id)
+{
+	global $bd;
+	$query = mysqli_query($bd, "SELECT * FROM vendas_reservas WHERE id_reserva = '$id'");
+	if($query){ 
+		$obj = mysqli_fetch_assoc($query); 
+		$obj['id_produto'] = retornaProduto($obj['id_produto']);
+		$obj['id_vendedor'] = retornaVendedor($obj['id_vendedor']);
+		return $obj; 
+	}
+}
+
+function retornaEventoConvite($id)
+{
+    global $bd;
+    $array = [];
+    $query = mysqli_query($bd, "SELECT * FROM evento_convite WHERE id_evento = '$id'");
+    if($query){
+        while($row = mysqli_fetch_assoc($query))
+        {
+			if($row['tp_convidado'] == 0){
+				$row['id_convidado'] = retornaProfile($row['id_convidado']);
+			}
+			$row['id_venda'] = retornaVenda($row['id_venda']);
+            $array[]=$row;
+        }
+        return $array;
+    }
+}
+
+function retornaEventoPhotos($id)
+{
+	global $bd;
+	$array = [];
+	$query = mysqli_query($bd, "SELECT * FROM evento_photo WHERE id_evento = '$id'");
+	if($query){
+		while($row = mysqli_fetch_assoc($query))
+		{
+			$array[]=$row;
+		}
+		return $array;
+	}
+}
+
+function retornaEventoPerseguidores($id)
+{
+	global $bd;
+	$array = [];
+	$query = mysqli_query($bd, "SELECT * FROM perseguicao WHERE id_perseguido = '$id' AND tp_perseguido = '2'");
+	if($query){
+		while($row = mysqli_fetch_assoc($query))
+		{
+			if($row['tp_perseguidor'] == 0){
+				$row['id_perseguidor'] = retornaProfile($row['id_perseguidor']);
+			}
+			$array[]=$row;
+			
+		}
+		return $array;
+	}
+}
+
+function loadEvento($id)
+{
+    global $bd;
+    $query = mysqli_query($bd,"SELECT * FROM evento WHERE id_evento = '$id'");
+    if($query){ $obj = mysqli_fetch_assoc($query);}
+    $obj['id_local'] = retornaLocal($obj['id_local']);
+    $obj['id_organizador'] = retornaOrganizador($obj['id_organizador']);
+    $obj['avisos'] = retornaEventoAvisos($id);
+    $obj['pub_adm'] = retornaEventoPubAdm($id);
+    $obj['pub_mem'] = retornaEventoPubMem($id);
+	$obj['convites'] = retornaEventoConvite($id);
+	$obj['perseguidores'] = retornaEventoPerseguidores($id);
+	$obj['galeria'] = retornaEventoPhotos($id);
+	if(mysqli_error($bd) != ""){
+		$obj['error'] = mysqli_error($bd);
+	} else {
+		$obj['error'] = "FALSE";
+	}
+    echo json_encode($obj, JSON_PRETTY_PRINT);
+}
+
+function retornaEvento($id)
+{
+    global $bd;
+    $query = mysqli_query($bd,"SELECT * FROM evento WHERE id_evento = '$id'");
+    if($query){ $obj = mysqli_fetch_assoc($query);}
+    $obj['id_local'] = retornaLocal($obj['id_local']);
+    $obj['id_organizador'] = retornaOrganizador($obj['id_organizador']);
+    $obj['avisos'] = retornaEventoAvisos($id);
+    $obj['pub_adm'] = retornaEventoPubAdm($id);
+    $obj['pub_mem'] = retornaEventoPubMem($id);
+	$obj['convites'] = retornaEventoConvite($id);
+	$obj['perseguidores'] = retornaEventoPerseguidores($id);
+	$obj['galeria'] = retornaEventoPhotos($id);
+	if(mysqli_error($bd) != ""){
+		$obj['error'] = mysqli_error($bd);
+	} else {
+		$obj['error'] = "FALSE";
+	}
+    return $obj;
+}
+
+function loadEventosPerseguidos($id)
+{
+	global $bd; $array = [];
+	$query = mysqli_query($bd, "SELECT * FROM perseguicao WHERE id_perseguidor = '$id' AND tp_perseguidor = '0' AND tp_perseguido = '2'");
+	if($query)
+	{
+		while($row = mysqli_fetch_assoc($query))
+		{
+			$row['id_perseguidor'] = retornaProfile($row['id_perseguidor']);
+			$row['id_perseguido'] = retornaEvento($row['id_perseguido']);
+			$array[]=$row;
+		}
+		echo json_encode($array, JSON_PRETTY_PRINT);
+	}
+}
+
+
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 switch($webservice) {
     case "reservaItem":
     {
@@ -642,6 +860,21 @@ switch($webservice) {
         loadComunitysInscrito($id);
         break;
     }
+<<<<<<< HEAD
+=======
+    case "loadEvento":
+    {
+        header('Content-Type: application/json');
+        loadEvento($id);
+        break;
+    }
+	case "eventoPerseguidos":
+	{
+		header('Content-Type: application/json');
+		loadEventosPerseguidos($id);
+		break;
+	}
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
     default:
     {
         echo "Não foi definido um case";

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 User-agent: *
 Disallow: /index.php
 
@@ -16,4 +17,24 @@ Disallow: /languages/
 Disallow: /modules/
 Disallow: /plugins/
 Disallow: /skins/
+=======
+User-agent: *
+Disallow: /index.php
+
+Disallow: /beta
+
+Disallow: /beta1
+
+Disallow: /beta2
+
+Disallow: /beta3
+
+Disallow: /banners/
+Disallow: /images/
+Disallow: /includes/
+Disallow: /languages/
+Disallow: /modules/
+Disallow: /plugins/
+Disallow: /skins/
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 Disallow: /temp/

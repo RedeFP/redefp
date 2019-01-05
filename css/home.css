@@ -167,4 +167,14 @@ div.comunity-list-group {
     overflow-y: scroll; 
     height: 122px; 
     width: 100%;
+<<<<<<< HEAD
+=======
+}
+
+div.18rw {
+	width: 18rem;
+}
+div.card {
+	max-width: 300px;
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 }
