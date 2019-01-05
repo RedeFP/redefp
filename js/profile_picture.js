@@ -23,7 +23,8 @@ function loadPerfil()
             $("#import").prepend('<div class="col-3 user-image" id="upload" align="center"><img src="/uploads/plus.jpg" class="user-image-src"><br><span>Enviar fotos</span><br><span>05/01/2019</span></div>');
             $("#upload").on("click",function(){
                 console.log("função em breve"); //insert upload form here
-
+                $(".modal-body").html('<form action="gateway/.php" method="post" enctype="multipart/form-data">Select image to upload:<input type="file" name="fileToUpload" id="fileToUpload"><input type="submit" value="Upload Image" name="submit"></form>');
+                $("#commentmodal").modal('show');
             });
         });
         

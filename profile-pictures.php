@@ -32,5 +32,6 @@
                 </div>
             </div>
         </main>
+        <?php include("./res/common/modal.php"); ?>
     </body>
 </html>
