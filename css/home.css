@@ -167,6 +167,7 @@ div.comunity-list-group {
     overflow-y: scroll; 
     height: 122px; 
     width: 100%;
+
 }
 
 div.18rw{
@@ -179,4 +180,5 @@ div.card {
 
 div.evento{
     width: calc(9% - 2px);
+
 }

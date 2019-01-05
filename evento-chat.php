@@ -7,6 +7,43 @@
 	<body>
 		<?php include("./res/common/nav.php"); ?>
 		<main class="container" role="main" style="margin-top: 71px; padding-top: 10px;">
+<<<<<<< HEAD
+			<h1>Publicações dos administradores</h1>
+			<div class="container post" data-id="1">
+				<a href="profile.php?id-15">
+					<img src="./css/user.png" class="user-icon">Alberto Benedito de Morais Trevisan
+				</a>
+				<br />
+				<textarea class="form-control-plaintext" readonly width="100vh">Edelson é demais! sz</textarea>
+				<button class="hitbox" onclick="likePost(1);" data-id="1">
+					<img class="hitpic" src="./vendor/custom-icons/like.png">10
+				</button>
+				<button class="hitbox" onclick="deslikePost(1);" data-id"1">
+					<img class="hitpic" src="./vendor/custom-icons/deslike.png">10
+				</button>
+				<buttom class="hitbox comment" onclick="montaModal(1)">
+					<img class="hitpic" src="./vendor/custom-icons/comment.png">
+				</button>
+			</div>
+			<br>
+			<h1>Publicações dos membros</h1>
+			<div class="container post" data-id="1">
+                                <a href="profile.php?id-15">     
+                                        <img src="./css/user.png" class="user-icon">Alberto Benedito de Morais Trevisan
+                                </a>
+                                <br />
+                                <textarea class="form-control-plaintext" readonly width="100vh">Edelson é demais! sz</textarea>
+                                <button class="hitbox" onclick="likePost(1);" data-id="1">
+                                        <img class="hitpic" src="./vendor/custom-icons/like.png">10
+                                </button>
+                                <button class="hitbox" onclick="deslikePost(1);" data-id"1">
+                                        <img class="hitpic" src="./vendor/custom-icons/deslike.png">10
+                                </button>  
+                                <buttom class="hitbox comment" onclick="montaModal(1)">
+                                        <img class="hitpic" src="./vendor/custom-icons/comment.png">
+                                </button>
+                        </div>
+=======
 		<div class="jumbotron" style="background-color: #e30613;">
 			<h1 id="event-name" class="display-4">Nome do Evento</h1>
 			<h3 id="event-date">25/12/2018 23:59</h3>
@@ -22,6 +59,7 @@
 			<h1>Publicações dos membros</h1>
 			<div class="container-fluid" id="import2">
 			</div>
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 			<h1>Galeria de fotos</h1>
 			<div id="carouselGaleria" class="carousel slide" data-ride="carousel" height="100px">
 				<ol class="carousel-indicators">
@@ -49,7 +87,11 @@
 					<span class="sr-only">Previous</span>
 				</a>
 				<a class="carousel-control-next" href="#carouselGaleria" role="button" data-slide="next">
+<<<<<<< HEAD
+					<span class="carousel-control-next-icon" aria-hidden"true"></span>
+=======
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 					<span class="sr-only">Next</span>
 				</a>
 			</div>

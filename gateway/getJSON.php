@@ -79,6 +79,8 @@ function searchProfile($id)
     }
 }
 
+<<<<<<< HEAD
+=======
 function retornaCurso($id)
 {
 	global $bd;
@@ -86,6 +88,7 @@ function retornaCurso($id)
 	if($query) { $obj = mysqli_fetch_assoc($query); return $obj; }
 }
 
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 function retornaProfile($id)
 {
     global $bd;
@@ -94,8 +97,12 @@ function retornaProfile($id)
     if($query)
     {
         while ($row = mysqli_fetch_assoc($query)) {
+<<<<<<< HEAD
+            return $row;
+=======
             $row['curso'] = retornaCurso($row['curso']);
 			return $row;
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
         }
     }
     else
@@ -518,6 +525,8 @@ function loadProdutosComunidades($id)
     if($query) { while($row=mysqli_fetch_assoc($query)) { $array[]=$row; } echo json_encode($array); }
 }
 
+<<<<<<< HEAD
+=======
 function retornaLocal($id)
 {
     global $bd;
@@ -718,6 +727,7 @@ function loadEventosPerseguidos($id)
 }
 
 
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
 switch($webservice) {
     case "reservaItem":
     {
@@ -850,6 +860,8 @@ switch($webservice) {
         loadComunitysInscrito($id);
         break;
     }
+<<<<<<< HEAD
+=======
     case "loadEvento":
     {
         header('Content-Type: application/json');
@@ -862,6 +874,7 @@ switch($webservice) {
 		loadEventosPerseguidos($id);
 		break;
 	}
+>>>>>>> 6c5a0eae472b47947e37c523b6389aff713b93b4
     default:
     {
         echo "Não foi definido um case";
