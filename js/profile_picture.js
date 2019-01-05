@@ -19,7 +19,14 @@ function loadPerfil()
         $("#l2").attr("href","profile-pictures.php?id="+aluno.id);
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);
         $("#l4").attr("href","profile-contact.php?id="+aluno.id);
-        $("#import").load('/handler/profile-pictures.php?id='+aluno.id)
+        $("#import").load('/handler/profile-pictures.php?id='+aluno.id,function(){
+            $("#import").prepend('<div class="col-3 user-image" id="upload" align="center"><img src="/uploads/plus.jpg" class="user-image-src"><br><span>Enviar fotos</span><br><span>05/01/2019</span></div>');
+            $("#upload").on("click",function(){
+                console.log("função em breve"); //insert upload form here
+
+            });
+        });
+        
     });
 }
 

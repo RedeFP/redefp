@@ -386,12 +386,12 @@ function expandePost($id)
         }
         else
         {
-            echo "400 ERROR";
+            echo "400 ERROR1";
         }
     }
     else
     {
-        echo "400 ERROR";
+        echo "400 ERROR2";
     }
 }
 
