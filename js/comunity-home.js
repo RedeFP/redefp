@@ -7,10 +7,8 @@ function init_page()
         obj.forEach(searchByUser);
     })
     .done(function(){
-        
-        
+        console.info("Iniciando... 100%");
     });
-    console.info("Iniciando... 100%");
 }
 
 $(function(){
@@ -59,6 +57,7 @@ function generatePost(post,aluno)
     div.appendChild(user);
     div.appendChild(br);
     dpost = document.createElement("textarea");
+    dpost.setAttribute("readonly","");
     dpost.setAttribute("class","form-control-plaintext");
     dpost.setAttribute("width","100vh");
     dpost.innerHTML = post.txpost;

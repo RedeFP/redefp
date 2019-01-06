@@ -24,7 +24,7 @@ function loadPerfil()
             $("#upload").on("click",function(){
                 console.log("função em breve"); //insert upload form here
                 $(".modal-title").html('Upload de Fotos');
-                $(".modal-body").html('<form id="fotoup" action="gateway/upload/profile-image.php" method="post" enctype="multipart/form-data">Escolha a imagem:<br><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*"></form>');
+                $(".modal-body").html('<form id="fotoup" action="gateway/upload/profile-image.php" method="post" enctype="multipart/form-data"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Escolha</span></div><div class="custom-file"><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" class="custom-file-input"><label class="custom-file-label" for="fileToUpload">Imagem</label></div></div><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Legenda da foto</span></div><input type="text" class="form-control" name="txlegenda" maxlength="120"></div></form>');
                 $(".btn-primary").html('Enviar Imagem');
                 $(".btn-primary").attr('onclick','salvarFoto()');
                 $(".btn-secondary").html('Cancelar');
@@ -36,7 +36,9 @@ function loadPerfil()
 
 function salvarFoto()
 {
-    
+    $("#fotoup").append('<input type="hidden" name="aluno" value="'+info.aluno+'">');
+    $("#fotoup").append('<inpu type="hidden" name="datetime" value="'+new Date().toISOString().slice(0, 19).replace('T', ' ')+'">');
+    document.getElementById("fotoup").submit();
 }
 
 $(function(){
