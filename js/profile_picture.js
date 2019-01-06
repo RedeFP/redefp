@@ -23,12 +23,20 @@ function loadPerfil()
             $("#import").prepend('<div class="col-3 user-image" id="upload" align="center"><img src="/uploads/plus.jpg" class="user-image-src"><br><span>Enviar fotos</span><br><span>05/01/2019</span></div>');
             $("#upload").on("click",function(){
                 console.log("função em breve"); //insert upload form here
-                $(".modal-body").html('<form action="gateway/.php" method="post" enctype="multipart/form-data">Select image to upload:<input type="file" name="fileToUpload" id="fileToUpload"><input type="submit" value="Upload Image" name="submit"></form>');
+                $(".modal-title").html('Upload de Fotos');
+                $(".modal-body").html('<form id="fotoup" action="gateway/upload/profile-image.php" method="post" enctype="multipart/form-data">Escolha a imagem:<br><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*"></form>');
+                $(".btn-primary").html('Enviar Imagem');
+                $(".btn-primary").attr('onclick','salvarFoto()');
+                $(".btn-secondary").html('Cancelar');
                 $("#commentmodal").modal('show');
             });
         });
-        
     });
+}
+
+function salvarFoto()
+{
+    
 }
 
 $(function(){

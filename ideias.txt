@@ -16,3 +16,10 @@
             - Publicações dos perseguidores
             - Galeria
         -->
+		md = new MobileDetect(window.navigator.userAgent)
+		if(md.phone() == null & md.tablet() == null & md.mobile() == null) { console.log("desktop"); }
+		new Modal({
+			title: "", //Janela Flutuante
+			btn-primary-title: "",
+
+		})
