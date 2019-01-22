@@ -7,8 +7,8 @@ $(function(){
     loadProduto();
     loadProdutoLateral();
     $(".nav-item")[0].setAttribute("class","nav-item active");
-    var md = new MobileDetect(window.navigator.userAgent);
-    if(md.mobile() != "null") {
+    md = new MobileDetect(window.navigator.userAgent);
+    if(md.mobile() != null) {
         $("#prodtud").remove();
         $(".col-8").attr("class","col bk-grey");
     }
