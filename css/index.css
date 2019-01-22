@@ -5,3 +5,26 @@ body
 .jumbotron {
     padding: 1px !important;
 }
+
+.mob {
+    padding: 0 !important;
+    border: 0 !important;
+
+}
+
+.indexlogo {
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+
+.btnicon {
+    line-height: 160px;
+    padding-right: 2%; 
+    text-align: right;
+}
+
+.mob2 {
+    line-height: 160px;
+}
