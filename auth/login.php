@@ -18,12 +18,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="background: lightgrey">
-    <div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
-        <div class="jumbotron" style="padding: 5px;">
-            <a href="../"><img src="../css/logo.png" style="width:50%; display: block; margin-left: auto; margin-right: auto;"></a>
+    <div class="container-fluid" style="padding: 0px;">
+        <div class="jumbotron">
+            <a href="../"><img src="../css/logo.png" class="logicon"></a>
         </div>
         <div id="error"></div>
-        <div class="container" style="background: #ffffff;padding-top: 10px;padding-bottom: 10px;border-radius: 5px;width: 50vh;">
+        <div class="container containerlog">
             <div class="form-group row">
                 <label for="inputRA" class="col-sm-2 col-form-label">RA</label>
                 <div class="col-sm-10">

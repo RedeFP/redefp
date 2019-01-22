@@ -12,6 +12,14 @@ body
 
 }
 
+.containerlog {
+    background: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    width: 50% !important;
+}
+
 .indexlogo {
     width:50%;
     margin-left:auto;
@@ -28,3 +36,11 @@ body
 .mob2 {
     line-height: 80px;
 }
+
+.logicon {
+    width:50%;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
