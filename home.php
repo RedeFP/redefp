@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-8 bk-grey" id="postline">
             </div>
-            <div class="col-4 bk-grey" style="height: calc(100vh - 82px); padding-bottom: 20px; ">
+            <div class="col-4 bk-grey" id="prodtud" style="height: calc(100vh - 82px); padding-bottom: 20px; ">
                 <div class="row container-fluid bk-lgrey" id="lista_produtos">
                     <center style="width: 100%;">Últimos produtos</center>
                     <br />
