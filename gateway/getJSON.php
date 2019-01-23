@@ -109,7 +109,7 @@ function likePost($id) {
     $search = "SELECT * FROM aluno_post WHERE id_post = '$id' ";
     $query = mysqli_query($bd,$search);
     if($query){
-        while($row = mysqli_fetch_assoc($query)) {
+        $row = mysqli_fetch_assoc($query);
             $like = $row['nlike'] + 1;
             $id = $row['id_post'];
             $search2 = "UPDATE aluno_post SET nlike = '$like' WHERE id_post = '$id' ";
@@ -119,7 +119,7 @@ function likePost($id) {
             } else {
                 echo mysqli_error($bd);
             }
-        }
+        
     } else {
         echo mysqli_error($bd);
     }
@@ -717,8 +717,33 @@ function loadEventosPerseguidos($id)
 	}
 }
 
+function sEditPost($id,$comentario) {
+    global $bd;
+    $search = "UPDATE aluno_post SET txpost = '$comentario' WHERE id_post='$id'";
+    $query = mysqli_query($bd, $search);
+    if($query) { echo "200 OK"; } else { echo "400 ERROR"; }
+}
+
+function delPost($id) {
+    global $bd;
+    $search1 = "DELETE FROM aluno_post_comentario WHERE id_post='$id'";
+    $query1 = mysqli_query($bd,$search1);
+    $search2 = "DELETE FROM aluno_post WHERE id_post='$id'";
+    $query2 = mysqli_query($bd,$search2);
+    if($query2) { echo "200 OK200 OK"; } else { echo $search; }
+}
 
 switch($webservice) {
+    case "delPost":
+    {
+        delPost($id);
+    }
+    case "sEditPost":
+    {
+        $comentario = filter_input(INPUT_GET,'comentario');
+        sEditPost($id,$comentario);
+        break;
+    }
     case "reservaItem":
     {
         $aluno = filter_input(INPUT_GET, 'aluno');

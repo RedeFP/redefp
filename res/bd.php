@@ -6,3 +6,4 @@
     //$bd = new mysqli('localhost','1126067','fernandotop2018','1126067');
     //$bd = new mysqli('localhost','juliano','123','id6136795_redefp');
     mysqli_set_charset($bd, 'utf8');
+ 

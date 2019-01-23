@@ -1,7 +1,7 @@
 //Detections
 $(function(){
     loadPost();
-    $("#commentmodal").on("hide.bs.modal",function() {
+    $("#commentmodal").on("hide.bs.modal",function(e) {
         limpaModal();
     });
     loadProduto();
@@ -12,16 +12,22 @@ $(function(){
         $("#prodtud").remove();
         $(".col-8").attr("class","col bk-grey");
     }
+    setInterval(function(){
+        autosize($('textarea'));
+    },1000)
 });
+
+
 
 $(document).one("ajaxStop",function(){
     $(".post").click(function(){
         expandePost($(this).attr("data-id"));
     });
+
 });
 
 $(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() > $(document).height() - 1) {
+   if($(window).scrollTop() + $(window).height() > $(document).height() - 5) {
        $(window).unbind('scroll');
        morePost();
    }
@@ -70,47 +76,19 @@ function searchProfile(id,item)
         br = document.createElement("br");
         post_text = document.createElement("textarea");
         post_text.setAttribute("class","form-control-plaintext");
+        post_text.readOnly = true;
         post_text.setAttribute("width","100vh");
         post_text.innerHTML = item.txpost;
         post.appendChild(profile_pic);
         post.appendChild(br);
         post.appendChild(post_text);
         
-        likehit = document.createElement("button");
-        likehit.setAttribute("class","hitbox");
-        likehit.setAttribute("onclick","likePost("+item.id_post+")");
-        likehit.setAttribute("data-id",item.id_post);
-        likepic = document.createElement("img");
-        likepic.setAttribute("class","hitpic");
-        likepic.setAttribute("src","/vendor/custom-icons/like.png");
-        nlike = document.createTextNode(item.nlike);
-        likehit.appendChild(likepic);
-        likehit.appendChild(nlike);
-        post.appendChild(likehit);
-        deslikehit = document.createElement("button");
-        deslikehit.setAttribute("class","hitbox deslike");
-        deslikehit.setAttribute("onclick","deslikePost("+item.id_post+");");
-        deslikepic = document.createElement("img");
-        deslikepic.setAttribute("class","hitpic");
-        deslikepic.setAttribute("src","/vendor/custom-icons/deslike.png");
-        ndeslike = document.createTextNode(item.ndeslike);
-        deslikehit.appendChild(deslikepic);
-        deslikehit.appendChild(ndeslike);
-        post.appendChild(deslikehit);
-        commenthit = document.createElement("button");
-        commenthit.setAttribute("class","hitbox comment");
-        commenthit.setAttribute("onclick","montaModal("+item.id_post+")");
-        commentpic = document.createElement("img");
-        commentpic.setAttribute("class","hitpic");
-        commentpic.setAttribute("src","/vendor/custom-icons/comment.png");
-        commenthit.appendChild(commentpic);
-        post.appendChild(commenthit);
-        
         document.getElementById("postline").appendChild(post);
     });
 }
 
 function expandePost(post) {
+    id_final = post;
     $.get("/gateway/getJSON.php",{f:"expandePost",id:post},function(result){
         post = JSON.parse(result);
         modal = document.getElementsByClassName("modal-body")[0];
@@ -118,7 +96,7 @@ function expandePost(post) {
         postcontainer = document.createElement("div");
         postcontainer.setAttribute("class","container");
             textarea = document.createElement("textarea");
-            textarea.setAttribute("class","form-control-plaintext");
+            textarea.setAttribute("class","form-control-plaintext ori");
             textarea.setAttribute("width","100vh");
             textarea.setAttribute("style","resize: none;");
             textarea.setAttribute("readonly","");
@@ -126,7 +104,8 @@ function expandePost(post) {
             postcontainer.appendChild(textarea);
         modal.appendChild(postcontainer);
         box1 = document.createElement("button");
-        box1.setAttribute("class","hitbox");
+        box1.setAttribute("class","hitbox cm1");
+        box1.setAttribute("onclick","likePost("+id_final+")");
             text1 = document.createTextNode(post.post.nlike);
             box1.appendChild(text1);
             img1 = document.createElement("img");
@@ -135,7 +114,8 @@ function expandePost(post) {
             box1.appendChild(img1);
         modal.appendChild(box1);
         box2 = document.createElement("button");
-        box2.setAttribute("class","hitbox");
+        box2.setAttribute("class","hitbox cm2");
+        box2.setAttribute("onclick","deslikePost("+id_final+")");
             text2 = document.createTextNode(post.post.ndeslike);
             box2.appendChild(text2);
             img2 = document.createElement("img");
@@ -144,18 +124,25 @@ function expandePost(post) {
             box2.appendChild(img2);
         modal.appendChild(box2);
         box3 = document.createElement("button");
-        box3.setAttribute("class","hitbox");
+        box3.setAttribute("class","hitbox cm3");
+        box3.setAttribute("onclick","montaModal("+id_final+")");
             img3 = document.createElement("img");
             img3.setAttribute("src","vendor/custom-icons/comment.png");
             img3.setAttribute("class","hitpic");
             box3.appendChild(img3);
         modal.appendChild(box3);
         post.comentarios.forEach(genComentario);
+        if(post.post.id_aluno == JSON.parse(localStorage.user)['id'])
+        {
+            $(".modal-footer").prepend("<button type='button' class='btn btn-warning' onclick='editarPost("+id_final+")'>Editar</button><button type='button' class='btn btn-danger' onclick='deletarPost("+id_final+")'>Deletar</button>");
+        }
         $(".btn-primary").css("display","none");
         $(".btn-secondary").html("Fechar");
         $(".btn-secondary").attr("onclick","limpaModal()");
         $("#commentmodal").modal('show');
+        
     });
+
 }
 
 function genComentario(comentario)
@@ -168,6 +155,7 @@ function genComentario(comentario)
     modal.appendChild(title);
     textarea = document.createElement("textarea");
     textarea.setAttribute("class","form-control-plaintext");
+    textarea.readOnly = true;
     textarea.setAttribute("style","resize: none;");
     textarea.innerHTML = comentario.txcomentario;
     modal.appendChild(textarea);
@@ -175,14 +163,14 @@ function genComentario(comentario)
 
 function likePost(post) {
     $.get('/gateway/getJSON.php',{f:"like",id:post}, function (result){
-        console.log(result);
+        window.location.reload();
     });
 }
 
 function deslikePost(post) {
     
     $.get('/gateway/getJSON.php',{f:"deslike",id:post}, function(result){
-        console.log(result);
+        window.location.reload();
     });
 }
 
@@ -204,11 +192,17 @@ function limpaModal()
     $(".modal-title").html("");
     $(".modal-body").html("");
     $(".btn-primary").attr("onclick","");
+    $(".btn-success").remove();
+    $(".btn-warning").remove();
+    $(".btn-danger").remove();
+    $(".btn-primary").css("display","initial");
+    $(".btn-secondary").css("display","initial");
 }
 
 function montaModal(post) {
     $("#salvacom").attr("onclick","salvaComentario("+post+")");
     $(".modal-title").html("Comentar em uma publicação");
+    $(".btn-primary").css("display","initial");
     $(".btn-primary").html("Comentar");
     $(".btn-primary").attr("onclick","salvaComentario("+post+")"); 
     $(".modal-body").html("<textarea type='text' id='cobox' maxlength='1024' width='100vw'>");
@@ -310,7 +304,60 @@ function loadProdutoLateral()
     });
 }
 
+function editarPost(post)
+{
+    $(".btn-warning").remove();
+    $(".btn-danger").remove();
+    $(".modal-title").html("Editando publicação");
+    $(".cm1").remove();
+    $(".cm2").remove();
+    $(".cm3").remove();
+    $(".ori").removeAttr("readonly");
+    $(".btn-primary").html("Salvar");
+    $(".btn-primary").attr("onclick","sEditPost("+post+")");
+    $(".btn-primary").css("display","initial");
+}
 
+function deletarPost(post)
+{
+    $(".btn-warning").remove();
+    $(".btn-danger").remove();
+    $(".modal-footer").append('<button type="button" class="btn btn-success" style="display: initial;" onclick="delPost('+post+')">Confirmar</button>');
+    $(".modal-footer").append('<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="$("#commentmodal").modal("hide")">Fechar</button>');
+    $(".btn-secondary").css("display","none");
+    $(".btn-primary").css("display","none");
+    $(".modal-body").html("Tem certeza que quer deletar a publicação?");
+    $(".modal-title").html("Deletando publicação");
+}
+
+function sEditPost(post)
+{
+    var cobox = $(".ori").val();
+    data = {
+        f: "sEditPost",
+        id: post,
+        comentario: cobox
+    };
+    $.get("gateway/getJSON.php",data,function(result){
+        if(result == "200 OK") {
+            window.location.reload();
+        }
+    })
+}
+
+function delPost(post)
+{
+    data = {
+        f: "delPost",
+        id: post
+    };
+    $.get("gateway/getJSON.php",data,function(result){
+        console.log(result);
+        if(result != "400 ERROR") {
+            window.location.reload();
+        }
+    });
+}
 
 function morePost()
 {
