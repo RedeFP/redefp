@@ -59,7 +59,7 @@ function genConvites(item)
 	col = document.createElement("div");
 	col.setAttribute("class","col");
 		card = document.createElement("div");
-		card.setAttribute("class","card 18rw");
+		card.setAttribute("class","card rw18");
 			cardimg = document.createElement("img");
 			cardimg.setAttribute("class","card-img-top");
 			cardimg.setAttribute("alt","Imagem");
@@ -86,7 +86,7 @@ function genPerseguidor(item)
 	col = document.createElement("div");
 	col.setAttribute("class","col");
 		card = document.createElement("div");
-		card.setAttribute("class","card 18rw");
+		card.setAttribute("class","card rw18");
 			cardimg = document.createElement("img");
 			cardimg.setAttribute("class","card-img-top");
 			cardimg.setAttribute("alt","Imagem");

@@ -21,12 +21,6 @@
         echo '<img class="user-icon" src="'.$prp_pic.'">'.$nome;
         echo '</a><br>';
         echo '<textarea class="form-control-plaintext" width="100vh">'.$row['txpost'].'</textarea>';
-        echo '<button class="hitbox" onclick="likePost('.$row['id_post'].')">';
-        echo '<img class="hitpic" src="/vendor/custom-icons/like.png">'.$row['nlike'].'</button>';
-        echo '<button class="hitbox deslike" onclick="deslikePost('.$row['id_post'].');">';
-        echo '<img class="hitpic" src="/vendor/custom-icons/deslike.png">'.$row['ndeslike'].'</button>';
-        echo '<button class="hitbox comment" onclick="montaModal('.$row['id_post'].')">';
-        echo '<img class="hitpic" src="/vendor/custom-icons/comment.png"></button>';
         echo '</div>';
 
         

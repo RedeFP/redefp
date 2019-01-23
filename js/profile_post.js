@@ -6,7 +6,18 @@ $(function(){
     });
     $(".nav-item")[1].setAttribute("class","nav-item active");
     $(this).scrollTop(0);
+    setInterval(function(){
+        autosize($('textarea'));
+    }, 1000);
+    md = new MobileDetect(window.navigator.userAgent);
+
 });
+$(document).one("ajaxStop",function(){
+    if(md.mobile() != null){
+        $(".col-3").remove();
+        $(".col-9").attr("class","col");
+    }
+})
 
 $(window).scroll(function() {
    if($(window).scrollTop() + $(window).height() > $(document).height() - 1) {
@@ -38,7 +49,7 @@ function loadPerfil()
         $("#aluno_id").attr("href","profile.php?id="+aluno.id);
         $("#aluno_id").html(aluno.nome);
         $("#aluno_apelido").html("@"+aluno.apelido);
-        document.getElementById("aluno_apelido").setAttribute("href","profile.php?id="+aluno.id);
+        //document.getElementById("aluno_apelido").setAttribute("href","profile.php?id="+aluno.id);
         $("#l1").attr("href","profile.php?id="+aluno.id);
         $("#l2").attr("href","profile-pictures.php?id="+aluno.id);
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);

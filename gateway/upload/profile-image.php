@@ -43,7 +43,7 @@ if ($uploadOk == 0) {
         $query = mysqli_query($bd,"INSERT INTO aluno_galeria (id_aluno,dtpublicacao,txlegenda,image_url) VALUES ('$aluno','$dtpublicacao','$txlegenda','$target_file')");
         error_reporting(E_ALL);
         if(mysqli_error($bd) != "") { echo mysqli_error($bd); }
-        header("Location: ../../profile-pictures.php");
+        header("Location: crop-image.php?img=$target_file");
     } else {
         echo $error;
     }

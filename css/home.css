@@ -10,8 +10,8 @@ body {
     padding-top: 5px;
 }
 .user-image-src {
-    width: 100%;
-	height: 100%;
+    width: 60%;
+    height: 60%;
 }
 .user-icon {
     border-radius: 25px;
@@ -88,6 +88,8 @@ body {
     width: 2vw;
     height: 2vw;
     vertical-align: baseline;
+    min-width: 30px;
+    min-height: 30px;
 }
 
 #cobox {
@@ -170,7 +172,7 @@ div.comunity-list-group {
 
 }
 
-div.18rw{
+div.rw18{
 	width: 18rem;
 }
 
@@ -180,5 +182,17 @@ div.card {
 
 div.evento{
     width: calc(9% - 2px);
+}
 
+textarea.form-control-plaintext {
+    text-align: justify;
+}
+
+span {
+    font-size: xx-small;
+}
+
+.user-image {
+    line-height: 50%;
+    margin-bottom: 5%;
 }

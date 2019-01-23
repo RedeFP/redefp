@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="home.php">
             <img src="css/logo.png" width="80" height="45"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-toggler-right float-xs-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -32,7 +32,7 @@
                 </li>
                 </ul>
             </div>
-            <div class="col-1" style="color: white">
+            <div class="col" style="color: white">
                 <a href="#" class="nav-link"></a>
             </div>
         </nav>
