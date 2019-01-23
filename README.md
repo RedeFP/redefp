@@ -6,82 +6,48 @@ Nosso projeto é para melhorar a produtividade, comunicação
 
 Por este ser um projeto de código fechado, não permitimos cópias não autorizadas, por favor se deseja participar do projeto/partes de código, envie um e-mail para d3cr1pt(mineplay152@gmail.com)
 
-### Prerequisites
+### Pre-Requisitos
 
-What things you need to install the software and how to install them
+Para fazer rodar este projeto, deve ter um servidor PHP e MySQL.
+E para clonar o projeto, tenha o cliente do Git.
 
-```
-Give examples
-```
+### Instalando os requisitos (Windows)
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Primeiro baixe o instalador
 
 ```
-Give the example
+https://www.apachefriends.org/xampp-files/7.3.1/xampp-win32-7.3.1-0-VC15-installer.exe
 ```
 
-And repeat
+Em seguida instale,e abra o Git Bash
 
 ```
-until finished
+cd ../../xampp/htdocs
+git clone https://github.com/d3cr1pt/redefp/redefp.git
+E em seguida mv redefp ../htdocs
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+## Teste o servidor
 
-## Running the tests
+Abra o navegador e navege até o endereço 127.0.0.1
 
-Explain how to run the automated tests for this system
+## Disponibilização
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+O projeto não deve ser disponibilizado em um servidor público, o direito autoral do projeto é da equipe de administradores do Juliano, e isto significa que você não deve reproduzir o projeto
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [jQuery](https://jquery.com) - Biblioteca JavaScript de produtividade
+* [PHP](http://www.php.net) - Linguagem de Programação para Web
 
-## Contributing
+## Contribuindo
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Se deseja contribuir, contate a equipe Juliano através do e-mail
 
-## Versioning
+## Autores
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* **Alberto Trevisan** - *Administrador* - [d3cr1pt](https://github.com/d3cr1pt)
 
-## Authors
+## Licensiamento
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Este projeto está sobre a licensa exclusiva RedeFP. Consulte [LICENSE.md](LICENSE.md) para mais detalhes.

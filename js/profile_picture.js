@@ -20,7 +20,7 @@ function loadPerfil()
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);
         $("#l4").attr("href","profile-contact.php?id="+aluno.id);
         $("#import").load('/handler/profile-pictures.php?id='+aluno.id,function(){
-            $("#import").prepend('<div class="col-3 user-image" id="upload" align="center"><img src="/uploads/plus.jpg" class="user-image-src"><br><span>Enviar fotos</span><br><span>05/01/2019</span></div>');
+            $("#import").prepend('<div class="col user-image" id="upload" align="center"><img src="/uploads/plus.jpg" class="user-image-src"><br><span>Enviar fotos</span><br><span></span></div>');
             $("#upload").on("click",function(){
                 console.log("função em breve"); //insert upload form here
                 $(".modal-title").html('Upload de Fotos');
