@@ -2,6 +2,7 @@
 <html>
     <head>
 		<?php include("./res/common/head.php"); ?>
+        <script src="js/navmob.js"></script>
         <script src="js/profile_picture.js"></script>
     </head>
     <body>

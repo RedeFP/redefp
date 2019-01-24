@@ -5,7 +5,7 @@ $(function(){
         limpaModal();
     });
     $(".nav-item")[1].setAttribute("class","nav-item active");
-    $(this).scrollTop(0);
+    $('body').scrollTop(0);
     setInterval(function(){
         autosize($('textarea'));
     }, 1000);
@@ -16,6 +16,13 @@ $(document).one("ajaxStop",function(){
     if(md.mobile() != null){
         $(".col-3").remove();
         $(".col-9").attr("class","col");
+        if(typeof($_GET['id']) != "undefined") {
+            id = $_GET['id'];    
+        } else {
+            id = JSON.parse(localStorage.user)['id'];
+        }
+        loadNavMob(id);
+        
     }
 })
 

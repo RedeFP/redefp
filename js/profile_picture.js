@@ -45,6 +45,19 @@ function salvarFoto()
 }
 
 $(function(){
+    md = new MobileDetect(window.navigator.userAgent);
     loadPerfil();
     $(".nav-item")[1].setAttribute("class","nav-item active");
+    $(document).one("ajaxStop",function(){
+        if(md.mobile() != null){
+            $(".col-3").remove();
+            $(".col-9").attr("class","col");
+            if(typeof($_GET['id']) != "undefined") {
+                id = $_GET['id'];    
+            } else {
+                id = JSON.parse(localStorage.user)['id'];
+            }
+            loadNavMob(id);
+        }
+    })
 });

@@ -1,25 +1,8 @@
 //window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1)
 
- <!-- Informações que deveram ser exibidas:
-			- Horario e Data do Evento 
-			- Nome do Local 
-			- Endereço do Local 
-			- Organizador 
-			- Valor do ingresso ou informações sobre entrada 
-            - Quadro de avisos dos administradores 
-			- Pessoas que compareceram (marcados pelo organizador na compra de ingresso) e quem perseguiu 
-			- Denunciar para os administradores de região 
-			- Informar algum problema ao organizador
+	new Modal({
+		title: "", //Janela Flutuante
+		btn-primary-title: "",
+		btn-primary-on: "",
 
-            Discussão:
-            - Publicações dos Administradores
-            - Publicações dos perseguidores
-            - Galeria
-        -->
-		md = new MobileDetect(window.navigator.userAgent)
-		if(md.phone() == null & md.tablet() == null & md.mobile() == null) { console.log("desktop"); }
-		new Modal({
-			title: "", //Janela Flutuante
-			btn-primary-title: "",
-
-		})
+	})
