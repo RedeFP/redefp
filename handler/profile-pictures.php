@@ -7,7 +7,7 @@
         $date = new DateTime($row['dtpublicacao']);
         $dt = date_format($date, "d/m/Y");
         echo '<div class="col user-image" align="center">';
-        echo '<img src="'.$row['image_url'].'" class="user-image-src"><br />';
+        echo '<img src="'.$row['image_url'].'" class="user-image-src" data-id="'.$row['id_foto'].'"><br />';
         echo '<span>'.$row['txlegenda'].'</span><br>';
         echo '<span>'.$dt.'</span>';
         echo '</div>';

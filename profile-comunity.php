@@ -9,7 +9,7 @@
         <?php include("res/common/nav.php") ?>
         <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
             <div class="row">
-                <div class="col-3" height="80vh" style="background: salmon; padding-bottom: 10px;">
+                <div class="col-3 profile-list">
                     <div class="user-pic-div">
                         <img src="css/user.png" class="user-pic">
                     </div>

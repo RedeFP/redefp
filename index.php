@@ -19,8 +19,8 @@
         <link rel="stylesheet" href="css/index.css">
         <div class="container-fluid">
             <div class="jumbotron justify-content-between mob">
-                <div class="row">
-                    <div class="col mob2"><img src="css/logo.png" style="width:30vw"></div>
+                <div class="row" style="max-height: 160px">
+                    <div class="col mob2"><img src="css/logo.png" style="width:30vw;max-width: 160px;"></div>
                     <div class="col btnicon">
                         <a href="auth/register.php"><button class="btn btn-danger">Registrar</button></a>
                         <a href="auth/login.php"><button class="btn btn-success">Login</button></a>

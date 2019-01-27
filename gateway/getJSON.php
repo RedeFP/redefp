@@ -115,7 +115,7 @@ function likePost($id) {
             $search2 = "UPDATE aluno_post SET nlike = '$like' WHERE id_post = '$id' ";
             $query = mysqli_query($bd,$search2);
             if($query) {
-                echo "200 OK";
+                echo "";
             } else {
                 echo mysqli_error($bd);
             }
@@ -136,7 +136,7 @@ function likeComunityPost($id) {
         $search2 = "UPDATE comunidade_post SET nlike = '$like' WHERE id_post = '$id' ";
         $query = mysqli_query($bd,$search2);
         if($query) {
-            echo "200 OK";
+            echo "";
         } else {
             echo mysqli_error($bd);
         }
@@ -154,7 +154,7 @@ function deslikePost($id) {
     $search2 = "UPDATE aluno_post SET ndeslike = '$deslike' WHERE id_post = '$id'";
     $query2 = mysqli_query($bd,$search2);
     if($query2) {
-        echo "200 OK";
+        echo "";
     } else {
         echo mysqli_error($bd);
     }
@@ -169,7 +169,7 @@ function deslikeComunityPost($id) {
     $search2 = "UPDATE comunidade_post SET ndeslike = '$deslike' WHERE id_post = '$id'";
     $query2 = mysqli_query($bd,$search2);
     if($query2) {
-        echo "200 OK";
+        echo "";
     } else {
         echo mysqli_error($bd);
     }
@@ -180,7 +180,7 @@ function salvaComentario($id,$comentario,$usuario) {
     $search = "INSERT INTO aluno_post_comentario (id_post,id_aluno,txcomentario) VALUES ('$id','$usuario','$comentario')";
     $query = mysqli_query($bd,$search);
     if($query) {
-        echo "200 OK";
+        echo "";
     } else {
         echo mysqli_error($bd);
     }
@@ -191,7 +191,7 @@ function salvaComunityComentario($id,$comentario,$usuario) {
     $search = "INSERT INTO comunidade_post_comentario (id_post,id_aluno,txcomentario) VALUES ('$id','$usuario','$comentario')";
     $query = mysqli_query($bd,$search);
     if($query) {
-        echo "200 OK";
+        echo "";
     } else {
         echo mysqli_error($bd);
     }
@@ -203,7 +203,7 @@ function salvaPost($id,$comentario)
     $search = "INSERT INTO aluno_post (id_aluno,txpost,nlike,ndeslike) VALUES ('$id','$comentario','0','0')";
     $query = mysqli_query($bd,$search);
     if($query){
-        echo "200 OK";
+        echo "";
     } else {
         echo "400 ERROR";
     }
@@ -281,7 +281,7 @@ function postImage($id,$nome,$arquivo)
 	$query = mysqli_query ($bd,$search);
 	if($query)
 	{
-		echo "200 OK";
+		echo "";
 	}
 	else
 	{
@@ -505,7 +505,7 @@ function reservaItem($id,$aluno)
     $obj = mysqli_fetch_assoc($query);
     $vendedor = $obj['vendedor'];
     $query = mysqli_query($bd,"INSERT INTO produtos_reserva (id_produto,id_vendedor,id_comprador,tp_venda) VALUES ('$id','$vendedor','$aluno','2')");
-    if($query) { echo "200 OK"; } else { echo "400 ERROR"; }
+    if($query) { echo ""; } else { echo "400 ERROR"; }
 }
 
 function loadProdutosComunidades($id)
@@ -721,7 +721,7 @@ function sEditPost($id,$comentario) {
     global $bd;
     $search = "UPDATE aluno_post SET txpost = '$comentario' WHERE id_post='$id'";
     $query = mysqli_query($bd, $search);
-    if($query) { echo "200 OK"; } else { echo "400 ERROR"; }
+    if($query) { echo ""; } else { echo "400 ERROR"; }
 }
 
 function delPost($id) {
@@ -730,13 +730,46 @@ function delPost($id) {
     $query1 = mysqli_query($bd,$search1);
     $search2 = "DELETE FROM aluno_post WHERE id_post='$id'";
     $query2 = mysqli_query($bd,$search2);
-    if($query2) { echo "200 OK200 OK"; } else { echo $search; }
+    if($query2) { echo ""; } else { echo $search; }
+}
+
+function searchFoto($id){
+    global $bd;
+    $search = "SELECT * FROM aluno_galeria WHERE id_foto = '$id'";
+    $query = mysqli_query($bd,$search);
+    if($query) {
+        $row=mysqli_fetch_assoc($query);
+        $row['id_aluno']=retornaProfile($row['id_aluno']);
+        echo json_encode($row,JSON_PRETTY_PRINT);
+    }
+}
+
+function delFoto($id) {
+    global $bd;
+    $search = "DELETE FROM aluno_galeria WHERE id_foto = '$id'";
+    $query = mysqli_query($bd,$search);
+    if($query) {
+        echo "";
+    } else {
+        echo "400 ERROR";
+    }
 }
 
 switch($webservice) {
+    case "delFoto":
+    {
+        delFoto($id);
+        break;
+    }
+    case "searchFoto":
+    {
+        searchFoto($id);
+        break;
+    }
     case "delPost":
     {
         delPost($id);
+        break;
     }
     case "sEditPost":
     {
