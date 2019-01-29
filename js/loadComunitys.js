@@ -7,11 +7,14 @@ function loadComunitysI()
     });
     $(".nav-item")[2].setAttribute("class","nav-item active");
 }
-
+/*
+<br><span>As Poc da Sofrência</span></div>
+*/
 function genComunityI(item)
 {
     comunity_link = document.createElement("a");
     comunity_link.setAttribute("href","comunity.php?id="+item.id_comunidade);
+    comunity_link.setAttribute("style","margin-bottom: 10px;");
     comunity_item = document.createElement("div");
     comunity_item.setAttribute("class","comunity-list-item");
         comunity_image = document.createElement("img");
@@ -26,7 +29,9 @@ function genComunityI(item)
         }
         comunity_image.setAttribute("src",imagesrc);
         comunity_item.appendChild(comunity_image);
-        comunity_name = document.createElement("p");
+        br = document.createElement("br");
+        comunity_item.appendChild(br);
+        comunity_name = document.createElement("span");
         comunity_name.innerHTML = item.comunidade.nome;
         comunity_item.appendChild(comunity_name);
         comunity_link.appendChild(comunity_item);

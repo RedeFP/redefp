@@ -88,7 +88,6 @@ function expandePhoto(id)
     data = {f: "searchFoto", id:id};
     $.get("gateway/getJSON.php",data,function(result){
         rec = JSON.parse(result);
-        $(".modal-dialog").addClass("modal-lg");
         $(".modal-title").html("Foto de @"+rec.id_aluno.apelido);
         $(".modal-body").html('<center><img src="'+rec.image_url+'" class="fullview"><br>'+rec.txlegenda+'</center>');
         $(".btn-primary").css("display","none");

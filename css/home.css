@@ -165,11 +165,10 @@ div.comunity-list-item {
 }
 
 div.comunity-list-group {
-    overflow-x: hidden; 
-    overflow-y: scroll; 
     height: 122px; 
     width: 100%;
-
+    margin-left: auto;
+    margin-right: auto;
 }
 
 *, textarea {

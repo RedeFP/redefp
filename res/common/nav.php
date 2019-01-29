@@ -1,4 +1,3 @@
-<link href="/css/home.css" rel="stylesheet" type="text/css">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="home.php">
             <img src="css/logo.png" width="80" height="45"></a>

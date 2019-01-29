@@ -746,13 +746,15 @@ function searchFoto($id){
 
 function delFoto($id) {
     global $bd;
+    $retrieve = "SELECT * FROM aluno_galeria WHERE id_foto='$id'";
+    $quer2 = mysqli_query($bd,$retrieve);
     $search = "DELETE FROM aluno_galeria WHERE id_foto = '$id'";
-    $query = mysqli_query($bd,$search);
-    if($query) {
-        echo "";
-    } else {
-        echo "400 ERROR";
-    }
+    // $query = mysqli_query($bd,$search);
+    $quer = mysqli_fetch_assoc($quer2);
+    // unlink("/uploads/".basename($quer['image_url']));
+        echo "/uploads/".basename($quer['image_url']);
+    
+    
 }
 
 switch($webservice) {
