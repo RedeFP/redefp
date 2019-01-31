@@ -4,7 +4,7 @@ Nosso projeto é para melhorar a produtividade, comunicação
 
 ## Responsabilidades
 
-Por este ser um projeto de código fechado, não permitimos cópias não autorizadas, por favor se deseja participar do projeto/partes de código, envie um e-mail para d3cr1pt(mineplay152@gmail.com)
+Por este ser um projeto de código fechado, não permitimos cópias não autorizadas, por favor se deseja participar do projeto/partes de código, envie um e-mail para [d3cr1pt](malito:mineplay152@gmail.com)
 
 ### Pre-Requisitos
 
@@ -13,13 +13,13 @@ E para clonar o projeto, tenha o cliente do Git.
 
 ### Instalando os requisitos (Windows)
 
-Primeiro baixe o instalador
+Primeiro baixe o instalador do XAMPP, e seguir os passos que o programa apresentar na tela
 
 ```
 https://www.apachefriends.org/xampp-files/7.3.1/xampp-win32-7.3.1-0-VC15-installer.exe
 ```
 
-Em seguida instale,e abra o Git Bash
+Em seguida instale o Git,e abra o Git Bash
 
 ```
 cd ../../xampp/htdocs
@@ -33,7 +33,7 @@ Abra o navegador e navege até o endereço 127.0.0.1
 
 ## Disponibilização
 
-O projeto não deve ser disponibilizado em um servidor público, o direito autoral do projeto é da equipe de administradores do Juliano, e isto significa que você não deve reproduzir o projeto
+O projeto pode ser modificado, porém pedimos que na página de entrada seja alterado o texto de descrição para o desejado e remova o nome da escola, e mantenha o footer com os creditos.
 
 ## Built With
 
@@ -50,4 +50,4 @@ Se deseja contribuir, contate a equipe Juliano através do e-mail
 
 ## Licensiamento
 
-Este projeto está sobre a licensa exclusiva RedeFP. Consulte [LICENSE.md](LICENSE.md) para mais detalhes.
+Este projeto está sobre a licença MIT. Consulte [LICENSE.md](LICENSE.md) para mais detalhes.
