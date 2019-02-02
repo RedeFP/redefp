@@ -4,7 +4,7 @@ Nosso projeto é para melhorar a produtividade, comunicação
 
 ## Responsabilidades
 
-Por este ser um projeto de código fechado, não permitimos cópias não autorizadas, por favor se deseja participar do projeto/partes de código, envie um e-mail para [d3cr1pt](malito:mineplay152@gmail.com)
+Por este ser um projeto de código aberto permissivo, não permitimos cópias não autorizadas, por favor se deseja o projeto/partes de código, envie um e-mail para [d3cr1pt](malito:mineplay152@gmail.com)
 
 ### Pre-Requisitos
 
