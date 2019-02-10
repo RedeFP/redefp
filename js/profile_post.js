@@ -167,6 +167,7 @@ function genComentario(comentario)
     modal.appendChild(title);
     textarea = document.createElement("textarea");
     textarea.setAttribute("class","form-control-plaintext");
+    textarea.readOnly = true;
     textarea.setAttribute("style","resize: none;");
     textarea.innerHTML = comentario.txcomentario;
     modal.appendChild(textarea);

@@ -7,9 +7,6 @@ function loadComunitysI()
     });
     $(".nav-item")[2].setAttribute("class","nav-item active");
 }
-/*
-<br><span>As Poc da Sofrência</span></div>
-*/
 function genComunityI(item)
 {
     comunity_link = document.createElement("a");

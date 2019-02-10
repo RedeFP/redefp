@@ -308,11 +308,18 @@ function editarPost(post)
 {
     $(".btn-warning").remove();
     $(".btn-danger").remove();
+    $(".modal").find("textarea:not(.ori)").remove();
+    $(".modal").find("hr").remove();
+    $(".modal").find("h6").remove();
+    $(".btn-warning").remove();
+    $(".btn-danger").remove();
     $(".modal-title").html("Editando publicação");
     $(".cm1").remove();
     $(".cm2").remove();
     $(".cm3").remove();
     $(".ori").removeAttr("readonly");
+    $(".ori").removeClass("form-control-plaintext");
+    $(".ori").addClass("form-control");
     $(".btn-primary").html("Salvar");
     $(".btn-primary").attr("onclick","sEditPost("+post+")");
     $(".btn-primary").css("display","initial");

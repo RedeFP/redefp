@@ -749,12 +749,19 @@ function delFoto($id) {
     $retrieve = "SELECT * FROM aluno_galeria WHERE id_foto='$id'";
     $quer2 = mysqli_query($bd,$retrieve);
     $search = "DELETE FROM aluno_galeria WHERE id_foto = '$id'";
-    // $query = mysqli_query($bd,$search);
+    $query = mysqli_query($bd,$search);
     $quer = mysqli_fetch_assoc($quer2);
-    // unlink("/uploads/".basename($quer['image_url']));
-        echo "/uploads/".basename($quer['image_url']);
+    // delete("uploads/".basename($quer['image_url']));
+        unlink("C:/xampp/htdocs/uploads/".basename($quer['image_url']));
     
     
+}
+
+function sEditCPost($id,$post)
+{
+    global $bd;
+    $query1 = mysqli_query($bd,"UPDATE aluno_post SET txpost='$post' WHERE id_post='$id'");
+    if($query){}else{}
 }
 
 switch($webservice) {
