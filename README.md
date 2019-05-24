@@ -1,6 +1,6 @@
 # RedeFP
 
-Nosso projeto é para melhorar a produtividade, comunicação
+Nosso projeto é para melhorar a produtividade, comunicação dentro de escolas.
 
 ## Responsabilidades
 
