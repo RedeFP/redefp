@@ -4,7 +4,7 @@ Nosso projeto é para melhorar a produtividade, comunicação
 
 ## Responsabilidades
 
-Por este ser um projeto de código aberto permissivo, não permitimos cópias não autorizadas, por favor se deseja o projeto/partes de código, envie um e-mail para [d3cr1pt](malito:mineplay152@gmail.com)
+Por este ser um projeto de código aberto permissivo, não permitimos cópias não autorizadas, por favor se deseja utilizar o projeto/partes de código, envie um e-mail para [d3cr1pt](mailto:mineplay152@gmail.com)
 
 ### Pre-Requisitos
 
@@ -39,15 +39,18 @@ O projeto pode ser modificado, porém pedimos que na página de entrada seja alt
 
 * [jQuery](https://jquery.com) - Biblioteca JavaScript de produtividade
 * [PHP](http://www.php.net) - Linguagem de Programação para Web
+* [Bootstrap](http://getbootstrap.com/) - Biblioteca Web de Design responsivo
 
 ## Contribuindo
 
-Se deseja contribuir, contate a equipe Juliano através do e-mail
+Se deseja contribuir, contate a equipe Juliano através do [e-mail](mailto:mineplay152@gmail.com)
 
 ## Autores
 
 * **Alberto Trevisan** - *Administrador* - [d3cr1pt](https://github.com/d3cr1pt)
+* **Laura Silva** - *Administrador* - [Laura Silva](https://www.facebook.com/profile.php?id=100010415355189)
+* **Felipe Rodrigues** - *Cartunista e Designer* - [kanekiblack](https://github.com/kanekiblack)
 
-## Licensiamento
+## Licenciamento
 
 Este projeto está sobre a licença MIT. Consulte [LICENSE.md](LICENSE.md) para mais detalhes.
