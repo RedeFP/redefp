@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-8"><img src="../css/logo.png" width="320" height="180"></div>
                     <div class="col-4" align="right" style="line-height: 180px;padding-right: 30px;">
-                        <a href="../auth/prplogin.php"><button class="btn btn-success">Login</button></a>
+                        <a href="../prp/login.php"><button class="btn btn-success">Login</button></a>
                     </div>
                 </div>
             </div>

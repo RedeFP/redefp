@@ -1,7 +1,7 @@
-body
-{
+body {
     background: lightgrey !important;
 }
+
 .jumbotron {
     padding: 1px !important;
 }
@@ -9,7 +9,6 @@ body
 .mob {
     padding: 0 !important;
     border: 0 !important;
-
 }
 
 .containerlog {
@@ -18,18 +17,19 @@ body
     padding-bottom: 10px;
     border-radius: 5px;
     width: 50% !important;
+    max-width: 470px !important;
 }
 
 .indexlogo {
-    width:50%;
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .btnicon {
     line-height: 80px;
-    padding-right: 2%; 
+    padding-right: 2%;
     text-align: right;
 }
 
@@ -38,9 +38,8 @@ body
 }
 
 .logicon {
-    width:50%;
-    display: block; 
-    margin-left: auto; 
+    width: 50%;
+    display: block;
+    margin-left: auto;
     margin-right: auto;
 }
-

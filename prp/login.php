@@ -5,7 +5,6 @@
     <title>RedeFP - Uma rede social escolar</title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="icon" href="css/logo.png">
-    <script src="../js/login.js"></script>
     <script src="../../vendor/jquery-3.3.1.min.js"></script>
     <script src="../../vendor/popper.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.js"></script>
@@ -16,14 +15,15 @@
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap-reboot.css">
     <script src="../vendor/mobile-detect.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/prplogin.js"></script>
     <script>
         $(function(){
-            $("#type").prop('selectedIndex',0);
+            $("#type").prop('selectedIndex',1);
             $("#type").change(function(){
                 console.log($("#type").val());
-                if($("#type").val() == 2) {
-                    console.log("Selecionou professor");
-                    window.location.href = "../prp/login.php"
+                if($("#type").val() == 1) {
+                    console.log("Selecionou aluno");
+                    window.location.href = "../auth/login.php"
                 }
             });
         });
@@ -34,7 +34,12 @@
         <div class="jumbotron">
             <a href="../"><img src="../css/logo.png" class="logicon" style="max-width: 250px !important"></a>
         </div>
-        <div id="error"></div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="box-alert">
+            <strong id="alert"></strong>
+            <button type="button" class="close" aria-label="Close" onclick="HideAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="container containerlog">
         <div class="form-group row">
             <label for="exampleFormControlSelect1" class="col-3 col-form-label text-right">Login como</label>
@@ -45,11 +50,12 @@
                 </select>
             </div>
         </div>
+        <form id="form1" method="POST">
             <div class="form-group row">
-                <label for="inputRA" class="col-3 col-form-label text-right">RA</label>
+                <label for="inputRA" class="col-3 col-form-label text-right">E-mail</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" maxlength="6" size="7" name="inputRA" id="inputRA" step="0" placeholder="RA">
-                    <small id="emailHelp" class="form-text text-muted">Utilize o RA provido pela Secretaria Acadêmica.</small>
+                    <input type="email" class="form-control" maxlength="100" name="inputEmail" id="inputEmail" step="0" placeholder="@etec.sp.gov.br">
+                    <small id="emailHelp" class="form-text text-muted">Utilize o E-mail provido pela Secretaria Acadêmica.</small>
                 </div>
             </div>
             <div class="form-group row">
@@ -59,9 +65,13 @@
                 </div>
             </div>
             <div class="col" style="text-align: center">
-                <input type="submit" onclick="Submit()" class="btn btn-success" value="Entrar"/>
+                <input type="button" class="btn btn-success" value="Entrar" onclick="Submit()" />
+            </div>
+            <div class="col" style="text-align: center">
+            <small id="emailHelp" class="form-text text-muted"><a href="register.php">Perdeu sua senha? (Registros até pré-lançamento)</a></small>
             </div>
         </div>
+    </form>
     </div>
 </body>
 </html>
