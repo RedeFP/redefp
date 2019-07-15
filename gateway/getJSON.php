@@ -521,14 +521,14 @@ function loadProdutosComunidades($id)
 function retornaLocal($id)
 {
     global $bd;
-    $query = mysqli_query($bd,"SELECT * FROM evento_local WHERE id_local='$id'");
+    $query = mysqli_query($bd,"SELECT * FROM local WHERE id_local='$id'");
     if($query){ $obj = mysqli_fetch_assoc($query); return $obj;}
 }
 
 function retornaOrganizador($id)
 {
     global $bd;
-    $query = mysqli_query($bd,"SELECT * FROM evento_organizador WHERE id_organizador='$id'");
+    $query = mysqli_query($bd,"SELECT * FROM organizador WHERE id_organizador='$id'");
     if($query){ $obj = mysqli_fetch_assoc($query); return $obj;}
 }
 

@@ -5,6 +5,10 @@ if($_GET['id'] == undefined)
 else
 {
 	var ide = $_GET['id'];
+	$("#lb1").attr("href","evento.php?id="+ide);
+	$("#lb2").attr("href","evento-chat.php?id="+ide);
+	$("#lb2").attr("class","nav-link active");
+
     $.get("/gateway/getJSON.php",{f:"loadEvento",id:ide},function(result){
         console.log(obj = result);
         $("#event-name").html(obj.no_evento);
@@ -17,6 +21,7 @@ else
         $("#lb2").attr("href","evento-chat.php?id="+$_GET['id']);
 		obj.pub_adm.forEach(genPubAdm);
 		obj.pub_mem.forEach(genPubMem);
+		$(".nav-item")[3].setAttribute("class","nav-item active");
 	});
 }	
 

@@ -10,8 +10,8 @@ body {
     padding-top: 5px;
 }
 .user-image-src, .user-plus {
-    width: 60%;
-    height: 60%;
+    width: 50%;
+    max-width: 200px;
 }
 .user-icon {
     border-radius: 25px;
@@ -76,6 +76,7 @@ body {
     width: -moz-available !important;
 	width: 100%;
     height: 100%;
+    max-width: 200px;
 }
 .cuser-pic {
 	width: 100%;
@@ -216,4 +217,37 @@ span {
 .fullview {
     width: 100%;
     max-width: 60vh;
+}
+
+.evento {
+    width: calc(99% - 2px) !important;
+    margin-bottom: 4px !important;
+}
+
+.evento-inner {
+    border-radius: 10px !important;
+    padding: 2px !important;
+}
+
+.evento-img {
+    margin-bottom: 5px !important;
+    border-radius: 50% !important;
+    height:        120px !important; 
+    width:         120px !important;
+}
+
+.evento-row {
+    background-color: orange !important; 
+    padding: 10px !important;
+    border-radius: 25px !important;
+}
+
+img.a {
+    max-width: 100px;
+    width: 200%;
+}
+
+img.comunity-img {
+    width: 50px;
+    margin-left: -15px;
 }

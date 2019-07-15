@@ -31,7 +31,7 @@
                 </li>
                 </ul>
             </div>
-            <div class="col" style="color: white">
-                <a href="#" class="nav-link"></a>
+            <div class="col-1" style="color: white;">
+            <a href="gateway/auth/logout.php" class="nav-link btn btn-danger" style="max-width: 200px; margin-left: auto">Logout</a>
             </div>
         </nav>

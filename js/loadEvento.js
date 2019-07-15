@@ -1,14 +1,23 @@
+$(function(){
+	$(".nav-link")[3].setAttribute("class","nav-link active");
+});
+
+
 if($_GET['id'] == undefined)
 {
     window.location.href = "diary.php";
 }
 else
 {
-    var ide = $_GET['id'];
+	var ide = $_GET['id'];
+	$("#lb1").attr("href","evento.php?id="+ide);
+	$("#lb2").attr("href","evento-chat.php?id="+ide);
+	$("#lb1").attr("class","nav-link active");
     $.get("/gateway/getJSON.php",{f:"loadEvento",id:ide},function(result){
-		obj = result;
+		console.log(obj = result);
+		//teste
         $("#event-name").html(obj.no_evento);
-        $("#event-date").html(new Date(obj.dt_evento).toLocaleString());
+        $("#event-date").html(new Date(obj.dt_evento).toLocaleString().substr(0,16));
         $("#place-name").html(obj.id_local.no_local);
         $("#place-address").html( obj.id_local.no_logradouro + ", " + obj.id_local.nr_logradouro + " - " + obj.id_local.no_bairro + " - " + obj.id_local.no_cidade );
         $("#event-owner").html("Organizado por: "+obj.id_organizador.no_organizador);
@@ -20,8 +29,8 @@ else
 		obj.avisos.forEach(genAviso);
 		obj.convites.forEach(genConvites);
 		obj.perseguidores.forEach(genPerseguidor);
+		$(".nav-item")[3].setAttribute("class","nav-item active");
     });
-	
 }
 
 function genAviso(item)
@@ -90,6 +99,9 @@ function genPerseguidor(item)
 			cardimg = document.createElement("img");
 			cardimg.setAttribute("class","card-img-top");
 			cardimg.setAttribute("alt","Imagem");
+			if(item.id_perseguidor.profile_pic_url == "") {
+				item.id_perseguidor.profile_pic_url = "/css/user.png";
+			}
 			cardimg.setAttribute("src",item.id_perseguidor.profile_pic_url);
 			card.appendChild(cardimg);
 			cardbody = document.createElement("div");

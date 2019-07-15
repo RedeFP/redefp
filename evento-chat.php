@@ -23,36 +23,7 @@
 			<div class="container-fluid" id="import2">
 			</div>
 			<h1>Galeria de fotos</h1>
-			<div id="carouselGaleria" class="carousel slide" data-ride="carousel" height="100px">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselGaleria" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselGaleria" data-slide-to="1"></li>
-					<li data-target="#carouselGaleria" data-slide-to="2"></li>
-					<li data-target="#carouselGaleria" data-slide-to="3"></li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img class="d-block w-100" src="./photo/IMG201811020024.jpg" alt="Primeira imagem">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="./photo/IMG201810141943.jpg" alt="Segunda imagem">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="./photo/IMG201810141520.jpg" alt="Terceira imagem">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="./photo/IMG201811152232.jpeg" alt="Quarta imagem">
-					</div>
-				</div>
-				<a class="carousel-control-prev" href="#carouselGaleria" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselGaleria" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
+			<p>Implementar isto, usando o Lightbox (disponivel em vendor/lightbox)</p>
 		</main>
 		<?php include("./res/common/modal.php"); ?>
 	</body>
