@@ -9,7 +9,8 @@
             <div class="container">
                 <?php include("./res/common/comunity-nav.php"); ?>
                 <div class="row" id="import">
-	                <div class="col-12">
+			<div class="col-1"></div>
+	                <div class="col-10">
 	                	<h3 class="about-title">Descrição</h3>
         	            <h5 class="about-description">Esta comunidade reune as donas de escravos</h5>
                         <hr>
