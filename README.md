@@ -50,6 +50,7 @@ Se deseja contribuir, contate a equipe Juliano através do [e-mail](mailto:minep
 * **Alberto Trevisan** - *Administrador* - [d3cr1pt](https://github.com/d3cr1pt)
 * **Laura Silva** - *Administrador* - [Laura Silva](https://www.facebook.com/profile.php?id=100010415355189)
 * **Felipe Rodrigues** - *Cartunista e Designer* - [kanekiblack](https://github.com/kanekiblack)
+* **Etec Mairinque** - *Provedor de BD* - [Etec Mairinque](https://etecdemairique.com.br)
 
 ## Licenciamento
 
