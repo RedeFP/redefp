@@ -13,3 +13,5 @@
         <link rel="stylesheet" href="css/home.css">
         <link rel="icon" href="./css/logo.png">
         <script src="vendor/autosize.min.js"></script>
+        <script src="vendor/rcrop/rcrop.min.js"></script>
+        <link rel="stylesheet" href="vendor/rcrop/rcrop.css">

@@ -29,13 +29,17 @@ if(mysqli_num_rows($resposta1) > 0) {
 if(!$erro) {
     $error = false;
     $erro = $message;
+    $data = mysqli_fetch_assoc($resposta2a);
+    unset($data["pwsenha_professores"]);
 } else {
     $error = true;
     $erro = $erro;
+    $data = "";
 }
 
 $return = array(
     "error" => $error,
-    "message" => $erro
+    "message" => $erro,
+    "data" => $data
 );
 echo json_encode($return);

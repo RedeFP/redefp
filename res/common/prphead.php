@@ -12,3 +12,5 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/home.css">
         <link rel="icon" href="../css/logo.png">
+        <script src="/vendor/rcrop/rcrop.min.js"></script>
+        <link rel="stylesheet" href="/vendor/rcrop/rcrop.css">

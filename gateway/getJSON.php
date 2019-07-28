@@ -730,7 +730,7 @@ function delPost($id) {
     $query1 = mysqli_query($bd,$search1);
     $search2 = "DELETE FROM aluno_post WHERE id_post='$id'";
     $query2 = mysqli_query($bd,$search2);
-    if($query2) { echo ""; } else { echo $search; }
+    if($query2) { echo ""; } else { echo $search2; }
 }
 
 function searchFoto($id){
@@ -761,7 +761,32 @@ function sEditCPost($id,$post)
 {
     global $bd;
     $query1 = mysqli_query($bd,"UPDATE aluno_post SET txpost='$post' WHERE id_post='$id'");
-    if($query){}else{}
+}
+
+function retornaProfessor($id) {
+    global $bd;
+    $query1 = mysqli_query($bd,"SELECT * FROM professores WHERE idprofessores = '$id'");
+    $ready = mysqli_fetch_assoc($query1);
+    unset($ready['pwsenha_professores']);
+    return $ready;
+}
+
+function prp_avisos_load()
+{
+    global $bd;
+    $query1 = mysqli_query($bd,"SELECT * FROM avisos ORDER BY idaviso DESC LIMIT 50");
+    if($query1){
+        $array = array();
+        while($row = mysqli_fetch_assoc($query1)) {
+            $row['idresponsavel'] = retornaProfessor($row['idresponsavel']);
+            $array[] = $row;
+        }
+        return json_encode($array,JSON_PRETTY_PRINT);
+    }
+}
+
+function loadAnotacoes($id) {
+    
 }
 
 switch($webservice) {
@@ -928,7 +953,11 @@ switch($webservice) {
 		header('Content-Type: application/json');
 		loadEventosPerseguidos($id);
 		break;
-	}
+    }
+    case "avisosLoad":
+        header('Content-Type: application/json');
+        prp_avisos_load();
+        break;
     default:
     {
         echo "Não foi definido um case";

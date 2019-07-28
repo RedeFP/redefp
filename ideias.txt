@@ -72,3 +72,10 @@
 //sugestões
 
 login atraves do sso (criar um SSO e substituir o gateway de autenticação por ele)
+
+//force-feedback
+if (window.navigator.vibrate) {
+this.enableVibration = true;
+}
+
+window.navigator.vibrate([200, 100, 200]);

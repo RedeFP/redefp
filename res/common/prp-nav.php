@@ -22,10 +22,7 @@
                         <a class="nav-link" href="calendar.php">Calendário</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reservations/">Agendamentos de Salas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../forum/">Forum</a>
+                        <a class="nav-link" href="../reservations/">Agendamentos</a>
                     </li>
                 </ul>
             </div>
