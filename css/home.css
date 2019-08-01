@@ -254,3 +254,16 @@ img.comunity-img {
 main.container {
     margin-top: 71px; padding-top: 10px;
 }
+
+.descriptions {
+    text-overflow: ellipsis;
+    height: 25px !important;
+    font-weight: 100;
+    font-size: 13px;
+    line-height: 30px;
+    overflow: hidden;
+}
+
+.notes {
+    font-size: 15px;
+}
