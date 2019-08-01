@@ -1,5 +1,5 @@
-<link href="../../css/home.css" rel="stylesheet" type="text/css">
-<script src="../../js/loadComunity.js"></script>
+<link href="<?php echo BASEURL; ?>css/home.css" rel="stylesheet" type="text/css">
+<script src="<?php echo BASEURL; ?>js/loadComunity.js"></script>
 <div class="header-comunity">
                     <img src="css/user.png" class="comunity-pic">
                 </div>

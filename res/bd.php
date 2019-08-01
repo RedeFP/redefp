@@ -6,4 +6,4 @@
     //$bd = new mysqli('localhost','juliano','123','id6136795_redefp'); //Servidor GCP
     $bd = new mysqli('localhost','alberto',123,'id6136795_redefp'); //Linux
     mysqli_set_charset($bd, 'utf8');
- 
+    require("config.php");

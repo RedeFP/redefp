@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php require("../res/bd.php"); ?>
     <meta charset="UTF-8">
     <title>RedeFP - Uma rede social escolar</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="icon" href="css/logo.png">
-    <script src="../../vendor/jquery-3.3.1.min.js"></script>
-    <script src="../../vendor/popper.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="../js/libGET.js"></script>
-    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap-grid.css">
-    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap-reboot.css">
-    <script src="../vendor/mobile-detect.min.js"></script>
+    <link rel="stylesheet" href="<?php echo URL; ?>css/index.css">
+    <link rel="icon" href="<?php echo URL; ?>css/logo.png">
+    <script src="<?php echo URL; ?>vendor/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo URL; ?>vendor/popper.js"></script>
+    <script src="<?php echo URL; ?>vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="<?php echo URL; ?>vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="<?php echo URL; ?>js/libGET.js"></script>
+    <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap-reboot.css">
+    <script src="<?php echo URL; ?>vendor/mobile-detect.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="../js/prplogin.js"></script>
+    <script src="<?php echo URL; ?>js/prplogin.js"></script>
     <script>
         $(function(){
             $("#type").prop('selectedIndex',1);
