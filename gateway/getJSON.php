@@ -786,7 +786,15 @@ function prp_avisos_load()
 }
 
 function loadAnotacoes($id) {
-    
+    global $bd;
+    $query = mysqli_query($bd,"SELECT * FROM notes WHERE idprofessor='$id' ORDER BY id DESC LIMIT 20");
+    if($query) {
+        $array=[];
+        while($row = mysqli_fetch_assoc($query)) {
+            $array[]=$row;
+        }
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
 }
 
 switch($webservice) {
@@ -955,9 +963,17 @@ switch($webservice) {
 		break;
     }
     case "avisosLoad":
+    {
         header('Content-Type: application/json');
         prp_avisos_load();
         break;
+    }
+    case "notesload":
+    {
+        header('Content-Type: application/json');
+        loadAnotacoes($id);
+        break;
+    }
     default:
     {
         echo "Não foi definido um case";

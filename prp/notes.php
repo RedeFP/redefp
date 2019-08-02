@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <?php include("../res/common/prphead.php"); ?>
+        
+        <script src="<?php echo URL; ?>js/notes.js"></script>
     </head>
     <body>
         <?php include("../res/common/prp-nav.php"); ?>
@@ -10,10 +12,8 @@
                 <div class="col-3">
                     <!-- List group -->
                     <div class="list-group" id="myList" role="tablist">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab">
-                            <h5>Admirável Chip Novo</h5>
-                            <div class="descriptions">Pane no sistema, alguém me desconfigurou</div>
-                        </a>
+                        <a href="#" class="list-group-item list-group-item-action"><i class="far fa-sticky-note"></i>Adicionar nova nota</a>
+                        <a class="list-group-item list-group-item-action active descriptions" data-toggle="list" href="#home1" role="tab">Admirável Chip Novo <br>Pane no sistema, alguém me desconfigurou</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Profile</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#messages" role="tab">Messages</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Settings</a>
@@ -21,10 +21,12 @@
                 </div>
                 <div class="col-6">
                     <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home" role="tabpanel">
-                            <h5>Admirável Chip Novo</h5>
-                            <p class="notes">Pane no sistema, alguém me desconfigurou<br>
+                    <div class="tab-content" id="myTab">
+                        <div class="tab-pane active" id="home1" role="tabpanel">
+                            <p class="notes">
+                                Admirável Chip Novo<br>
+                                <br>
+                                Pane no sistema, alguém me desconfigurou<br>
                                 Aonde estão meus olhos de robô?<br>
                                 Eu não sabia, eu não tinha percebido<br>
                                 Eu sempre achei que era vivo<br>

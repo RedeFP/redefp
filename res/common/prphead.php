@@ -15,3 +15,5 @@
         <link rel="icon" href="<?php echo URL; ?>css/logo.png">
         <script src="<?php echo URL; ?>vendor/rcrop/rcrop.min.js"></script>
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/rcrop/rcrop.css">
+        <script src="<?php echo URL; ?>vendor/fontawesome/js/all.min.js"></script>
+        <link rel="stylesheet" href="<?php echo URL; ?>vendor/fontawesome/css/all.min.css">

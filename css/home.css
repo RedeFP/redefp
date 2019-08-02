@@ -257,13 +257,45 @@ main.container {
 
 .descriptions {
     text-overflow: ellipsis;
-    height: 25px !important;
+    height: 50px !important;
     font-weight: 100;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 30px;
+    overflow: hidden;
+}
+
+h5 {
     overflow: hidden;
 }
 
 .notes {
     font-size: 15px;
+    margin-bottom: 0px !important;
 }
+
+.tab-pane {
+    background: rgba(224, 220, 209,0.9) !important;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
