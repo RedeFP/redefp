@@ -808,7 +808,17 @@ function findAnotacoes($id) {
     }
 }
 
+function saveAviso($id,$aviso) {
+    global $bd;
+    $query = mysqli_query($bd,"INSERT INTO avisos (txpost,idresponsavel) VALUES ('$aviso','$id')");
+    if($query) { echo "true"; } else { echo $sql; }
+}
+
 switch($webservice) {
+    case "saveAviso":
+        $aviso = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
+        saveAviso($id,$aviso);
+        break;
     case "viewNote":
         header('Content-Type: application/json');
         findAnotacoes($id);
