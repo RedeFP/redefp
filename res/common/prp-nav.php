@@ -7,26 +7,32 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home.php">Inicio <span class="sr-only"> Current </span></a>
+                        <a class="nav-link" href="home.php"><i class="fas fa-home"></i>&nbsp;Inicio <span class="sr-only"> Current </span></a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="profiles.php">Cracha</a>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="notes.php"><i class="fas fa-sticky-note"></i>&nbsp;Anotações</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="notes.php">Anotações</a>
+                        <a class="nav-link" href="calendar.php"><i class="far fa-calendar-alt"></i>&nbsp;Calendário</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.php">Noticias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="calendar.php">Calendário</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../reservations/">Agendamentos</a>
+                        <a class="nav-link" href="../reservations/"><i class="fas fa-map-marked-alt"></i>&nbsp;Agendamentos</a>
                     </li>
                 </ul>
             </div>
             <div class="col-2" style="color: white;">
-            <a href="../gateway/auth/logout.php" class="nav-link btn btn-danger" style="max-width: 100px; width: max-content; margin-left: auto">Logout</a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-warning align-middle" href="profiles.php" style="line-height: 32px; "><i class="fas fa-user-circle"></i></a>
+                    <a href="../gateway/auth/logout.php" class="nav-link btn btn-danger" style="line-height: 28px; max-width: 100px; width: max-content; margin-left: auto">Logout</a>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        &nbsp;
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="<?php echo URL;?>nsa">Modo Secretária</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>

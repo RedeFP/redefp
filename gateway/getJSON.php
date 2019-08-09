@@ -774,14 +774,16 @@ function retornaProfessor($id) {
 function prp_avisos_load()
 {
     global $bd;
-    $query1 = mysqli_query($bd,"SELECT * FROM avisos ORDER BY idaviso DESC LIMIT 50");
+    $sql = "SELECT * FROM avisos";
+    $query1 = mysqli_query($bd,$sql);// ORDER BY idaviso DESC LIMIT 50
+    // echo var_dump($query1);
     if($query1){
         $array = array();
         while($row = mysqli_fetch_assoc($query1)) {
             $row['idresponsavel'] = retornaProfessor($row['idresponsavel']);
-            $array[] = $row;
+            $array[]=$row;
         }
-        return json_encode($array,JSON_PRETTY_PRINT);
+        echo json_encode($array,JSON_PRETTY_PRINT);
     }
 }
 
@@ -797,7 +799,20 @@ function loadAnotacoes($id) {
     }
 }
 
+function findAnotacoes($id) {
+    global $bd;
+    $query = mysqli_query($bd,"SELECT * FROM `notes` WHERE id='$id'");
+    if($query) {
+        $data = mysqli_fetch_assoc($query);
+        echo json_encode($data,JSON_PRETTY_PRINT);
+    }
+}
+
 switch($webservice) {
+    case "viewNote":
+        header('Content-Type: application/json');
+        findAnotacoes($id);
+        break;
     case "delFoto":
     {
         delFoto($id);

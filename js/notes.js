@@ -29,7 +29,46 @@ function genTab(obj) {
     tab.setAttribute("class","tab-pane");
     tab.setAttribute("id","note"+obj.id);
     tab.setAttribute("role","tabpanel");
-    tab.innerHTML = res;
-    console.log(res);
+    p = document.createElement("p");
+    p.innerHTML = res;
+    tab.appendChild(Toolbar(obj.id));
+    tab.appendChild(p);
     document.getElementById("myTab").append(tab);
+}
+
+function genDeleteModal(id) {
+    $("#commentmodal").modal('show');
+    $(".modal-title").text("Anotação #"+id);
+    $(".modal-body").text("Confirme que vai deletar a anotação");
+    $(".btn-primary").addClass("btn-danger").text("Deletar").attr("onclick","sendDelete("+id+")");
+    $(".btn-secondary").text("Cancelar").attr("onclick","limpaModal()");
+}
+
+function limpaModal() {
+    $("#commentmodal").modal('hide');
+    $(".modal-title").text("Modal title");
+    $(".modal-body").html("");
+    $(".btn-primary").attr("class","btn btn-primary").removeAttr("onclick").text("");
+    $(".btn-secondary").text("");
+}
+
+function genEditModal(id) {
+    $.get("../gateway/getJSON.php",{f:"viewNote",id:id},function(result){
+        console.log(result);
+        obj = result;
+        res = obj.txnotes.replace(/\r\n/g,"<br>");
+        $(".modal").modal('show');
+        $(".modal-title").text("Anotação #"+id);
+        $(".modal-body").html("<textarea id='noteedit' style='width:100%' class='form-control-plaintext'>"+obj.txnotes+"</textarea>");
+    });
+}
+
+function sendDelete(id) {
+
+}
+
+function Toolbar(id) {
+    div = document.createElement("div");
+    div.innerHTML = '<button class="btn btn-outline-primary" onclick="genEditModal('+id+')"><i class="fas fa-edit fa-lg"></i>&nbsp;Editar</button>&nbsp;<button class="btn btn-outline-danger" onclick="genDeleteModal('+id+')"><i class="fas fa-trash-alt fa-lg"></i>&nbsp;Deletar</button><br>';
+    return div;
 }
