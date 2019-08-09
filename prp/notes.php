@@ -15,7 +15,7 @@
                 <div class="col-3">
                     <!-- List group -->
                     <div class="list-group" id="myList" role="tablist">
-                        <a href="#" class="list-group-item list-group-item-action"><i class="far fa-sticky-note"></i>&nbsp;Adicionar nova nota</a>
+                        <a href="#" class="list-group-item list-group-item-action" onclick="setModalAddNote()"><i class="far fa-sticky-note"></i>&nbsp;Criar</a>
                     </div>
                 </div>
                 <div class="col-6">

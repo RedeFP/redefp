@@ -811,14 +811,53 @@ function findAnotacoes($id) {
 function saveAviso($id,$aviso) {
     global $bd;
     $query = mysqli_query($bd,"INSERT INTO avisos (txpost,idresponsavel) VALUES ('$aviso','$id')");
+    if($query) { echo "true"; } else { echo "false"; }
+}
+
+function deleteNote($id) {
+    global $bd;
+    $query = mysqli_query($bd,"DELETE FROM notes WHERE id='$id'");
+    if($query) { echo "true"; } else { echo "false"; }
+}
+
+function saveNote($id,$note){
+    global $bd;
+    $sql = "INSERT INTO notes (txnotes,idprofessor) VALUES ('$note','$id')";
+    $query = mysqli_query($bd,$sql);
+    if($query) { echo "true"; } else { echo $sql; }
+}
+
+function editNote($id,$note) {
+    global $bd;
+    $sql = "UPDATE notes SET txnotes='$note' WHERE id='$id'";
+    $query = mysqli_query($bd,$sql);
     if($query) { echo "true"; } else { echo $sql; }
 }
 
 switch($webservice) {
+    case "editNote":
+    {
+        $note = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
+        editNote($id,$note);
+        break;
+    }
+    case "salvarNote":
+    {
+        $note = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
+        saveNote($id,$note);
+        break;
+    }
+    case "deleteNote":
+    {
+        deleteNote($id);
+        break;
+    }
     case "saveAviso":
+    {
         $aviso = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
         saveAviso($id,$aviso);
         break;
+    }
     case "viewNote":
         header('Content-Type: application/json');
         findAnotacoes($id);

@@ -21,7 +21,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-2" style="color: white;">
+            <div class="col" style="color: white; text-align:right">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a class="btn btn-warning align-middle" href="profiles.php" style="line-height: 32px; "><i class="fas fa-user-circle"></i></a>
                     <a href="../gateway/auth/logout.php" class="nav-link btn btn-danger" style="line-height: 28px; max-width: 100px; width: max-content; margin-left: auto">Logout</a>
@@ -30,7 +30,7 @@
                         &nbsp;
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                            <a class="dropdown-item" href="<?php echo URL;?>nsa">Modo Secretária</a>
+                            <a class="dropdown-item" href="<?php echo URL;?>nsa"><i class='fas fa-school fa-lg'></i>&nbsp;Modo Secretária</a>
                         </div>
                     </div>
                 </div>

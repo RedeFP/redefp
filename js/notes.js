@@ -60,11 +60,56 @@ function genEditModal(id) {
         $(".modal").modal('show');
         $(".modal-title").text("Anotação #"+id);
         $(".modal-body").html("<textarea id='noteedit' style='width:100%' class='form-control-plaintext'>"+obj.txnotes+"</textarea>");
+        $(".btn-primary").attr("onclick","saveEdit("+id+")").text("Salvar").addClass("btn-success");
+    });
+}
+
+function saveEdit(id) {
+    input = $("#noteedit").val();
+    data = {
+        f: "editNote",
+        input:input,
+        id:id
+    };
+    $.get("../gateway/getJSON.php",data,function(result){
+        if(result == "true") {
+            window.location.reload();
+        }
     });
 }
 
 function sendDelete(id) {
+    data = {
+        f: "deleteNote",
+        id: id
+    };
+    $.get("../gateway/getJSON.php",data,function(result){
+        if(result == "true") {
+            window.location.reload();
+        }
+    });
+}
 
+function setModalAddNote() {
+    $("#commentmodal").modal('show');
+    $(".modal-title").text("Criando uma nova Anotação");
+    $(".modal-body").html("<textarea id='noteadd' style='width:100%' class='form-control'></textarea>");
+    $(".btn-primary").text("Salvar").addClass("btn-success").attr("onclick","salvarNote()");
+}
+
+function salvarNote() {
+    input = $("#noteadd").val();
+    id = JSON.parse(localStorage.prpuser)['idprofessores'];
+    data = {
+        f: "salvarNote",
+        id: id,
+        input: input
+    };
+    $.get("../gateway/getJSON.php",data,function(result){
+        if(result == "true") {
+            window.location.reload();
+        }
+    });
 }
 
 function Toolbar(id) {
