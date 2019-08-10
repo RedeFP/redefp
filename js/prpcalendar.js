@@ -10,6 +10,7 @@ var eventData = [
         modal: true
     },
 ];
+var id = JSON.parse(localStorage.prpuser).idprofessor;
 $(function(){
     $("#myCalendar").zabuto_calendar({
         language: "pt",
@@ -20,7 +21,7 @@ $(function(){
         },
         data: eventData
         //ajax: {
-        //  url: "../gateway/getJSON.php?f=show_data&id=5",
+        //  url: "../gateway/getJSON.php?f=show_data&id="+id,
         //  modal: true
         //}
     });

@@ -834,7 +834,28 @@ function editNote($id,$note) {
     if($query) { echo "true"; } else { echo $sql; }
 }
 
+function loadCalendar($id) {
+    global $bd;
+    $sql = "SELECT * FROM calendar WHERE id_professor='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $array=[];
+        while($row = mysqli_fetch_assoc($query)) {
+            $array[]=$row;
+        }
+        echo json_encode($array);
+    } else {
+        echo "false";
+    }
+}
+
 switch($webservice) {
+    case "loadCalendar":
+    {
+        header('Content-Type: application/json');
+        loadCalendar($id);
+        break;
+    }
     case "editNote":
     {
         $note = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
