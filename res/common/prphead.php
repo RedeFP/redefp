@@ -19,3 +19,6 @@
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/fontawesome/css/all.min.css">
         <script src="<?php echo URL;?>vendor/jpace/pace.min.js"></script>
         <link rel="stylesheet" href="<?php echo URL;?>vendor/jpace/pace.min.css">
+        <script src="<?php echo URL; ?>vendor/calendar/zabuto_calendar.min.js"></script>
+        <link rel="stylesheet" href="<?php echo URL;?>vendor/calendar/zabuto_calendar.min.css">
+        
