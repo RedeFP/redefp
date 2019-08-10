@@ -14,9 +14,6 @@
                         <a class="nav-link" href="notes.php"><i class="fas fa-sticky-note"></i>&nbsp;Anotações</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="calendar.php"><i class="far fa-calendar-alt"></i>&nbsp;Calendário</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="../reservations/"><i class="fas fa-map-marked-alt"></i>&nbsp;Agendamentos</a>
                     </li>
                 </ul>
@@ -30,7 +27,8 @@
                         &nbsp;
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                            <a class="dropdown-item" href="<?php echo URL;?>nsa"><i class='fas fa-school fa-lg'></i>&nbsp;Modo Secretária</a>
+                            <a class="dropdown-item" href="<?php echo URL;?>nsa"><i class='fas fa-school'></i>&nbsp;Modo Secretária</a>
+                            <a class="dropdown-item" href="calendar.php"><i class="far fa-calendar-alt"></i>&nbsp;Calendário</a>
                         </div>
                     </div>
                 </div>
