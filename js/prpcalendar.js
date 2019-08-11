@@ -1,5 +1,9 @@
 var eventData = [
-    {"date":"2019-08-01","badge":false,"title":"Example 1"},
+    {
+        "date":"2019-08-01",
+        "badge":false,
+        "title":"Example 1"
+    },
     {
         "date":"2019-08-02",
         "badge":true,

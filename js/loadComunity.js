@@ -26,7 +26,7 @@ function init()
             }
             console.info("Iniciando... 25%");
             $("#lb1").attr("href","comunity.php?id="+obj.id);
-            $("#lb2").attr("href","comunity-store.php?id="+obj.id);
+            $("#lb2").attr("href","../store/index.php?c="+obj.id);
             $("#lb3").attr("href","comunity-pictures.php?id="+obj.id);
             $("#lb4").attr("href","diary.php?c="+obj.id);
             $("#lb5").attr("href","comunity-members.php?id="+obj.id);

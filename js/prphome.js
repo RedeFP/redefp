@@ -42,12 +42,12 @@ function limpaModal() {
     $(".modal-title").text("Modal title");
     $(".modal-body").html("");
     $(".btn-primary").attr("class","btn btn-primary").removeAttr("onclick").text("Save");
-    $(".btn-secondary").text("Cancel");
+    
 }
 
 function salvarAviso() {
     input = $("#textaviso").val();
-    responsavel = JSON.parse(localStorage.prpuser)["idprofessores"];
+    responsavel = JSON.parse(localStorage.prpuser).idprofessores;
     data = {
         id:responsavel,
         input:input,
