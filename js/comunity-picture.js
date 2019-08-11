@@ -15,19 +15,15 @@ function genImages(post)
 	div.setAttribute("class","col-3 user-image");
 	div.setAttribute("align","center");
 	div.setAttribute("data-id",post.id_post);
-		image = document.createElement("img");
-		image.setAttribute("src",post.photo_url);
+		image = document.createElement("a");
+		image.setAttribute("href",post.photo_url);
 		image.setAttribute("class","user-image-src");
+		image.setAttribute("data-lightbox",post.photo_url);
+		image.setAttribute("data-title",post.txlegenda);
+			img = document.createElement("img");
+			img.setAttribute("src",post.photo_url);
+			img.setAttribute("class","user-image-src");
+			image.appendChild(img);
 		div.appendChild(image);
-		span1 = document.createElement("span");
-		span1.innerHTML = post.txlegenda;
-		div.appendChild(span1);
-		br = document.createElement("br");
-		div.appendChild(br);
-		span2 = document.createElement("span");
-		var d = new Date(post.dtpublicacao);
-		var n = d.toLocaleDateString();
-		span2.innerHTML = n;
-		div.appendChild(span2);
 	document.getElementById("import").appendChild(div);
 }

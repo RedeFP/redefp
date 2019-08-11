@@ -5,7 +5,7 @@
                     <img src="css/user.png" class="comunity-pic">
                 </div>
                 <div class="comunity-name">Sinhá do FP</div>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 10px;">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
