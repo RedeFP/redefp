@@ -59,8 +59,9 @@ function genEditModal(id) {
         res = obj.txnotes.replace(/\r\n/g,"<br>");
         $(".modal").modal('show');
         $(".modal-title").text("Anotação #"+id);
-        $(".modal-body").html("<textarea id='noteedit' style='width:100%' class='form-control-plaintext'>"+obj.txnotes+"</textarea>");
+        $(".modal-body").html("<textarea id='noteedit' style='width:100%' class='form-control'>"+obj.txnotes+"</textarea>");
         $(".btn-primary").attr("onclick","saveEdit("+id+")").text("Salvar").addClass("btn-success");
+        $(".btn-secondary").text("Cancelar");
     });
 }
 
@@ -95,6 +96,7 @@ function setModalAddNote() {
     $(".modal-title").text("Criando uma nova Anotação");
     $(".modal-body").html("<textarea id='noteadd' style='width:100%' class='form-control'></textarea>");
     $(".btn-primary").text("Salvar").addClass("btn-success").attr("onclick","salvarNote()");
+    $(".btn-secondary").text("Cancelar");
 }
 
 function salvarNote() {

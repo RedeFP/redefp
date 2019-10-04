@@ -26,7 +26,7 @@ if(mysqli_num_rows($resposta1) > 0) {
     $erro = "Login incorreto";
 }
 
-if(!$erro) {
+if($resposta2) {
     $error = false;
     $erro = $message;
     $data = mysqli_fetch_assoc($resposta2a);

@@ -525,6 +525,14 @@ function retornaLocal($id)
     if($query){ $obj = mysqli_fetch_assoc($query); return $obj;}
 }
 
+function loadLocal()
+{
+    global $bd;
+    $array=[];
+    $query = mysqli_query($bd,"SELECT * FROM local");
+    if($query){  while($row=mysqli_fetch_assoc($query)) { $array[]=$row; } echo json_encode($array); }
+}
+
 function retornaOrganizador($id)
 {
     global $bd;
@@ -836,12 +844,19 @@ function editNote($id,$note) {
 
 function loadCalendar($id) {
     global $bd;
-    $sql = "SELECT * FROM calendar WHERE id_professor='$id'";
+    $sql = "SELECT id_reuniao AS id, date_reuniao AS date, title_reuniao AS title, txpost_reuniao AS body, id_local FROM professores_reunioes WHERE id_professor='$id'";
     $query = mysqli_query($bd,$sql);
     if($query) {
         $array=[];
         while($row = mysqli_fetch_assoc($query)) {
+            $row['badge']=true;
+            $row['title'] = "&nbsp;<button onclick='editEvento(".$row['id'].")' class='btn btn-primary'><i class='fas fa-pencil-alt'></i></button>"."&nbsp;<button onclick='deleteEvento(".$row['id'].")' class='btn btn-danger'><i class='fas fa-trash-alt'></i></button>&nbsp;".$row['title'];
+            $row['modal']=true;
+            $row['classname']="purple-event";
+            $row['footer'] = retornaLocal($row['id_local'])['no_local'];
+            unset($row['id_local']);
             $array[]=$row;
+            
         }
         echo json_encode($array);
     } else {
@@ -849,7 +864,31 @@ function loadCalendar($id) {
     }
 }
 
+function saveReuniao($a,$b,$c,$d,$e) {
+    global $bd;
+    $sql = "INSERT INTO professores_reunioes (id_professor,title_reuniao,date_reuniao,txpost_reuniao,id_local) VALUES ('$e','$a','$b','$c','$d') ";
+    $query = mysqli_query($bd,$sql);
+    if($query) { echo "true"; } else { echo $sql; };
+}
+
 switch($webservice) {
+    case "saveReuniao":
+    {
+        $e = filter_input(INPUT_GET,'id_professor');
+        $a = filter_input(INPUT_GET,'title_reuniao');
+        $b = filter_input(INPUT_GET,'date_reuniao');
+        $c = filter_input(INPUT_GET,'txpost_reuniao');
+        $d = filter_input(INPUT_GET,'id_local');
+        header('Content-Type: application/json');
+        saveReuniao($a,$b,$c,$d,$e);
+        break;
+    }
+    case "loadLocal":
+    {
+        header('Content-Type: application/json');
+        loadLocal();
+        break;
+    }
     case "loadCalendar":
     {
         header('Content-Type: application/json');

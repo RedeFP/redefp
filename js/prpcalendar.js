@@ -1,13 +1,8 @@
 var eventData = [
     {
-        "date":"2019-08-01",
-        "badge":false,
-        "title":"Example 1"
-    },
-    {
-        "date":"2019-08-02",
+        "date":"2019-10-02",
         "badge":true,
-        "title":"Tonight",
+        "title":"De noite",
         "body":"<p class=\"lead\">Party<\/p><p>Like it's 1999.<\/p>",
         "footer":"At Paisley Park",
         "classname":"purple-event",
@@ -16,6 +11,8 @@ var eventData = [
 ];
 var id = JSON.parse(localStorage.prpuser).idprofessor;
 $(function(){
+    $.getScript("../js/js.js");
+    professor = JSON.parse(localStorage.prpuser)['idprofessores'];
     $("#myCalendar").zabuto_calendar({
         language: "pt",
         year: 2019,
@@ -23,10 +20,71 @@ $(function(){
             prev: '<i class="fa fa-chevron-left fa-lg"></i>',
             next: '<i class="fa fa-chevron-right fa-lg"></i>'
         },
-        data: eventData
-        //ajax: {
-        //  url: "../gateway/getJSON.php?f=show_data&id="+id,
-        //  modal: true
-        //}
+        // data: eventData
+        ajax: {
+         url: "../gateway/getJSON.php?f=loadCalendar&id="+professor,
+         modal: true
+        }
     });
+
+    function loadLocal() {
+        $.get(URLBASE+"gateway/getJSON.php?f=loadLocal",null,function(result){
+            obj =result;
+            obj.forEach(genLocal);
+        });
+    };
+
+    function genLocal(item) {
+        opt = document.createElement("option");
+        opt.value = item.id_local;
+        opt.innerHTML = item.no_local;
+        document.getElementById("localLoad").appendChild(opt);
+    }
+
+    $("#createNewEvent").click(function(){
+        console.log("Clicou no Botão `Create New Event`");
+        $(".modal-title").text("Criando um novo evento");
+        $(".modal-body").html('<div class="form-group row"><label for="title_reuniao" class="col-4">Nome do Evento:</label><div class="col-8"><input type="text" class="form-control " id="title_reuniao" placeholder="Nome do Evento"></div></div><div class="form-group row"><label class="col-4" for="date_reuniao">Data do Evento: </label><div class="col-8"><input type="date" class="form-control" id="date_reuniao"></div></div><div class="form-group row"><label class="col-4" for="txpost_reuniao">Texto do Evento:</label><div class="col-8"><input type="text" class="form-control" id="txpost_reuniao" placeholder="Texto do Evento" </div></div></div><div class="form-group row"><label for="localLoad" class="col-4">Local do Evento:</label><div class="col-8"><select id="localLoad" class="custom-select"></select></div></div>')
+        $("#localLoad").html(loadLocal());
+        $("#localLoad").prepend('<option value="" disabled selected hidden></option><option value="add">Cadastrar</option>');
+        $("#localLoad").change(function(){
+            if($(this).val() == "add") {
+                console.log("#Add");
+                //TODO: implement AddLocal Modal
+            }
+        })
+        $("#commentmodal").modal('show');
+        $(".btn-primary").text("Salvar").attr("onclick","saveModal()");
+    });
+    
 });
+
+function saveModal() {
+    if($("#title_reuniao").val() == "") {
+        return false;
+    }
+    if($("#date_reuniao").val() == "") {
+        return false;
+    }
+    if($("#txpost_reuniao").val() == "") {
+        return false;
+    }
+    if($("#localLoad").val() == "") {
+        return false;
+    }
+    data = {
+        f: "saveReuniao",
+        id_professor: JSON.parse(localStorage.prpuser)['idprofessores'],
+        title_reuniao: $("#title_reuniao").val(),
+        date_reuniao: $("#date_reuniao").val(),
+        txpost_reuniao: $("#txpost_reuniao").val(),
+        id_local: $("#localLoad").val()
+    }
+    console.log(data);
+    $.get(URLBASE+"gateway/getJSON.php",data,function(result){
+        console.log(result);
+        if(result == true) {
+            window.location.reload();
+        }
+    });
+}

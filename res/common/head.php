@@ -1,6 +1,7 @@
 ﻿		<meta charset="utf8">
         <?php require("./res/bd.php"); ?>
         <title>Centrão - A casa dos etecquianos</title>
+        <?php include(URL."js/JS.php"); ?>
         <script src="<?php echo URL; ?>vendor/jquery-3.3.1.min.js"></script>
         <script src="<?php echo URL; ?>vendor/popper.js"></script>       
         <script src="<?php echo URL; ?>vendor/bootstrap/js/bootstrap.js"></script>

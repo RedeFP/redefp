@@ -42,7 +42,7 @@
 
 	- Cracha - Concluido
 	- Anotacoes - Concluido
-	- agenda - Falta CRD(AI-D)
+	- agenda - Falta CRUD(AI-D)
 	- Notificacoes de Noticias - FPress Redirect
 	- Acesso ao forum - Forum Redirect
 	- agendamento de laboratorio (professores) - Reservations Redirect

@@ -316,8 +316,8 @@ $.fn.zabuto_calendar = function (options) {
         /* ----- Modal functions ----- */
 
         function createModal(id, title, body, footer) {
-            var $modalHeaderButton = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>');
-            var $modalHeaderTitle = $('<h4 class="modal-title" id="' + id + '_modal_title">' + title + '</h4>');
+            var $modalHeaderButton = $('<h4 class="modal-title" id="' + id + '_modal_title">' + title + '</h4>');
+            var $modalHeaderTitle = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>');
 
             var $modalHeader = $('<div class="modal-header"></div>');
             $modalHeader.append($modalHeaderButton);

@@ -12,6 +12,7 @@
                 <h1>Calendário</h1>
             </center>
             <div id="myCalendar"></div>
+            <button class="btn btn-success" id="createNewEvent">Criar novo Evento</button>
         </main>
         <?php require("../res/common/modal.php");?>
         <div style="display: none;">

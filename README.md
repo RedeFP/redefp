@@ -15,13 +15,13 @@ E para clonar o projeto, tenha o cliente do Git.
 
 Primeiro baixe o instalador do XAMPP, e seguir os passos que o programa apresentar na tela
 
-```
+``` javascript
 https://www.apachefriends.org/xampp-files/7.3.1/xampp-win32-7.3.1-0-VC15-installer.exe
 ```
 
-Em seguida instale o Git,e abra o Git Bash
+Em seguida instale o Git, e abra o Git Bash
 
-```
+``` bash
 cd ../../xampp/htdocs
 git clone https://github.com/d3cr1pt/redefp/redefp.git
 E em seguida mv redefp ../htdocs

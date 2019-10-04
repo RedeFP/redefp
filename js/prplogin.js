@@ -1,3 +1,5 @@
+$.getScript("../js/JS.JS");
+
 $(function() {
     HideAlert();
     $("#inputEmail").keypress(function(e){
@@ -25,7 +27,7 @@ function Submit() {
     passinput = $("#inputPassword").val();
 
     //Chamada AJAX via jQuery
-    $.get("/gateway/auth/sendPRPLogin.php", { user: userinput, pass: passinput }, function(result) {
+    $.get(URLBASE+"gateway/auth/sendPRPLogin.php", { user: userinput, pass: passinput }, function(result) {
         var obj = JSON.parse(result);
 
         if (obj.error == true) {
