@@ -868,10 +868,50 @@ function saveReuniao($a,$b,$c,$d,$e) {
     global $bd;
     $sql = "INSERT INTO professores_reunioes (id_professor,title_reuniao,date_reuniao,txpost_reuniao,id_local) VALUES ('$e','$a','$b','$c','$d') ";
     $query = mysqli_query($bd,$sql);
-    if($query) { echo "true"; } else { echo $sql; };
+    if($query) { echo "true"; } else { echo "false"; };
+}
+
+function deleteReuniao($id) {
+    global $bd;
+    $sql = "DELETE FROM professores_reunioes WHERE id_reuniao = '$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) { echo "true"; } else { echo "false"; }
+}
+
+function findReuniao($id) {
+    global $bd;
+    $sql = "SELECT * FROM professores_reunioes WHERE id_reuniao = '$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) { echo json_encode(mysqli_fetch_assoc($query)); } else { echo "false"; }
+}
+
+function editReuniao($id,$a,$b,$c) {
+    global $bd;
+    $sql = "UPDATE professores_reunioes SET title_reuniao='$a', date_reuniao='$b', txpost_reuniao='$c' WHERE id_reuniao = '$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) { echo "true"; } else { echo $sql; }
 }
 
 switch($webservice) {
+    case "editReuniao":
+    {
+        header('Contetn-Type: application/json');
+        editReuniao($id,$_GET['a'],$_GET['b'],$_GET['c']);
+        break;
+    }
+    case "findReuniao":
+    {
+        header('Content-Type: application/json');
+        findReuniao($id);
+        break;
+    }
+    case "deleteReuniao":
+        {
+            header('Content-Type: application/json');
+            deleteReuniao($id);
+            break;
+        
+        }
     case "saveReuniao":
     {
         $e = filter_input(INPUT_GET,'id_professor');

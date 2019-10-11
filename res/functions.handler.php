@@ -1,3 +1,3 @@
 <?php
 
-include("./function.url.php"); 
+include("functions.url.php"); 

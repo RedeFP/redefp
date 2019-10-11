@@ -3,7 +3,7 @@ function Submit(){
         ra: $("#inputRA").val(),
         pass: $("#inputPassword").val()
     };
-    $.get("/gateway/auth/login.php",data,function(result){
+    $.get("../gateway/auth/login.php",data,function(result){
         obj = JSON.parse(result)[0];
         console.log(obj);
         if(obj.error == true){

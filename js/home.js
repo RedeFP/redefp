@@ -15,6 +15,7 @@ $(function(){
     setInterval(function(){
         autosize($('textarea'));
     },1000)
+    $("#postline").prepend("<div class='container post' data-id='null'><button onclick='createPost()'class='btn btn-dark btn-add'>+</button><span>Criar uma nova publicação</span></div>");
 });
 
 
@@ -46,7 +47,7 @@ function getDocHeight() {
 
 function loadPost()
 {
-$.get("/gateway/getJSON.php",{f:"posts",id:1},function(result) {
+$.get("./gateway/getJSON.php",{f:"posts",id:1},function(result) {
     obj = JSON.parse(result);
     obj.forEach(generatePost);
     
@@ -55,7 +56,7 @@ $.get("/gateway/getJSON.php",{f:"posts",id:1},function(result) {
 
 function searchProfile(id,item)
 {
-    $.get("/gateway/getJSON.php",{f:"one-profile",id:id},function(result){
+    $.get("./gateway/getJSON.php",{f:"one-profile",id:id},function(result){
         aluno = JSON.parse(result);
         post = document.createElement("div");
         post.setAttribute("class","container post");
@@ -89,7 +90,7 @@ function searchProfile(id,item)
 
 function expandePost(post) {
     id_final = post;
-    $.get("/gateway/getJSON.php",{f:"expandePost",id:post},function(result){
+    $.get("./gateway/getJSON.php",{f:"expandePost",id:post},function(result){
         post = JSON.parse(result);
         modal = document.getElementsByClassName("modal-body")[0];
         $(".modal-title").html("Publicação de @"+post.post.aluno.apelido);
@@ -162,14 +163,14 @@ function genComentario(comentario)
 }
 
 function likePost(post) {
-    $.get('/gateway/getJSON.php',{f:"like",id:post}, function (result){
+    $.get('./gateway/getJSON.php',{f:"like",id:post}, function (result){
         window.location.reload();
     });
 }
 
 function deslikePost(post) {
     
-    $.get('/gateway/getJSON.php',{f:"deslike",id:post}, function(result){
+    $.get('./gateway/getJSON.php',{f:"deslike",id:post}, function(result){
         window.location.reload();
     });
 }
@@ -177,7 +178,7 @@ function deslikePost(post) {
 function salvaComentario(post) {
     var usuario = parseInt(JSON.parse(localStorage.getItem('user'))['id']);
     var comentario = $("#cobox").val(); 
-    $.get('/gateway/getJSON.php',{f:"comentar",id:post,comentar: comentario,usuario:usuario},function(result){
+    $.get('./gateway/getJSON.php',{f:"comentar",id:post,comentar: comentario,usuario:usuario},function(result){
         console.log(result);
         if(result == "200 OK")
         {
@@ -219,7 +220,7 @@ function generateProduto(item)
 {
     idc = item.id_vendedor;
     br = document.createElement("br");
-    $.get("/gateway/getJSON.php",{f:"one-vendedor",id:idc},function(result){
+    $.get("./gateway/getJSON.php",{f:"one-vendedor",id:idc},function(result){
         comunidade = JSON.parse(result);
         post = document.createElement("div");
         post.setAttribute("class","container post");
@@ -265,7 +266,7 @@ function genProdutoLateral(item)
 {
     idc = item.id_vendedor;
     br = document.createElement("br");
-    $.get("/gateway/getJSON.php",{f:"one-vendedor",id:idc},function(result){
+    $.get("./gateway/getJSON.php",{f:"one-vendedor",id:idc},function(result){
         comunidade = JSON.parse(result);
         post = document.createElement("div");
         post.setAttribute("class","container product bk-grey");
@@ -290,7 +291,7 @@ function genProdutoLateral(item)
 
 function loadProduto()
 {
-    $.get("/gateway/getJSON.php",{f:"loadProdutoTurma"},function(result){
+    $.get("./gateway/getJSON.php",{f:"loadProdutoTurma"},function(result){
         obj = JSON.parse(result);
         obj.forEach(generateProduto);
     });
@@ -298,7 +299,7 @@ function loadProduto()
 
 function loadProdutoLateral()
 {
-    $.get("/gateway/getJSON.php",{f:"loadProdutoTurma2"},function(result){
+    $.get("./gateway/getJSON.php",{f:"loadProdutoTurma2"},function(result){
         obj = JSON.parse(result);
         obj.forEach(genProdutoLateral);
     });
@@ -345,7 +346,7 @@ function sEditPost(post)
         id: post,
         comentario: cobox
     };
-    $.get("gateway/getJSON.php",data,function(result){
+    $.get("./gateway/getJSON.php",data,function(result){
         if(result == "200 OK") {
             window.location.reload();
         }
@@ -358,7 +359,7 @@ function delPost(post)
         f: "delPost",
         id: post
     };
-    $.get("gateway/getJSON.php",data,function(result){
+    $.get("./gateway/getJSON.php",data,function(result){
         console.log(result);
         if(result != "400 ERROR") {
             window.location.reload();

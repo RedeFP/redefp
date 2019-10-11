@@ -1,5 +1,7 @@
 //window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1)
 
+	//Enviar e-mails programados
+
 	new Modal({
 		title: "", //Janela Flutuante
 		large-size: false,
@@ -31,6 +33,10 @@
 	});
 
 	//Alunos
+	Fix:
+	- JS URL
+
+	> Permitir publicação apartir da Home
 	- Perfil 
 	> Novo Sistema de Upload para Galeria
 	> Disparar para Comunidade no Cadastro
@@ -42,12 +48,17 @@
 
 	- Cracha - Concluido
 	- Anotacoes - Concluido
-	- agenda - Falta CRUD(AI-D)
+	- agenda - Concluido
 	- Notificacoes de Noticias - FPress Redirect
 	- Acesso ao forum - Forum Redirect
 	- agendamento de laboratorio (professores) - Reservations Redirect
-	//
 
+	V2 - PRP 
+	- Editar perfil.
+	- Remover conta.
+	- Baixar vCard com Eventos
+	- Adicionar pessoas aos Eventos
+	- Receber e-mail avisando meia hora antes
 
 	//Forum (Central de Aprendizado)
 
@@ -72,6 +83,8 @@
 	- declaracoes de faltas
 	- disponibilizar publico (//serverdados)
 	- disponibilizar apostila em formato digital
+
+	//Reservations
 
 
 

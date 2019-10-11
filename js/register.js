@@ -1,5 +1,6 @@
+
 function loadCursos(){
-    $.get('/gateway/getJSON.php',data = { f: "cursos"}, function(result){
+    $.get('../gateway/getJSON.php',data = { f: "cursos"}, function(result){
         obj = JSON.parse(result);
         obj.forEach(generateCursos);
     });
@@ -34,11 +35,11 @@ function Submit() {
         'inputTelefone' : $("#inputTelefone").val(),
         'inputApelido' : $("#inputApelido").val() 
     };
-    $.get('/gateway/auth/sendRegister.php',data,function(result) {
+    $.get('../gateway/auth/sendRegister.php',data,function(result) {
        console.log(result);
        if(result == "200 OK") 
        {
-           window.location.href="/";
+           window.location.href="../";
        }
     });
 }

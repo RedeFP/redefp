@@ -7,14 +7,17 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home.php"><i class="fas fa-home"></i>&nbsp;Inicio <span class="sr-only"> Current </span></a>
+                        <a class="nav-link" href="<?php echo URL;?>prp/home.php"><i class="fas fa-home"></i>&nbsp;Inicio <span class="sr-only"> Current </span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="notes.php"><i class="fas fa-sticky-note"></i>&nbsp;Anotações</a>
+                        <a class="nav-link" href="<?php echo URL;?>prp/notes.php"><i class="fas fa-sticky-note"></i>&nbsp;Anotações</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reservations/"><i class="fas fa-map-marked-alt"></i>&nbsp;Agendamentos</a>
+                        <a class="nav-link" href="<?php echo URL;?>reservations/"><i class="fas fa-map-marked-alt"></i>&nbsp;Agendamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URL;?>forum"><i class="fas fa-question-circle"></i>&nbsp;Fórum</a>
                     </li>
                 </ul>
             </div>
@@ -28,7 +31,8 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
                             <a class="dropdown-item" href="<?php echo URL;?>nsa"><i class='fas fa-school'></i>&nbsp;Modo Secretária</a>
-                            <a class="dropdown-item" href="calendar.php"><i class="far fa-calendar-alt"></i>&nbsp;Calendário</a>
+                            <a class="dropdown-item" href="<?php echo URL;?>prp/calendar.php"><i class="far fa-calendar-alt"></i>&nbsp;Calendário</a>
+                            
                         </div>
                     </div>
                 </div>

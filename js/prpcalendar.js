@@ -11,7 +11,7 @@ var eventData = [
 ];
 var id = JSON.parse(localStorage.prpuser).idprofessor;
 $(function(){
-    $.getScript("../js/js.js");
+    $.getScript("../js/JS.JS");
     professor = JSON.parse(localStorage.prpuser)['idprofessores'];
     $("#myCalendar").zabuto_calendar({
         language: "pt",
@@ -84,6 +84,55 @@ function saveModal() {
     $.get(URLBASE+"gateway/getJSON.php",data,function(result){
         console.log(result);
         if(result == true) {
+            window.location.reload();
+        }
+    });
+}
+
+function deleteEvento(id) {
+    data = {
+        f: "deleteReuniao",
+        id: id
+    }
+    $.get(URLBASE+"gateway/getJSON.php",data,function(result){
+        console.log(result);
+        if(result == true) {
+            if(window.navigator.vibrate){
+                window.navigator.vibrate(["200","20","20"]);
+            }
+            window.location.reload();
+        }
+    })
+}
+
+function editEvento(id) {
+    data = {
+        f: "findReuniao",
+        id: id
+    };
+    $.get(URLBASE+"gateway/getJSON.php",data,function(result){
+        console.log(result);
+        info = result;
+        $(".modal").modal('hide');
+        $("#commentmodal").modal('show');
+        $("#commentmodal .modal-title").text("Editando Evento");
+        $("#commentmodal .btn-primary").text("Salvar").attr("onclick","btnSalvar("+info.id_reuniao+")");
+        $(".modal-body").html(`<div class="form-group row"><label for="title_reuniao" class="col-4">Nome do Evento:</label><div class="col-8"><input type="text" class="form-control " id="title_reuniao" value="`+info.title_reuniao+`"></div></div><div class="form-group row"><label class="col-4" for="date_reuniao">Data do Evento: </label><div class="col-8"><input type="date" class="form-control" id="date_reuniao" value="`+info.date_reuniao+`"></div></div><div class="form-group row"><label class="col-4" for="txpost_reuniao">Texto do Evento:</label><div class="col-8"><input type="text" class="form-control" id="txpost_reuniao" placeholder="Texto do Evento" value="`+info.txpost_reuniao+`"></div></div>`);
+        $("#commentmodal .btn-secondary").text("Cancelar").attr("onclick","window.location.reload()");
+    });
+}
+
+function btnSalvar(id) {
+    data = {
+        f: "editReuniao",
+        id: id,
+        a: $("#title_reuniao").val(),
+        b: $("#date_reuniao").val(),
+        c: $("#txpost_reuniao").val()
+    };
+    $.get(URLBASE+"gateway/getJSON.php",data,function(result){
+        console.log(result);
+        if(result == "true") {
             window.location.reload();
         }
     });

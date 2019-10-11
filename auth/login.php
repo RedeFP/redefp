@@ -5,8 +5,8 @@
     <?php require("../res/bd.php"); ?>
     <title>RedeFP - Uma rede social escolar</title>
     <link rel="stylesheet" href="<?php echo URL; ?>css/index.css">
+    <script src="<?php echo URL; ?>js/JS.JS"></script>
     <link rel="icon" href="<?php echo URL; ?>css/logo.png">
-    <script src="<?php echo URL; ?>js/login.js"></script>
     <script src="<?php echo URL; ?>vendor/jquery-3.3.1.min.js"></script>
     <script src="<?php echo URL; ?>vendor/popper.js"></script>
     <script src="<?php echo URL; ?>vendor/bootstrap/js/bootstrap.js"></script>
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap-grid.css">
     <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap-reboot.css">
     <script src="<?php echo URL; ?>vendor/mobile-detect.min.js"></script>
+    <script src="<?php echo URL; ?>js/login.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         $(function(){
