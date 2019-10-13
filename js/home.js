@@ -58,6 +58,7 @@ function searchProfile(id,item)
 {
     $.get("./gateway/getJSON.php",{f:"one-profile",id:id},function(result){
         aluno = JSON.parse(result);
+        console.log(aluno);
         post = document.createElement("div");
         post.setAttribute("class","container post");
         post.setAttribute("data-id",item.id_post);

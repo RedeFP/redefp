@@ -1,7 +1,7 @@
 <?php
     include('../../res/bd.php');
     $info_ra = filter_input(INPUT_GET,'ra');
-    $info_senha = filter_input(INPUT_GET,'pass'); //md5(filter_input(INPUT_GET,'pass'));
+    $info_senha = md5(filter_input(INPUT_GET,'pass'));
     
     $search = "SELECT * FROM aluno WHERE ra = '$info_ra' AND senha = '$info_senha'";
     $query = mysqli_query($bd,$search);

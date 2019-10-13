@@ -4,6 +4,8 @@ $webservice = filter_input(INPUT_GET, 'f');
 if(isset($_GET['id'])) {
     $id = filter_input(INPUT_GET, 'id');
 }
+
+error_reporting(E_ALL);
 function loadCursos()
 {
     global $bd;
@@ -69,9 +71,7 @@ function searchProfile($id)
     $query = mysqli_query($bd,$search);
     if($query)
     {
-        while ($row = mysqli_fetch_assoc($query)) {
-            echo json_encode($row);
-        }
+            echo json_encode(mysqli_fetch_assoc($query));
     }
     else
     {
@@ -1011,6 +1011,7 @@ switch($webservice) {
     }
     case "one-profile":
     {
+        header("Content-Type: application/json");
         searchProfile($id);
         break;
     }
@@ -1144,3 +1145,5 @@ switch($webservice) {
         break;
     }
 }
+
+echo mysqli_error($bd);

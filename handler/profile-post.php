@@ -18,7 +18,7 @@
         echo '<div class="container post" data-id="'.$row['id_post'].'">'.PHP_EOL;
         echo'<a style="vertical-align: middle;" href="profile.php?id='.$aluno['id'].'">';
         
-        echo '<img class="user-icon" src="'.$prp_pic.'">'.$nome;
+        echo '<img class="user-icon" src="'.URL.$prp_pic.'">'.$nome;
         echo '</a><br>';
         echo '<textarea class="form-control-plaintext" width="100vh">'.$row['txpost'].'</textarea>';
         echo '</div>';
