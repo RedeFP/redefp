@@ -180,7 +180,7 @@ function salvaComentario($id,$comentario,$usuario) {
     $search = "INSERT INTO aluno_post_comentario (id_post,id_aluno,txcomentario) VALUES ('$id','$usuario','$comentario')";
     $query = mysqli_query($bd,$search);
     if($query) {
-        echo "";
+        echo "200 OK";
     } else {
         echo mysqli_error($bd);
     }
@@ -729,7 +729,7 @@ function sEditPost($id,$comentario) {
     global $bd;
     $search = "UPDATE aluno_post SET txpost = '$comentario' WHERE id_post='$id'";
     $query = mysqli_query($bd, $search);
-    if($query) { echo ""; } else { echo "400 ERROR"; }
+    if($query) { echo "200 OK"; } else { echo "400 ERROR"; }
 }
 
 function delPost($id) {

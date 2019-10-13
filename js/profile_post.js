@@ -93,7 +93,7 @@ function salvaPost()
 {
     txpost = $("#cobox").val();
     user = JSON.parse(localStorage.user)['id'];
-    $.get("/gateway/getJSON.php",{f:"savePost",id:user,post:txpost}, function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"savePost",id:user,post:txpost}, function(result){
         console.error(result);
         limpaModal();
         $("#commentmodal").modal('hide');
@@ -258,7 +258,7 @@ function sEditPost(post)
         id: post,
         comentario: cobox
     };
-    $.get("gateway/getJSON.php",data,function(result){
+    $.get(URLBASE+"gateway/getJSON.php",data,function(result){
         if(result == "200 OK") {
             window.location.reload();
         }

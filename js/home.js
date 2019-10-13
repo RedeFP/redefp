@@ -1,5 +1,9 @@
 //Detections
+var loading;
 $(function(){
+    if(localStorage.user == undefined) {
+        window.location.href = URLBASE + "gateway/auth/logout.php"
+    }
     loadPost();
     $("#commentmodal").on("hide.bs.modal",function(e) {
         limpaModal();
@@ -22,7 +26,9 @@ $(function(){
 
 $(document).one("ajaxStop",function(){
     $(".post").click(function(){
-        expandePost($(this).attr("data-id"));
+        if(loading != 1) {
+            expandePost($(this).attr("data-id"));
+        }
     });
 
 });
@@ -57,7 +63,7 @@ $.get("./gateway/getJSON.php",{f:"posts",id:1},function(result) {
 function searchProfile(id,item)
 {
     $.get("./gateway/getJSON.php",{f:"one-profile",id:id},function(result){
-        aluno = JSON.parse(result);
+        aluno = result;
         console.log(aluno);
         post = document.createElement("div");
         post.setAttribute("class","container post");
@@ -68,7 +74,7 @@ function searchProfile(id,item)
         image_pic = document.createElement("img");
         image_pic.setAttribute("class","user-icon");
         if(aluno.profile_pic_url != ""){
-            image_pic.setAttribute("src",aluno.profile_pic_url);
+            image_pic.setAttribute("src",URLBASE+aluno.profile_pic_url);
         } else {
             image_pic.setAttribute("src","css/user.png");
         }
@@ -90,6 +96,7 @@ function searchProfile(id,item)
 }
 
 function expandePost(post) {
+    loading = 1;
     id_final = post;
     $.get("./gateway/getJSON.php",{f:"expandePost",id:post},function(result){
         post = JSON.parse(result);
@@ -136,15 +143,37 @@ function expandePost(post) {
         post.comentarios.forEach(genComentario);
         if(post.post.id_aluno == JSON.parse(localStorage.user)['id'])
         {
-            $(".modal-footer").prepend("<button type='button' class='btn btn-warning' onclick='editarPost("+id_final+")'>Editar</button><button type='button' class='btn btn-danger' onclick='deletarPost("+id_final+")'>Deletar</button>");
+            $(".modal-footer").prepend("<button type='button' class='btn btn-warning' onclick='editarPost("+id_final+")'><i class='fas fa-pencil-alt'></i></button><button type='button' class='btn btn-danger' onclick='deletarPost("+id_final+")'><i class='far fa-trash-alt'></i></button>");
         }
         $(".btn-primary").css("display","none");
         $(".btn-secondary").html("Fechar");
         $(".btn-secondary").attr("onclick","limpaModal()");
         $("#commentmodal").modal('show');
-        
+        loading = 0;    
     });
+    
+}
 
+function createPost()
+{
+    $(".modal-title").html("Postando...");
+    $(".modal-body").html("<textarea id='cobox'></textarea>");
+    $(".btn-primary").attr("onclick","salvaPost()");
+    $(".btn-primary").html("Salvar");
+    $(".btn-secondary").html("Fechar");
+    $("#commentmodal").modal('show');
+}
+
+function salvaPost()
+{
+    txpost = $("#cobox").val();
+    user = JSON.parse(localStorage.user)['id'];
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"savePost",id:user,post:txpost}, function(result){
+        console.error(result);
+        limpaModal();
+        $("#commentmodal").modal('hide');
+        window.location.reload();
+    });
 }
 
 function genComentario(comentario)
@@ -161,6 +190,7 @@ function genComentario(comentario)
     textarea.setAttribute("style","resize: none;");
     textarea.innerHTML = comentario.txcomentario;
     modal.appendChild(textarea);
+    
 }
 
 function likePost(post) {
@@ -209,6 +239,8 @@ function montaModal(post) {
     $(".btn-primary").attr("onclick","salvaComentario("+post+")"); 
     $(".modal-body").html("<textarea type='text' id='cobox' maxlength='1024' width='100vw'>");
     $(".btn-secondary").html("Sair");
+    $("#commentmodal .btn-danger").hide();
+    $("#commentmodal .btn-warning").hide();
     $("#commentmodal").modal("show");
 }
 

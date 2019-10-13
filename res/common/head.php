@@ -19,3 +19,4 @@
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/rcrop/rcrop.css">
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/lightbox2-master/dist/css/lightbox.min.css">
         <script src="<?php echo URL; ?>vendor/lightbox2-master/dist/js/lightbox.min.js"></script>
+        <link rel="stylesheet" href="<?php echo URL; ?>vendor/fontawesome/css/all.min.css">
