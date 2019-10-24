@@ -14,8 +14,8 @@ $(function(){
 });
 $(document).one("ajaxStop",function(){
     if(md.mobile() != null){
-        $(".col-3").remove();
-        $(".col-9").attr("class","col");
+        $(".col-4").remove();
+        $(".col-8").attr("class","col");
         if(typeof($_GET['id']) != "undefined") {
             id = $_GET['id'];    
         } else {
@@ -61,11 +61,11 @@ function loadPerfil()
         $("#l2").attr("href","profile-pictures.php?id="+aluno.id);
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);
         $("#l4").attr("href","profile-contact.php?id="+aluno.id);
-        $(".col-9").load("handler/profile-post.php?id="+aluno.id,
+        $(".col-8").load("handler/profile-post.php?id="+aluno.id,
         function(){
             if(typeof($_GET['id']) == "undefined" || $_GET['id'] == JSON.parse(localStorage.user)['id'])
             {
-                $("<div class='container post' data-id='null'><button onclick='createPost()'class='btn btn-dark btn-add'>+</button><span>Criar uma nova publicação</span></div>").prependTo(".col-9");
+                $("<div class='container post' data-id='null'><button onclick='createPost()'class='btn btn-dark btn-add'>+</button><span>Criar uma nova publicação</span></div>").prependTo(".col-8");
             }
             $(".post").click(function(){
                 if($(this).attr("data-id") != "null")
@@ -102,7 +102,7 @@ function salvaPost()
 }
 
 function expandePost(post) {
-    $.get("/gateway/getJSON.php",{f:"expandePost",id:post},function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"expandePost",id:post},function(result){
         id_final = post;
         post = JSON.parse(result);
         modal = document.getElementsByClassName("modal-body")[0];
@@ -122,9 +122,8 @@ function expandePost(post) {
         box1.setAttribute("onclick","likePost("+id_final+")");
             text1 = document.createTextNode(post.post.nlike);
             box1.appendChild(text1);
-            img1 = document.createElement("img");
-            img1.setAttribute("src","vendor/custom-icons/like.png");
-            img1.setAttribute("class","hitpic");
+            img1 = document.createElement("i");
+            img1.setAttribute("class","far fa-thumbs-up");
             box1.appendChild(img1);
         modal.appendChild(box1);
         box2 = document.createElement("button");
@@ -132,26 +131,24 @@ function expandePost(post) {
         box2.setAttribute("onclick","deslikePost("+id_final+")");
             text2 = document.createTextNode(post.post.ndeslike);
             box2.appendChild(text2);
-            img2 = document.createElement("img");
-            img2.setAttribute("src","vendor/custom-icons/deslike.png");
-            img2.setAttribute("class","hitpic");
+            img2 = document.createElement("i");
+            img2.setAttribute("class","far fa-thumbs-down");
             box2.appendChild(img2);
         modal.appendChild(box2);
         box3 = document.createElement("button");
         box3.setAttribute("class","hitbox");
         box3.setAttribute("onclick","montaModal("+id_final+")");
-            img3 = document.createElement("img");
-            img3.setAttribute("src","vendor/custom-icons/comment.png");
-            img3.setAttribute("class","hitpic");
+            img3 = document.createElement("i");
+            img3.setAttribute("class","far fa-comment-alt");
             box3.appendChild(img3);
         modal.appendChild(box3);
         post.comentarios.forEach(genComentario);
         if(post.post.id_aluno == JSON.parse(localStorage.user)['id'])
         {
-            $(".modal-footer").prepend("<button type='button' class='btn btn-warning' onclick='editarPost("+id_final+")'>Editar</button><button type='button' class='btn btn-danger' onclick='deletarPost("+id_final+")'>Deletar</button>");
+            $(".modal-footer").prepend("<button type='button' class='btn btn-warning' onclick='editarPost("+id_final+")'><i class='fas fa-pencil-alt'></i></button><button type='button' class='btn btn-danger' onclick='deletarPost("+id_final+")'><i class='far fa-trash-alt'></i></button>");
         }
         $(".btn-primary").css("display","none");
-        $(".btn-secondary").html("Fechar");
+        $(".btn-secondary").html("<i class='fas fa-times'></i>");
         $(".btn-secondary").attr("onclick","limpaModal()");
         $("#commentmodal").modal('show');
     });
@@ -233,7 +230,7 @@ function editarPost(post)
     $(".cm2").remove();
     $(".cm3").remove();
     $(".ori").removeAttr("readonly");
-    $(".btn-primary").html("Salvar");
+    $(".btn-primary").html("<i class='far fa-save'></i>");
     $(".btn-primary").attr("onclick","sEditPost("+post+")");
     $(".btn-primary").css("display","initial");
 }

@@ -15,9 +15,12 @@
         echo '<a href="comunity.php?id='.$id_c.'">';
         echo '<div class="row list-group-item list-group-item-dark comunityl">';
         echo '<div class="col-12">';
-        echo $row_c['nome']."<br>Comunidade ".$row_e['nome'];
-        echo '</div>';
+        echo $row_c['nome']."<br>Comunidade ".$row_e['nome']."<br>";
         echo '</div>';
         echo '</a>';
+            if($row_c['entrada'] == "3") {
+                echo '<button class="btn btn-danger" onclick="sairComunidade('.$id_c.')"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</button>';
+            }
+        echo '</div>';
     }
     

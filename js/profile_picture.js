@@ -7,9 +7,9 @@ function loadPerfil()
         id = JSON.parse(localStorage.user)['id'];
     }
     $.get("gateway/getJSON.php",{f:"one-profile", id: id}, function(result){
-        aluno = JSON.parse(result);
+        aluno = result;
         if(aluno.profile_pic_url != "") {
-            $(".user-pic").attr("src",aluno.profile_pic_url);
+            $(".user-pic").attr("src",URLBASE+aluno.profile_pic_url);
         }
         $("#aluno_id").attr("href","profile.php?id="+aluno.id);
         $("#aluno_id").html(aluno.nome);
@@ -20,10 +20,10 @@ function loadPerfil()
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);
         $("#l4").attr("href","profile-contact.php?id="+aluno.id);
         $("#import").load('/handler/profile-pictures.php?id='+aluno.id,function(){
-            $("#import").prepend('<div class="col user-image" id="upload" align="center"><img src="/uploads/plus.jpg" class="user-plus"><br><span>Enviar fotos</span><br><span></span></div>');
+            $("#import").prepend('<div class="col user-image" id="upload" align="center"><img src="'+URLBASE+'uploads/plus.jpg" class="user-plus"><br><span>Enviar fotos</span><br><span></span></div>');
             $("#upload").on("click",function(){
                 $(".modal-title").html('Upload de Fotos');
-                $(".modal-body").html('<form id="fotoup" action="gateway/upload/profile-image.php" method="post" enctype="multipart/form-data"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Escolha</span></div><div class="custom-file"><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" class="custom-file-input"><label class="custom-file-label" for="fileToUpload">Imagem</label></div></div><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Legenda da foto</span></div><input type="text" class="form-control" name="txlegenda" maxlength="120"></div></form>');
+                $(".modal-body").html('<form id="fotoup" action="'+URLBASE+'gateway/upload/profile-image.php" method="post" enctype="multipart/form-data"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Escolha</span></div><div class="custom-file"><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" class="custom-file-input"><label class="custom-file-label" for="fileToUpload">Imagem</label></div></div><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Legenda da foto</span></div><input type="text" class="form-control" name="txlegenda" maxlength="120"></div></form>');
                 $(".btn-primary").html('Enviar Imagem');
                 $(".btn-primary").attr('onclick','salvarFoto()');
                 $(".btn-secondary").html('Cancelar');

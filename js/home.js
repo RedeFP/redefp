@@ -117,9 +117,8 @@ function expandePost(post) {
         box1.setAttribute("onclick","likePost("+id_final+")");
             text1 = document.createTextNode(post.post.nlike);
             box1.appendChild(text1);
-            img1 = document.createElement("img");
-            img1.setAttribute("src","vendor/custom-icons/like.png");
-            img1.setAttribute("class","hitpic");
+            img1 = document.createElement("i");
+            img1.setAttribute("class","far fa-thumbs-up");
             box1.appendChild(img1);
         modal.appendChild(box1);
         box2 = document.createElement("button");
@@ -127,17 +126,15 @@ function expandePost(post) {
         box2.setAttribute("onclick","deslikePost("+id_final+")");
             text2 = document.createTextNode(post.post.ndeslike);
             box2.appendChild(text2);
-            img2 = document.createElement("img");
-            img2.setAttribute("src","vendor/custom-icons/deslike.png");
-            img2.setAttribute("class","hitpic");
+            img2 = document.createElement("i");
+            img2.setAttribute("class","far fa-thumbs-down");
             box2.appendChild(img2);
         modal.appendChild(box2);
         box3 = document.createElement("button");
         box3.setAttribute("class","hitbox cm3");
         box3.setAttribute("onclick","montaModal("+id_final+")");
-            img3 = document.createElement("img");
-            img3.setAttribute("src","vendor/custom-icons/comment.png");
-            img3.setAttribute("class","hitpic");
+            img3 = document.createElement("i");
+            img3.setAttribute("class","far fa-comment-alt");
             box3.appendChild(img3);
         modal.appendChild(box3);
         post.comentarios.forEach(genComentario);
@@ -146,7 +143,7 @@ function expandePost(post) {
             $(".modal-footer").prepend("<button type='button' class='btn btn-warning' onclick='editarPost("+id_final+")'><i class='fas fa-pencil-alt'></i></button><button type='button' class='btn btn-danger' onclick='deletarPost("+id_final+")'><i class='far fa-trash-alt'></i></button>");
         }
         $(".btn-primary").css("display","none");
-        $(".btn-secondary").html("Fechar");
+        $(".btn-secondary").html("<i class='fas fa-times'></i>");
         $(".btn-secondary").attr("onclick","limpaModal()");
         $("#commentmodal").modal('show');
         loading = 0;    
@@ -354,9 +351,7 @@ function editarPost(post)
     $(".ori").removeAttr("readonly");
     $(".ori").removeClass("form-control-plaintext");
     $(".ori").addClass("form-control");
-    $(".btn-primary").html("Salvar");
-    $(".btn-primary").attr("onclick","sEditPost("+post+")");
-    $(".btn-primary").css("display","initial");
+    $(".btn-primary").html("<i class='far fa-save'></i>").attr("onclick","sEditPost("+post+")").css("display","initial");
 }
 
 function deletarPost(post)

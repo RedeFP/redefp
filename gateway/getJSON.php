@@ -1,11 +1,16 @@
 <?php
-include('../res/bd.php');
 $webservice = filter_input(INPUT_GET, 'f');
+include('../res/bd.php');
 if(isset($_GET['id'])) {
     $id = filter_input(INPUT_GET, 'id');
 }
 
-error_reporting(E_ALL);
+function error($level) {
+    error_reporting($level);
+}
+
+error(E_ALL);
+
 function loadCursos()
 {
     global $bd;
@@ -274,6 +279,7 @@ function loadComunityMembers($id)
 		echo "400 ERROR";
 	}
 }
+
 function postImage($id,$nome,$arquivo)
 {
    global  $bd;
@@ -288,6 +294,7 @@ function postImage($id,$nome,$arquivo)
 		echo "400 ERROR";
 	}
 }
+
 function loadImage($id)
 {
     global $bd;
@@ -892,10 +899,28 @@ function editReuniao($id,$a,$b,$c) {
     if($query) { echo "true"; } else { echo $sql; }
 }
 
+function deleteComunidadeEntrada($id,$idaluno)
+{
+    global $bd;
+    $SQL = "DELETE FROM comunidade_inscrito WHERE id_aluno = '$idaluno' AND id_comunidade = '$id'";
+    $query = mysqli_query($bd,$SQL);
+    if($query) {
+        echo "true";
+    } else {
+        echo $SQL;
+    }
+}
+
 switch($webservice) {
+    case "deleteComunidadeEntrada":
+    {
+        header('Content-Type: application/json');
+        deleteComunidadeEntrada($id,filter_input(INPUT_GET,'idaluno'));
+        break;
+    }
     case "editReuniao":
     {
-        header('Contetn-Type: application/json');
+        header('Content-Type: application/json');
         editReuniao($id,$_GET['a'],$_GET['b'],$_GET['c']);
         break;
     }
@@ -906,12 +931,12 @@ switch($webservice) {
         break;
     }
     case "deleteReuniao":
-        {
-            header('Content-Type: application/json');
-            deleteReuniao($id);
-            break;
-        
-        }
+    {
+        header('Content-Type: application/json');
+        deleteReuniao($id);
+        break;
+    
+    }
     case "saveReuniao":
     {
         $e = filter_input(INPUT_GET,'id_professor');
@@ -959,9 +984,11 @@ switch($webservice) {
         break;
     }
     case "viewNote":
+    {
         header('Content-Type: application/json');
         findAnotacoes($id);
         break;
+    }
     case "delFoto":
     {
         delFoto($id);

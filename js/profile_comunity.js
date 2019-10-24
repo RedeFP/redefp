@@ -7,9 +7,9 @@ function loadPerfil()
         id = JSON.parse(localStorage.user)['id'];
     }
     $.get("gateway/getJSON.php",{f:"one-profile", id: id}, function(result){
-        aluno = JSON.parse(result);
+        aluno = result;
         if(aluno.profile_pic_url != "") {
-            $(".user-pic").attr("src",aluno.profile_pic_url);
+            $(".user-pic").attr("src",URLBASE+aluno.profile_pic_url);
         }
         $("#aluno_id").attr("href","profile.php?id="+aluno.id);
         $("#aluno_id").html(aluno.nome);
@@ -19,7 +19,24 @@ function loadPerfil()
         $("#l2").attr("href","profile-pictures.php?id="+aluno.id);
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);
         $("#l4").attr("href","profile-contact.php?id="+aluno.id);
-        $("#import").load('/handler/profile-comunity.php?id='+aluno.id)
+        $("#import").load(URLBASE+'/handler/profile-comunity.php?id='+aluno.id)
+    });
+}
+
+function sairComunidade($id) {
+    var id = $id;
+    var aluno = JSON.parse(localStorage.user)['id'];
+    $var = {
+        id: id,
+        idaluno: aluno,
+        f: 'deleteComunidadeEntrada'
+    };
+    $.get(URLBASE+"gateway/getJSON.php",$var, function(result) {
+        if(result == "true") {
+            window.location.reload();
+        } else {
+            console.log(result)
+        }
     });
 }
 

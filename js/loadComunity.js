@@ -2,7 +2,7 @@ function init()
 {
     console.info("Iniciando... 0%");
     var idc = $_GET['id'];
-    $.get("/gateway/getJSON.php",{f:"one-comunity", id: idc}, function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"one-comunity", id: idc}, function(result){
         if(result == "400 ERROR") {
             console.error("Erro não foi possivel carregar esta comunidade, verifique");
         } else {
@@ -14,7 +14,7 @@ function init()
             } 
             else
             {
-                $(".header-comunity").css("background-image","url('"+obj.cover_url+"')");
+                $(".header-comunity").css("background-image","url('"+URLBASE+obj.cover_url+"')");
             }
             if(obj.icon_url == "")
             {
@@ -22,7 +22,7 @@ function init()
             }
             else
             {
-                $(".comunity-pic").attr("src",obj.icon_url);
+                $(".comunity-pic").attr("src",URLBASE+obj.icon_url);
             }
             console.info("Iniciando... 25%");
             $("#lb1").attr("href","comunity.php?id="+obj.id);

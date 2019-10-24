@@ -18,11 +18,11 @@
                 <li class="nav-item">
                 	<a class="nav-link" href="diary.php">Agenda</a>
                 </li>
-                <li class="nav-item">
-                	<a class="nav-link" href="directs.php">Mensagens</a>
+                <li class="nav-item disabled">
+                	<a class="nav-link disabled" href="directs.php">Mensagens</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lojinhas</a>
+                <li class="nav-item dropdown disabled">
+                    <a class="nav-link disabled dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lojinhas</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Oficiais da ETEC</a>
                     <a class="dropdown-item" href="#">Turmas</a>

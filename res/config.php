@@ -1,3 +1,3 @@
 <?php
 
-define("URL","/tcc/");
+define("URL","/redefp/");

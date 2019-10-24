@@ -9,7 +9,7 @@
         <?php include("res/common/nav.php"); ?>
         <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
             <div class="row">
-                <div class="col-3 profile-list">
+                <div class="col-4 profile-list">
                     <div class="user-pic-div">
                         <a href="<?php echo URL;?>handler/upload-image.php">
                           <img src="css/user.png" class="user-pic">
@@ -28,7 +28,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     
                 </div>
             </div>

@@ -2,7 +2,7 @@ function init_page()
 {
     console.info("Iniciando... 75%");
     var idc = $_GET['id'];
-    $.get("/gateway/getJSON.php",{f:"loadPostComunity",id:idc}, function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"loadPostComunity",id:idc}, function(result){
         obj = JSON.parse(result);
         obj.forEach(searchByUser);
     })
@@ -34,7 +34,7 @@ $(document).on("ajaxStop",function(){
 
 function showComentario(post)
 {
-    $.get("/gateway/getJSON.php",{f:"comunity-postfull",id:post},function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"comunity-postfull",id:post},function(result){
         
     })
 }
@@ -42,8 +42,8 @@ function showComentario(post)
 function searchByUser(item)
 {
     var idu = item.id_aluno;
-    $.get("/gateway/getJSON.php",{f:"one-profile",id:idu},function(result){
-        obj = JSON.parse(result);
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"one-profile",id:idu},function(result){
+        obj = result;
         generatePost(item,obj);
     });
 }
@@ -59,11 +59,11 @@ function generatePost(post,aluno)
     img.setAttribute("class","user-icon");
     if(aluno.profile_pic_url == "")
     {
-        imgsrc = "css/user.png";
+        imgsrc = URLBASE+"css/user.png";
     }
     else
     {
-        imgsrc = aluno.profile_pic_url;
+        imgsrc = URLBASE+aluno.profile_pic_url;
     }
     img.setAttribute("src",imgsrc);
     treat = document.createTextNode(aluno.nome);
@@ -86,7 +86,7 @@ function generatePost(post,aluno)
 }
 
 function likePost(post) {
-    $.get('/gateway/getJSON.php',{f:"comunity-like",id:post}, function (result){
+    $.get(URLBASE+'/gateway/getJSON.php',{f:"comunity-like",id:post}, function (result){
         if(result != "400 ERROR") {
             window.location.reload();
         }
@@ -94,7 +94,7 @@ function likePost(post) {
 }
 
 function deslikePost(post) {
-    $.get('/gateway/getJSON.php',{f:"comunity-deslike",id:post}, function(result){
+    $.get(URLBASE+'/gateway/getJSON.php',{f:"comunity-deslike",id:post}, function(result){
         if(result != "400 ERROR") {
             window.location.reload();
         }
@@ -138,7 +138,7 @@ function salvaComentario(post) {
 }
 
 function expandePost(post) {
-    $.get("/gateway/getJSON.php",{f:"expandeCPost",id:post},function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"expandeCPost",id:post},function(result){
         post = JSON.parse(result);
         modal = document.getElementsByClassName("modal-body")[0];
         $(".modal-title").html("Publicação de @"+post.post.aluno.apelido);

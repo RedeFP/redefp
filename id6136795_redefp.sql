@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 09-Ago-2019 às 00:56
--- Versão do servidor: 5.7.27-0ubuntu0.19.04.1
--- versão do PHP: 7.2.19-0ubuntu0.19.04.1
+-- Tempo de geração: 15-Out-2019 às 22:57
+-- Versão do servidor: 10.3.16-MariaDB
+-- versão do PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `id6136795_redefp`
 --
-CREATE DATABASE IF NOT EXISTS `id6136795_redefp` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `id6136795_redefp`;
 
 -- --------------------------------------------------------
 
@@ -30,12 +28,21 @@ USE `id6136795_redefp`;
 -- Estrutura da tabela `access_tokens`
 --
 
-CREATE TABLE IF NOT EXISTS `access_tokens` (
-  `id_access` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `access_tokens` (
+  `id_access` int(11) NOT NULL,
   `access_token` varchar(32) COLLATE utf8_bin NOT NULL,
-  `id_aluno` int(11) NOT NULL,
-  PRIMARY KEY (`id_access`)
+  `id_aluno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `access_tokens`
+--
+
+INSERT INTO `access_tokens` (`id_access`, `access_token`, `id_aluno`) VALUES
+(1, 'f528764d624db129b32c21fbca0cb8d6', 6275),
+(2, 'f528764d624db129b32c21fbca0cb8d6', 6275),
+(3, 'f528764d624db129b32c21fbca0cb8d6', 6275),
+(4, 'f528764d624db129b32c21fbca0cb8d6', 6275);
 
 -- --------------------------------------------------------
 
@@ -43,14 +50,13 @@ CREATE TABLE IF NOT EXISTS `access_tokens` (
 -- Estrutura da tabela `agenda_eventos`
 --
 
-CREATE TABLE IF NOT EXISTS `agenda_eventos` (
-  `id_evento` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `agenda_eventos` (
+  `id_evento` int(11) NOT NULL,
   `id_responsavel` int(11) NOT NULL,
   `tp_responsavel` int(1) NOT NULL,
   `dt_inicio` datetime NOT NULL,
   `dt_fim` datetime NOT NULL,
-  `id_local` int(11) NOT NULL,
-  PRIMARY KEY (`id_evento`)
+  `id_local` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -59,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `agenda_eventos` (
 -- Estrutura da tabela `agenda_local`
 --
 
-CREATE TABLE IF NOT EXISTS `agenda_local` (
+CREATE TABLE `agenda_local` (
   `id_local` int(11) NOT NULL,
   `geocode_placeid` int(11) NOT NULL,
   `nr_lat` int(11) NOT NULL,
@@ -72,8 +78,8 @@ CREATE TABLE IF NOT EXISTS `agenda_local` (
 -- Estrutura da tabela `aluno`
 --
 
-CREATE TABLE IF NOT EXISTS `aluno` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `aluno` (
+  `id` int(11) NOT NULL,
   `ra` int(11) NOT NULL,
   `curso` int(11) NOT NULL,
   `ano` int(11) NOT NULL,
@@ -83,12 +89,18 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   `institucional` varchar(180) COLLATE utf8_bin NOT NULL,
   `telefone` varchar(13) COLLATE utf8_bin NOT NULL,
   `senha` varchar(32) COLLATE utf8_bin NOT NULL,
-  `profile_pic_url` varchar(2048) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `ra` (`ra`),
-  KEY `curso` (`curso`),
-  KEY `ano` (`ano`)
+  `profile_pic_url` varchar(2048) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `aluno`
+--
+
+INSERT INTO `aluno` (`id`, `ra`, `curso`, `ano`, `nome`, `apelido`, `email`, `institucional`, `telefone`, `senha`, `profile_pic_url`) VALUES
+(15, 6275, 1, 1, 'Alberto Benedito de Morais Trevisan', 'Bebeto', 'mineplay152@gmail.com', 'alberto.trevisan@etec.sp.gov.br', '15981893297', '21232f297a57a5a743894a0e4a801fc3', '../../uploads/ppd3.png'),
+(16, 2165, 1, 1, 'Laura Dias da Silva', 'Lau', 'laura.dsilva15@gmail.com', 'laura.silva@etec.sp.gov.br', '15990000000', '21232f297a57a5a743894a0e4a801fc3', '/uploads/IMG201810141943.jpg'),
+(17, 6371, 1, 1, 'Felipe Silva', 'ImBlackYT', 'byonichip@gmail.com', 'felipe.silva1572@etec.sp.gov.br', '15997473867', '1aaed8901b94cf3f5636eedd48362c9e', ''),
+(18, 1, 1, 1, 'Jeovana Kitagaki', 'Jeo', 'jeovana.kitagaki@gmail.com', 'jeovana.kitagaki@etec.sp.gov.br', '15981077330', '21232f297a57a5a743894a0e4a801fc3', '/uploads/IMG201811152232.jpeg');
 
 -- --------------------------------------------------------
 
@@ -96,15 +108,21 @@ CREATE TABLE IF NOT EXISTS `aluno` (
 -- Estrutura da tabela `aluno_galeria`
 --
 
-CREATE TABLE IF NOT EXISTS `aluno_galeria` (
-  `id_foto` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `aluno_galeria` (
+  `id_foto` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
   `dtpublicacao` datetime NOT NULL,
   `txlegenda` varchar(1024) COLLATE utf8_bin NOT NULL,
-  `image_url` varchar(1024) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id_foto`),
-  KEY `id_aluno` (`id_aluno`)
+  `image_url` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `aluno_galeria`
+--
+
+INSERT INTO `aluno_galeria` (`id_foto`, `id_aluno`, `dtpublicacao`, `txlegenda`, `image_url`) VALUES
+(3, 15, '2019-03-09 03:40:37', 'Minha miga', '../../uploads/watch dogs.png'),
+(5, 15, '2019-06-30 03:36:57', '', '../../uploads/bloco3.jpg');
 
 -- --------------------------------------------------------
 
@@ -112,15 +130,23 @@ CREATE TABLE IF NOT EXISTS `aluno_galeria` (
 -- Estrutura da tabela `aluno_post`
 --
 
-CREATE TABLE IF NOT EXISTS `aluno_post` (
-  `id_post` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `aluno_post` (
+  `id_post` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
   `txpost` varchar(1024) COLLATE utf8_bin NOT NULL,
   `nlike` int(11) NOT NULL,
-  `ndeslike` int(11) NOT NULL,
-  PRIMARY KEY (`id_post`),
-  KEY `id_aluno` (`id_aluno`)
+  `ndeslike` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `aluno_post`
+--
+
+INSERT INTO `aluno_post` (`id_post`, `id_aluno`, `txpost`, `nlike`, `ndeslike`) VALUES
+(1, 16, 'Este projeto deve andar', 1007, 1001),
+(2, 15, 'Vamos lá, profile.php construir', 5, 1000),
+(3, 18, 'Edelson é demais! sz', 1, 0),
+(4, 15, 'Mano, que felicidade que eu, to de que este projeto está dando certo.', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -128,15 +154,23 @@ CREATE TABLE IF NOT EXISTS `aluno_post` (
 -- Estrutura da tabela `aluno_post_comentario`
 --
 
-CREATE TABLE IF NOT EXISTS `aluno_post_comentario` (
-  `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `aluno_post_comentario` (
+  `id_comentario` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
-  `txcomentario` varchar(1024) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id_comentario`),
-  KEY `id_aluno` (`id_aluno`),
-  KEY `id_post` (`id_post`)
+  `txcomentario` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `aluno_post_comentario`
+--
+
+INSERT INTO `aluno_post_comentario` (`id_comentario`, `id_post`, `id_aluno`, `txcomentario`) VALUES
+(1, 1, 15, 'comentando'),
+(2, 1, 15, 'comentando'),
+(3, 2, 16, 'Caraca, ainda não fez?'),
+(4, 1, 15, 'Com certeza'),
+(5, 2, 15, 'Esse aqui é top');
 
 -- --------------------------------------------------------
 
@@ -144,25 +178,18 @@ CREATE TABLE IF NOT EXISTS `aluno_post_comentario` (
 -- Estrutura da tabela `api_key`
 --
 
-CREATE TABLE IF NOT EXISTS `api_key` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `api_key` (
+  `id` int(11) NOT NULL,
   `type` int(2) NOT NULL,
-  `code` varchar(2048) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  `code` varchar(2048) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- --------------------------------------------------------
-
 --
--- Estrutura da tabela `avisos`
+-- Extraindo dados da tabela `api_key`
 --
 
-CREATE TABLE IF NOT EXISTS `avisos` (
-  `idaviso` int(11) NOT NULL AUTO_INCREMENT,
-  `idresponsavel` int(11) NOT NULL,
-  `txpost` varchar(150) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`idaviso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+INSERT INTO `api_key` (`id`, `type`, `code`) VALUES
+(1, 1, ' AIzaSyB7hWsWR2KJ4cxdUZif1ITHlu---U7lM-g ');
 
 -- --------------------------------------------------------
 
@@ -170,17 +197,22 @@ CREATE TABLE IF NOT EXISTS `avisos` (
 -- Estrutura da tabela `comunidade`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comunidade` (
+  `id` int(11) NOT NULL,
   `nome` varchar(100) COLLATE utf8_bin NOT NULL,
   `tema` int(11) NOT NULL,
   `entrada` int(11) NOT NULL,
   `icon_url` varchar(1024) COLLATE utf8_bin NOT NULL,
-  `cover_url` varchar(1024) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `entrada` (`entrada`),
-  KEY `tema` (`tema`)
+  `cover_url` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `comunidade`
+--
+
+INSERT INTO `comunidade` (`id`, `nome`, `tema`, `entrada`, `icon_url`, `cover_url`) VALUES
+(1, 'As Poc da Sofrência', 2, 3, '/css/user.png', ''),
+(2, 'ETEC F.P.', 1, 3, '', '');
 
 -- --------------------------------------------------------
 
@@ -188,11 +220,19 @@ CREATE TABLE IF NOT EXISTS `comunidade` (
 -- Estrutura da tabela `comunidade_entrada`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade_entrada` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `comunidade_entrada` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `comunidade_entrada`
+--
+
+INSERT INTO `comunidade_entrada` (`id`, `nome`) VALUES
+(1, 'Convite'),
+(2, 'Convocação'),
+(3, 'Aberto');
 
 -- --------------------------------------------------------
 
@@ -200,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `comunidade_entrada` (
 -- Estrutura da tabela `comunidade_galeria`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade_galeria` (
+CREATE TABLE `comunidade_galeria` (
   `id_post` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
   `dtpublicacao` datetime NOT NULL,
@@ -214,14 +254,20 @@ CREATE TABLE IF NOT EXISTS `comunidade_galeria` (
 -- Estrutura da tabela `comunidade_inscrito`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade_inscrito` (
-  `id_inscrito` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comunidade_inscrito` (
+  `id_inscrito` int(11) NOT NULL,
   `id_comunidade` int(11) NOT NULL,
-  `id_aluno` int(11) NOT NULL,
-  PRIMARY KEY (`id_inscrito`),
-  KEY `id_comunidade` (`id_comunidade`),
-  KEY `id_aluno` (`id_aluno`)
+  `id_aluno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `comunidade_inscrito`
+--
+
+INSERT INTO `comunidade_inscrito` (`id_inscrito`, `id_comunidade`, `id_aluno`) VALUES
+(1, 1, 15),
+(2, 2, 15),
+(3, 2, 16);
 
 -- --------------------------------------------------------
 
@@ -229,17 +275,21 @@ CREATE TABLE IF NOT EXISTS `comunidade_inscrito` (
 -- Estrutura da tabela `comunidade_post`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade_post` (
-  `id_post` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comunidade_post` (
+  `id_post` int(11) NOT NULL,
   `id_comunidade` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
   `txpost` varchar(1024) COLLATE utf8_bin NOT NULL,
   `nlike` int(11) NOT NULL,
-  `ndeslike` int(11) NOT NULL,
-  PRIMARY KEY (`id_post`),
-  KEY `id_comunidade` (`id_comunidade`),
-  KEY `id_aluno` (`id_aluno`)
+  `ndeslike` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `comunidade_post`
+--
+
+INSERT INTO `comunidade_post` (`id_post`, `id_comunidade`, `id_aluno`, `txpost`, `nlike`, `ndeslike`) VALUES
+(1, 1, 16, 'Eu sou uma ótima escrava =)', 19, 2);
 
 -- --------------------------------------------------------
 
@@ -247,15 +297,19 @@ CREATE TABLE IF NOT EXISTS `comunidade_post` (
 -- Estrutura da tabela `comunidade_post_comentario`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade_post_comentario` (
-  `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comunidade_post_comentario` (
+  `id_comentario` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
-  `txcomentario` varchar(1024) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id_comentario`),
-  KEY `id_aluno` (`id_aluno`),
-  KEY `id_post` (`id_post`)
+  `txcomentario` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `comunidade_post_comentario`
+--
+
+INSERT INTO `comunidade_post_comentario` (`id_comentario`, `id_post`, `id_aluno`, `txcomentario`) VALUES
+(1, 1, 15, 'Hello puta');
 
 -- --------------------------------------------------------
 
@@ -263,11 +317,18 @@ CREATE TABLE IF NOT EXISTS `comunidade_post_comentario` (
 -- Estrutura da tabela `comunidade_tema`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidade_tema` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `comunidade_tema` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `comunidade_tema`
+--
+
+INSERT INTO `comunidade_tema` (`id`, `nome`) VALUES
+(1, 'ETEC'),
+(2, 'LGBT');
 
 -- --------------------------------------------------------
 
@@ -275,12 +336,18 @@ CREATE TABLE IF NOT EXISTS `comunidade_tema` (
 -- Estrutura da tabela `curso`
 --
 
-CREATE TABLE IF NOT EXISTS `curso` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `curso` (
+  `id` int(11) NOT NULL,
   `nome` varchar(128) COLLATE utf8_bin NOT NULL,
-  `sigla` varchar(10) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  `sigla` varchar(10) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `curso`
+--
+
+INSERT INTO `curso` (`id`, `nome`, `sigla`) VALUES
+(1, 'Informatica para Internet Integrado ao Ensino Médio', 'IPIIEM');
 
 -- --------------------------------------------------------
 
@@ -288,13 +355,20 @@ CREATE TABLE IF NOT EXISTS `curso` (
 -- Estrutura da tabela `curso_sala`
 --
 
-CREATE TABLE IF NOT EXISTS `curso_sala` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `curso_sala` (
+  `id` int(11) NOT NULL,
   `curso` int(11) NOT NULL,
-  `seq` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `curso` (`curso`)
+  `seq` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `curso_sala`
+--
+
+INSERT INTO `curso_sala` (`id`, `curso`, `seq`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -302,13 +376,18 @@ CREATE TABLE IF NOT EXISTS `curso_sala` (
 -- Estrutura da tabela `curso_sala_ano`
 --
 
-CREATE TABLE IF NOT EXISTS `curso_sala_ano` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `curso_sala_ano` (
+  `id` int(11) NOT NULL,
   `curso_sala` int(25) NOT NULL,
-  `ano` int(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `curso_sala` (`curso_sala`)
+  `ano` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `curso_sala_ano`
+--
+
+INSERT INTO `curso_sala_ano` (`id`, `curso_sala`, `ano`) VALUES
+(1, 1, 2018);
 
 -- --------------------------------------------------------
 
@@ -316,16 +395,15 @@ CREATE TABLE IF NOT EXISTS `curso_sala_ano` (
 -- Estrutura da tabela `direct`
 --
 
-CREATE TABLE IF NOT EXISTS `direct` (
-  `id_mensagem` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `direct` (
+  `id_mensagem` int(11) NOT NULL,
   `tp_lado_recebido` int(1) NOT NULL,
   `tp_lado_enviado` int(1) NOT NULL,
   `id_lado_recebido` int(11) NOT NULL,
   `id_lado_enviado` int(11) NOT NULL,
   `dt_envio` datetime NOT NULL,
   `dt_lido` datetime DEFAULT NULL,
-  `tx_mensagem` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_mensagem`)
+  `tx_mensagem` varchar(256) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -334,19 +412,23 @@ CREATE TABLE IF NOT EXISTS `direct` (
 -- Estrutura da tabela `evento`
 --
 
-CREATE TABLE IF NOT EXISTS `evento` (
-  `id_evento` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evento` (
+  `id_evento` int(11) NOT NULL,
   `no_evento` varchar(120) NOT NULL,
   `id_organizador` int(11) NOT NULL,
   `dt_evento` datetime NOT NULL,
   `id_local` int(11) NOT NULL,
   `vl_ingresso` int(11) NOT NULL,
   `if_doacao` int(11) NOT NULL,
-  `img_url` varchar(1024) NOT NULL,
-  PRIMARY KEY (`id_evento`),
-  KEY `id_organizador` (`id_organizador`),
-  KEY `id_local` (`id_local`)
+  `img_url` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `evento`
+--
+
+INSERT INTO `evento` (`id_evento`, `no_evento`, `id_organizador`, `dt_evento`, `id_local`, `vl_ingresso`, `if_doacao`, `img_url`) VALUES
+(1, 'Apresentação da escola', 1, '2019-03-31 19:00:00', 1, 0, 0, '/uploads/luminova.png');
 
 -- --------------------------------------------------------
 
@@ -354,15 +436,12 @@ CREATE TABLE IF NOT EXISTS `evento` (
 -- Estrutura da tabela `evento_avisos`
 --
 
-CREATE TABLE IF NOT EXISTS `evento_avisos` (
-  `id_aviso` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evento_avisos` (
+  `id_aviso` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL,
   `id_organizador` int(11) NOT NULL,
   `tx_post` int(11) NOT NULL,
-  `dt_post` int(11) NOT NULL,
-  PRIMARY KEY (`id_aviso`),
-  KEY `id_evento` (`id_evento`),
-  KEY `id_organizador` (`id_organizador`)
+  `dt_post` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -371,18 +450,15 @@ CREATE TABLE IF NOT EXISTS `evento_avisos` (
 -- Estrutura da tabela `evento_convite`
 --
 
-CREATE TABLE IF NOT EXISTS `evento_convite` (
-  `id_convite` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evento_convite` (
+  `id_convite` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL,
   `id_convidado` int(11) NOT NULL,
   `tp_convidado` int(11) NOT NULL,
   `dt_compra` datetime NOT NULL,
   `id_venda` int(11) NOT NULL,
   `id_organizador` int(11) NOT NULL,
-  `dt_confirma` datetime NOT NULL,
-  PRIMARY KEY (`id_convite`),
-  KEY `id_evento` (`id_evento`),
-  KEY `id_organizador` (`id_organizador`)
+  `dt_confirma` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -391,15 +467,13 @@ CREATE TABLE IF NOT EXISTS `evento_convite` (
 -- Estrutura da tabela `evento_photo`
 --
 
-CREATE TABLE IF NOT EXISTS `evento_photo` (
-  `id_photo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evento_photo` (
+  `id_photo` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL,
   `id_responsavel` int(11) NOT NULL,
   `tp_responsavel` int(1) NOT NULL,
   `tx_photo` varchar(2048) NOT NULL,
-  `tx_legenda` varchar(120) NOT NULL,
-  PRIMARY KEY (`id_photo`),
-  KEY `id_evento` (`id_evento`)
+  `tx_legenda` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -408,16 +482,14 @@ CREATE TABLE IF NOT EXISTS `evento_photo` (
 -- Estrutura da tabela `evento_pub_adm`
 --
 
-CREATE TABLE IF NOT EXISTS `evento_pub_adm` (
-  `id_pub` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evento_pub_adm` (
+  `id_pub` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL,
   `id_responsavel` int(11) NOT NULL,
   `tp_responsavel` int(1) NOT NULL,
   `tx_post` varchar(180) NOT NULL,
   `nr_like` int(5) NOT NULL,
-  `nr_deslike` int(5) NOT NULL,
-  PRIMARY KEY (`id_pub`),
-  KEY `id_evento` (`id_evento`)
+  `nr_deslike` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -426,16 +498,14 @@ CREATE TABLE IF NOT EXISTS `evento_pub_adm` (
 -- Estrutura da tabela `evento_pub_mem`
 --
 
-CREATE TABLE IF NOT EXISTS `evento_pub_mem` (
-  `id_pub` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evento_pub_mem` (
+  `id_pub` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL,
   `id_responsavel` int(11) NOT NULL,
   `tp_responsavel` int(1) NOT NULL,
   `tx_post` varchar(180) NOT NULL,
   `nr_like` int(5) NOT NULL,
-  `nr_deslike` int(5) NOT NULL,
-  PRIMARY KEY (`id_pub`),
-  KEY `id_evento` (`id_evento`)
+  `nr_deslike` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -444,29 +514,22 @@ CREATE TABLE IF NOT EXISTS `evento_pub_mem` (
 -- Estrutura da tabela `local`
 --
 
-CREATE TABLE IF NOT EXISTS `local` (
-  `id_local` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `local` (
+  `id_local` int(11) NOT NULL,
   `no_local` varchar(120) NOT NULL,
   `no_logradouro` varchar(120) NOT NULL,
   `nr_logradouro` int(7) NOT NULL,
   `no_bairro` varchar(120) NOT NULL,
   `no_cidade` varchar(50) NOT NULL,
-  `nr_cep` int(8) NOT NULL,
-  PRIMARY KEY (`id_local`)
+  `nr_cep` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Estrutura da tabela `notes`
+-- Extraindo dados da tabela `local`
 --
 
-CREATE TABLE IF NOT EXISTS `notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `txnotes` varchar(1000) COLLATE utf8_bin NOT NULL,
-  `idprofessor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+INSERT INTO `local` (`id_local`, `no_local`, `no_logradouro`, `nr_logradouro`, `no_bairro`, `no_cidade`, `nr_cep`) VALUES
+(1, 'Escola Luminova - Unidade Sorocaba', 'Rua Ary Annunciato', 80, 'Jd. Maria Antonia Prado', 'Sorocaba', 18077080);
 
 -- --------------------------------------------------------
 
@@ -474,8 +537,8 @@ CREATE TABLE IF NOT EXISTS `notes` (
 -- Estrutura da tabela `organizador`
 --
 
-CREATE TABLE IF NOT EXISTS `organizador` (
-  `id_organizador` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `organizador` (
+  `id_organizador` int(11) NOT NULL,
   `no_organizador` varchar(130) NOT NULL,
   `dt_solicitacao` datetime NOT NULL,
   `dt_validacao` datetime NOT NULL,
@@ -483,9 +546,15 @@ CREATE TABLE IF NOT EXISTS `organizador` (
   `tx_email` varchar(130) NOT NULL,
   `tp_documento` int(1) NOT NULL,
   `nr_documento` int(20) NOT NULL,
-  `tx_documento` varchar(1024) NOT NULL,
-  PRIMARY KEY (`id_organizador`)
+  `tx_documento` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `organizador`
+--
+
+INSERT INTO `organizador` (`id_organizador`, `no_organizador`, `dt_solicitacao`, `dt_validacao`, `st_validacacao`, `tx_email`, `tp_documento`, `nr_documento`, `tx_documento`) VALUES
+(1, 'Escolas Luminova LTDA', '2019-03-01 00:00:00', '2019-03-01 10:00:00', 2, 'maria.morais@escolaluminova.com.br', 2, 183842129, '/uploads/rg-183842129.jpg');
 
 -- --------------------------------------------------------
 
@@ -493,14 +562,24 @@ CREATE TABLE IF NOT EXISTS `organizador` (
 -- Estrutura da tabela `perseguicao`
 --
 
-CREATE TABLE IF NOT EXISTS `perseguicao` (
-  `id_perseguicao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `perseguicao` (
+  `id_perseguicao` int(11) NOT NULL,
   `id_perseguido` int(11) NOT NULL,
   `id_perseguidor` int(11) NOT NULL,
   `tp_perseguido` int(11) NOT NULL,
-  `tp_perseguidor` int(11) NOT NULL,
-  PRIMARY KEY (`id_perseguicao`)
+  `tp_perseguidor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `perseguicao`
+--
+
+INSERT INTO `perseguicao` (`id_perseguicao`, `id_perseguido`, `id_perseguidor`, `tp_perseguido`, `tp_perseguidor`) VALUES
+(1, 15, 16, 0, 0),
+(2, 15, 17, 0, 0),
+(3, 0, 0, 0, 0),
+(4, 1, 2, 15, 0),
+(5, 1, 15, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -508,16 +587,35 @@ CREATE TABLE IF NOT EXISTS `perseguicao` (
 -- Estrutura da tabela `professores`
 --
 
-CREATE TABLE IF NOT EXISTS `professores` (
-  `idprofessores` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `professores` (
+  `idprofessores` int(11) NOT NULL,
   `noprofessores` varchar(50) COLLATE utf8_bin NOT NULL,
   `txmail_professores` varchar(100) COLLATE utf8_bin NOT NULL,
   `pwsenha_professores` varchar(32) COLLATE utf8_bin NOT NULL,
-  `tximagem_professores` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
-  `cargo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `biologia` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`idprofessores`)
+  `tximagem_professores` varchar(1024) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `professores`
+--
+
+INSERT INTO `professores` (`idprofessores`, `noprofessores`, `txmail_professores`, `pwsenha_professores`, `tximagem_professores`) VALUES
+(5, 'Luis Flacido', 'luis.flacido@etec.sp.gov.br', '827ccb0eea8a706c4c34a16891f84e7b', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `professores_reunioes`
+--
+
+CREATE TABLE `professores_reunioes` (
+  `id_reuniao` int(11) NOT NULL,
+  `id_professor` int(11) NOT NULL,
+  `title_reuniao` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `date_reuniao` date NOT NULL,
+  `txpost_reuniao` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `id_local` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -525,16 +623,15 @@ CREATE TABLE IF NOT EXISTS `professores` (
 -- Estrutura da tabela `vendas_produtos`
 --
 
-CREATE TABLE IF NOT EXISTS `vendas_produtos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vendas_produtos` (
+  `id` int(11) NOT NULL,
   `id_publicacao` int(11) NOT NULL,
   `price` float NOT NULL,
   `image_url` varchar(1024) COLLATE utf8_bin NOT NULL,
   `title` varchar(128) COLLATE utf8_bin NOT NULL,
   `details` varchar(128) COLLATE utf8_bin NOT NULL,
   `type` int(11) NOT NULL,
-  `prpview` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  `prpview` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -543,12 +640,11 @@ CREATE TABLE IF NOT EXISTS `vendas_produtos` (
 -- Estrutura da tabela `vendas_reservas`
 --
 
-CREATE TABLE IF NOT EXISTS `vendas_reservas` (
-  `id_produto` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vendas_reservas` (
+  `id_produto` int(11) NOT NULL,
   `id_comprador` int(11) NOT NULL,
   `id_vendedor` int(11) NOT NULL,
-  `tp_venda` int(1) NOT NULL,
-  PRIMARY KEY (`id_produto`)
+  `tp_venda` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -557,15 +653,420 @@ CREATE TABLE IF NOT EXISTS `vendas_reservas` (
 -- Estrutura da tabela `vendas_vendedor`
 --
 
-CREATE TABLE IF NOT EXISTS `vendas_vendedor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `vendas_vendedor` (
+  `id` int(11) NOT NULL,
   `type` int(1) NOT NULL,
   `id_interna` int(11) NOT NULL,
   `nr_cpf` int(11) NOT NULL,
   `aprovacao_status` int(1) NOT NULL,
-  `dt_aprovacao` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `dt_aprovacao` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `access_tokens`
+--
+ALTER TABLE `access_tokens`
+  ADD PRIMARY KEY (`id_access`);
+
+--
+-- Índices para tabela `agenda_eventos`
+--
+ALTER TABLE `agenda_eventos`
+  ADD PRIMARY KEY (`id_evento`);
+
+--
+-- Índices para tabela `aluno`
+--
+ALTER TABLE `aluno`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ra` (`ra`),
+  ADD KEY `curso` (`curso`),
+  ADD KEY `ano` (`ano`);
+
+--
+-- Índices para tabela `aluno_galeria`
+--
+ALTER TABLE `aluno_galeria`
+  ADD PRIMARY KEY (`id_foto`),
+  ADD KEY `id_aluno` (`id_aluno`);
+
+--
+-- Índices para tabela `aluno_post`
+--
+ALTER TABLE `aluno_post`
+  ADD PRIMARY KEY (`id_post`),
+  ADD KEY `id_aluno` (`id_aluno`);
+
+--
+-- Índices para tabela `aluno_post_comentario`
+--
+ALTER TABLE `aluno_post_comentario`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `id_aluno` (`id_aluno`),
+  ADD KEY `id_post` (`id_post`);
+
+--
+-- Índices para tabela `api_key`
+--
+ALTER TABLE `api_key`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `comunidade`
+--
+ALTER TABLE `comunidade`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `entrada` (`entrada`),
+  ADD KEY `tema` (`tema`);
+
+--
+-- Índices para tabela `comunidade_entrada`
+--
+ALTER TABLE `comunidade_entrada`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `comunidade_inscrito`
+--
+ALTER TABLE `comunidade_inscrito`
+  ADD PRIMARY KEY (`id_inscrito`),
+  ADD KEY `id_comunidade` (`id_comunidade`),
+  ADD KEY `id_aluno` (`id_aluno`);
+
+--
+-- Índices para tabela `comunidade_post`
+--
+ALTER TABLE `comunidade_post`
+  ADD PRIMARY KEY (`id_post`),
+  ADD KEY `id_comunidade` (`id_comunidade`),
+  ADD KEY `id_aluno` (`id_aluno`);
+
+--
+-- Índices para tabela `comunidade_post_comentario`
+--
+ALTER TABLE `comunidade_post_comentario`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `id_aluno` (`id_aluno`),
+  ADD KEY `id_post` (`id_post`);
+
+--
+-- Índices para tabela `comunidade_tema`
+--
+ALTER TABLE `comunidade_tema`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `curso`
+--
+ALTER TABLE `curso`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `curso_sala`
+--
+ALTER TABLE `curso_sala`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `curso` (`curso`);
+
+--
+-- Índices para tabela `curso_sala_ano`
+--
+ALTER TABLE `curso_sala_ano`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `curso_sala` (`curso_sala`);
+
+--
+-- Índices para tabela `direct`
+--
+ALTER TABLE `direct`
+  ADD PRIMARY KEY (`id_mensagem`);
+
+--
+-- Índices para tabela `evento`
+--
+ALTER TABLE `evento`
+  ADD PRIMARY KEY (`id_evento`),
+  ADD KEY `id_organizador` (`id_organizador`),
+  ADD KEY `id_local` (`id_local`);
+
+--
+-- Índices para tabela `evento_avisos`
+--
+ALTER TABLE `evento_avisos`
+  ADD PRIMARY KEY (`id_aviso`),
+  ADD KEY `id_evento` (`id_evento`),
+  ADD KEY `id_organizador` (`id_organizador`);
+
+--
+-- Índices para tabela `evento_convite`
+--
+ALTER TABLE `evento_convite`
+  ADD PRIMARY KEY (`id_convite`),
+  ADD KEY `id_evento` (`id_evento`),
+  ADD KEY `id_organizador` (`id_organizador`);
+
+--
+-- Índices para tabela `evento_photo`
+--
+ALTER TABLE `evento_photo`
+  ADD PRIMARY KEY (`id_photo`),
+  ADD KEY `id_evento` (`id_evento`);
+
+--
+-- Índices para tabela `evento_pub_adm`
+--
+ALTER TABLE `evento_pub_adm`
+  ADD PRIMARY KEY (`id_pub`),
+  ADD KEY `id_evento` (`id_evento`);
+
+--
+-- Índices para tabela `evento_pub_mem`
+--
+ALTER TABLE `evento_pub_mem`
+  ADD PRIMARY KEY (`id_pub`),
+  ADD KEY `id_evento` (`id_evento`);
+
+--
+-- Índices para tabela `local`
+--
+ALTER TABLE `local`
+  ADD PRIMARY KEY (`id_local`);
+
+--
+-- Índices para tabela `organizador`
+--
+ALTER TABLE `organizador`
+  ADD PRIMARY KEY (`id_organizador`);
+
+--
+-- Índices para tabela `perseguicao`
+--
+ALTER TABLE `perseguicao`
+  ADD PRIMARY KEY (`id_perseguicao`);
+
+--
+-- Índices para tabela `professores`
+--
+ALTER TABLE `professores`
+  ADD PRIMARY KEY (`idprofessores`);
+
+--
+-- Índices para tabela `professores_reunioes`
+--
+ALTER TABLE `professores_reunioes`
+  ADD PRIMARY KEY (`id_reuniao`);
+
+--
+-- Índices para tabela `vendas_produtos`
+--
+ALTER TABLE `vendas_produtos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `vendas_reservas`
+--
+ALTER TABLE `vendas_reservas`
+  ADD PRIMARY KEY (`id_produto`);
+
+--
+-- Índices para tabela `vendas_vendedor`
+--
+ALTER TABLE `vendas_vendedor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `access_tokens`
+--
+ALTER TABLE `access_tokens`
+  MODIFY `id_access` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `agenda_eventos`
+--
+ALTER TABLE `agenda_eventos`
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `aluno`
+--
+ALTER TABLE `aluno`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de tabela `aluno_galeria`
+--
+ALTER TABLE `aluno_galeria`
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `aluno_post`
+--
+ALTER TABLE `aluno_post`
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `aluno_post_comentario`
+--
+ALTER TABLE `aluno_post_comentario`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `api_key`
+--
+ALTER TABLE `api_key`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `comunidade`
+--
+ALTER TABLE `comunidade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `comunidade_entrada`
+--
+ALTER TABLE `comunidade_entrada`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `comunidade_inscrito`
+--
+ALTER TABLE `comunidade_inscrito`
+  MODIFY `id_inscrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `comunidade_post`
+--
+ALTER TABLE `comunidade_post`
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `comunidade_post_comentario`
+--
+ALTER TABLE `comunidade_post_comentario`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `comunidade_tema`
+--
+ALTER TABLE `comunidade_tema`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `curso`
+--
+ALTER TABLE `curso`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `curso_sala`
+--
+ALTER TABLE `curso_sala`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `curso_sala_ano`
+--
+ALTER TABLE `curso_sala_ano`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `direct`
+--
+ALTER TABLE `direct`
+  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `evento`
+--
+ALTER TABLE `evento`
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `evento_avisos`
+--
+ALTER TABLE `evento_avisos`
+  MODIFY `id_aviso` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `evento_convite`
+--
+ALTER TABLE `evento_convite`
+  MODIFY `id_convite` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `evento_photo`
+--
+ALTER TABLE `evento_photo`
+  MODIFY `id_photo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `evento_pub_adm`
+--
+ALTER TABLE `evento_pub_adm`
+  MODIFY `id_pub` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `evento_pub_mem`
+--
+ALTER TABLE `evento_pub_mem`
+  MODIFY `id_pub` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `local`
+--
+ALTER TABLE `local`
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `organizador`
+--
+ALTER TABLE `organizador`
+  MODIFY `id_organizador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `perseguicao`
+--
+ALTER TABLE `perseguicao`
+  MODIFY `id_perseguicao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `professores`
+--
+ALTER TABLE `professores`
+  MODIFY `idprofessores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `professores_reunioes`
+--
+ALTER TABLE `professores_reunioes`
+  MODIFY `id_reuniao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `vendas_produtos`
+--
+ALTER TABLE `vendas_produtos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `vendas_reservas`
+--
+ALTER TABLE `vendas_reservas`
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `vendas_vendedor`
+--
+ALTER TABLE `vendas_vendedor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas

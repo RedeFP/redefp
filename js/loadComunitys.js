@@ -1,7 +1,7 @@
 function loadComunitysI()
 {
     iduser = JSON.parse(localStorage.user)['id'];
-    $.get("/gateway/getJSON.php",{f:"loadComunitysInscrito",id:iduser},function(result){
+    $.get(URLBASE+"/gateway/getJSON.php",{f:"loadComunitysInscrito",id:iduser},function(result){
         obj = JSON.parse(result);
         obj.forEach(genComunityI);
     });
@@ -18,7 +18,7 @@ function genComunityI(item)
         comunity_image.setAttribute("width","90px");
         if(item.comunidade.icon_url != "")
         {
-            imagesrc = item.comunidade.icon_url;
+            imagesrc = URLBASE+item.comunidade.icon_url;
         }
         else
         {

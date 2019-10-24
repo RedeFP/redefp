@@ -7,9 +7,9 @@ function loadPerfil()
         id = JSON.parse(localStorage.user)['id'];
     }
     $.get("gateway/getJSON.php",{f:"one-profile", id: id}, function(result){
-        aluno = JSON.parse(result);
+        aluno = result;
         if(aluno.profile_pic_url != "") {
-            $(".user-pic").attr("src",aluno.profile_pic_url);
+            $(".user-pic").attr("src",URLBASE+aluno.profile_pic_url);
         }
         $("#aluno_id").attr("href","profile.php?id="+aluno.id);
         $("#aluno_id").html(aluno.nome);
