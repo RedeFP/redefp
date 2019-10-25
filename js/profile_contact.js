@@ -31,7 +31,83 @@ function loadPerfil()
     });
 }
 
+function modalEditTelefone() {
+    $(".modal-title").text("Editando telefone cadastrado");
+    $(".modal-body").html(`Telefone:&nbsp;<input type="tel" id="varTelefone" class="form-control" style="width:50%;display: inline-block"> `);
+    $(".btn-primary").addClass("btn-success").text("Salvar").attr("onclick","salvarTelefone()");
+    $("#varTelefone").val(JSON.parse(localStorage.user)['telefone']).inputmask({mask: "99 99999-9999",autoUnmask:"true"});
+    showModal();
+}
+
+function salvarTelefone() {
+    $data = {
+        id: JSON.parse(localStorage.user).id,
+        f: "saveTelefone",
+        telefone: $("#varTelefone").val()
+    }
+    $.get(URLBASE+"gateway/getJSON.php",$data,function(result){
+        if(result != "false") {
+            obj = JSON.parse(localStorage.user);
+            obj.telefone = result;
+            localStorage.user = JSON.stringify(obj);
+            window.location.reload();
+        } else {
+
+        }
+    })
+}
+
+function modalFotoPerfil() {
+    hideModal();
+    $(".modal-title").text("Foto de Perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").hide();
+    $(".modal .btn-secondary").hide();
+    if(parseUser().profile_pic_url != "") {
+        $(".modal .btn-warning").show().html("<i class='fas fa-sync-alt'></i>");
+        $(".modal .modal-body").html("<img src='"+URLBASE+parseUser().profile_pic_url+"' style='width: 100%'>")
+        $(".modal .btn-danger").show().html(`<i class="fas fa-trash-alt"></i>`).attr("onclick","modalDeleteFotoPerfil()");
+    } else {
+        $(".modal .modal-body").hide();
+        $(".modal .btn-success").show().html(`<i class="fas fa-plus"></i>`).attr("onclick","modalAddFotoPerfil()");
+    }
+    showModal();
+}
+
+function modalDeleteFotoPerfil() {
+    $(".modal-title").text("Removendo a foto de perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-warning").hide();
+    $(".modal .btn-danger").show().html("<i class='fas fa-times'></i>").data("dismiss","modal");
+    $(".modal .btn-success").show().html("<i class='fas fa-check'></i>").attr("onclick","deleteFotoPerfil()");
+    $(".modal .btn-secondary").hide();
+    $(".modal .modal-body").text("Você tem certeza disso?");
+}
+
+function deleteFotoPerfil() {
+    $data = {
+        f: "deleteFotoPerfil",
+        id: parseUser().id
+    };
+    $.get(URLBASE+"gateway/getJSON.php",$data,function(result){
+        if(result == true) {
+            obj = parseUser();
+            obj.profile_pic_url = "";
+            localStorage.user = JSON.stringify(obj);
+            window.location.reload();
+        } else {
+            $(".modal-body").html(result);
+        }
+    })
+}
+
+function modalAddFotoPerfil() {
+    $(".modal-title").text("Adicionando uma foto de Perfil");
+    $(".modal .btn-primary")
+}
+
 $(function(){
+    $.getScript(URLBASE+"vendor/inputmask.js");
     md = new MobileDetect(window.navigator.userAgent);
     loadPerfil();
     $(".nav-item")[1].setAttribute("class","nav-item active");
@@ -46,5 +122,6 @@ $(function(){
             }
             loadNavMob(id);
         }
-    })
+    });
+    $(".user-pic").click(modalFotoPerfil);
 });

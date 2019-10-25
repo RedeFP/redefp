@@ -29,12 +29,13 @@
                 <div class="col-9">
                     <div class="row bk-lgrey">
                         <div class="col-12">
-                            <div style="vertical-align: middle;" class="form-control-plaintext">Email Institucional: <a href="malito:fulano@etec.sp.gov.br" id="mail">fulano@etec.sp.gov.br</a></div>
-                            <div class="form-control-plaintext" style="vertical-align: middle;">Telefone: <a href="tel:00 00000-0000" id="tel">00 00000-0000</a></div>
+                            <div style="vertical-align: middle;" class="form-control-plaintext">&nbsp;<big><b>Email Institucional</b>: <a href="malito:fulano@etec.sp.gov.br" id="mail">fulano@etec.sp.gov.br</a></big></div>
+                            <div class="form-control-plaintext" style="vertical-align: middle;"><button class="btn btn-warning" onclick="modalEditTelefone()"><i class="fas fa-pencil-alt fa-sm"></i></button>&nbsp;<big><b>Telefone</b>: <a href="tel:00 00000-0000" id="tel">00 00000-0000</a></big></div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
+        <?php include("res/common/modal.php"); ?>
     </body>
 </html>

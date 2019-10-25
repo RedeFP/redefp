@@ -14,3 +14,15 @@ if(document.location.toString().indexOf('?') !== -1) {
        $_GET[aux[0]] = aux[1];
     }
 }
+
+function showModal() {
+    $(".modal").modal('show');
+}
+
+function hideModal() {
+    $(".modal").modal('hide');
+}
+
+function parseUser() {
+    return JSON.parse(localStorage.user);
+}

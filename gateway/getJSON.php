@@ -911,7 +911,44 @@ function deleteComunidadeEntrada($id,$idaluno)
     }
 }
 
+function salvarTelefone($id,$telefone) 
+{
+    global $bd;
+    $sql = "UPDATE aluno SET telefone='$telefone' WHERE id='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        echo $telefones;
+    }
+    else {
+        echo "false";
+    }
+}
+
+function deleteFotoPerfil($id) 
+{
+    global $bd;
+    $sql = "UPDATE aluno SET profile_pic_url = '' WHERE id='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        echo "true";
+    } else {
+        echo "false";
+    }
+}
+
 switch($webservice) {
+    case "deleteFotoPerfil":
+    {
+        header('Content-Type: application/json');
+        deleteFotoPerfil($id);
+        break;
+    }
+    case "saveTelefone":
+    {
+        header('Content-Type: application/json');
+        salvarTelefone($id,filter_input(INPUT_GET,'telefone')); 
+        break;
+    }
     case "deleteComunidadeEntrada":
     {
         header('Content-Type: application/json');
