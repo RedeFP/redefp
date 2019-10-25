@@ -23,6 +23,13 @@ function loadPerfil()
     });
 }
 
+function modalSairComunidade($id) {
+    $(".modal-title").text("Saindo de uma comunidade");
+    $(".btn-primary").addClass(".btn-danger").html("Confirmar").attr("onclick","sairComunidade("+$id+")");
+    $(".modal-body").text("Você tem certeza que quer sair dessa comunidade");
+    $(".modal").modal('show');
+}
+
 function sairComunidade($id) {
     var id = $id;
     var aluno = JSON.parse(localStorage.user)['id'];
@@ -32,7 +39,7 @@ function sairComunidade($id) {
         f: 'deleteComunidadeEntrada'
     };
     $.get(URLBASE+"gateway/getJSON.php",$var, function(result) {
-        if(result == "true") {
+        if(result != "false") {
             window.location.reload();
         } else {
             console.log(result)

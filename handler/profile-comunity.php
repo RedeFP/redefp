@@ -19,7 +19,7 @@
         echo '</div>';
         echo '</a>';
             if($row_c['entrada'] == "3") {
-                echo '<button class="btn btn-danger" onclick="sairComunidade('.$id_c.')"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</button>';
+                echo '<button class="btn btn-danger" onclick="modalSairComunidade('.$id_c.')"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</button>';
             }
         echo '</div>';
     }
