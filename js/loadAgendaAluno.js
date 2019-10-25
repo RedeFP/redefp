@@ -1,9 +1,12 @@
 $(function(){
     $(".nav-item")[3].setAttribute("class","nav-item active");
 	ide = JSON.parse(localStorage.user).id;
-	$.get("/gateway/getJSON.php",{f:"eventoPerseguidos",id:ide},function(result){
+	$.get(URLBASE+"gateway/getJSON.php",{f:"eventoPerseguidos",id:ide},function(result){
         console.log(result)
-		result.forEach(genEventoPerseguido);
+        result.forEach(genEventoPerseguido);
+        if(result == []) {
+            $("#import1").hide();
+        }
 		
 	});
 });
@@ -17,7 +20,7 @@ function genEventoPerseguido(perseguicao) {
             inner.setAttribute("class","col-12 evento-inner");
                 center = document.createElement("center");
                     img = document.createElement("img");
-                    img.setAttribute("src",perseguicao.id_perseguido.img_url);
+                    img.setAttribute("src",URLBASE+perseguicao.id_perseguido.img_url);
                     img.setAttribute("class","evento-img");
                     center.appendChild(img);
                     br = document.createElement("br");
