@@ -2,3 +2,4 @@ phpmyadmin/*
 .vscode/*
 nbproject/*
 res/bd.php
+*/.DS_Store
