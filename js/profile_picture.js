@@ -19,14 +19,13 @@ function loadPerfil()
         $("#l2").attr("href","profile-pictures.php?id="+aluno.id);
         $("#l3").attr("href","profile-comunity.php?id="+aluno.id);
         $("#l4").attr("href","profile-contact.php?id="+aluno.id);
-        $("#import").load('/handler/profile-pictures.php?id='+aluno.id,function(){
-            $("#import").prepend('<div class="col user-image" id="upload" align="center"><img src="'+URLBASE+'uploads/plus.jpg" class="user-plus"><br><span>Enviar fotos</span><br><span></span></div>');
+        $("#import").load(URLBASE+'/handler/profile-pictures.php?id='+aluno.id,function(){
+            $("#import").prepend('<div class="col user-image" id="upload" align="center"><i class=" fas fa-plus fa-5x user-plus"><br><span><h6>Enviar fotos</h6></span><br><span></span></div>');
             $("#upload").on("click",function(){
                 $(".modal-title").html('Upload de Fotos');
-                $(".modal-body").html('<form id="fotoup" action="'+URLBASE+'gateway/upload/profile-image.php" method="post" enctype="multipart/form-data"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Escolha</span></div><div class="custom-file"><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" class="custom-file-input"><label class="custom-file-label" for="fileToUpload">Imagem</label></div></div><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Legenda da foto</span></div><input type="text" class="form-control" name="txlegenda" maxlength="120"></div></form>');
-                $(".btn-primary").html('Enviar Imagem');
-                $(".btn-primary").attr('onclick','salvarFoto()');
-                $(".btn-secondary").html('Cancelar');
+                $(".modal-body").html('<form id="fotoup" action="'+URLBASE+'handler/photo_create.profile.php" method="post" enctype="multipart/form-data"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Escolha</span></div><div class="custom-file"><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" class="custom-file-input"><label class="custom-file-label" for="fileToUpload">Imagem</label></div></div><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Legenda da foto</span></div><input type="text" class="form-control" name="txlegenda" maxlength="120"></div></form>');
+                $(".btn-primary").html('<i class="fas fa-save"></i>').attr('onclick','salvarFoto()');
+                $(".btn-secondary").html('Cancelar').hide();
                 $("#commentmodal").modal('show');
             });
         });
@@ -44,6 +43,14 @@ function salvarFoto()
 }
 
 $(function(){
+    if($_GET['error'] != undefined ) {
+        alert($_GET['error']);
+    }
+    if($_GET['save'] != undefined) {
+        obj = parseUser()
+        obj.profile_pic_url = $_GET['save'];
+        localStorage.user = JSON.stringify(obj);
+    }
     md = new MobileDetect(window.navigator.userAgent);
     loadPerfil();
     $("#commentmodal").on("hide.bs.modal",function() {
@@ -92,10 +99,10 @@ function expandePhoto(id)
         $(".modal-title").html("Foto de @"+rec.id_aluno.apelido);
         $(".modal-body").html('<center><img src="'+rec.image_url+'" class="fullview"><br>'+rec.txlegenda+'</center>');
         $(".btn-primary").css("display","none");
-        $(".btn-secondary").html("Fechar");
+        $(".btn-secondary").html("Fechar").hide();
         if(JSON.parse(localStorage.user)['id'] == rec.id_aluno.id)
         {
-            $(".modal-footer").prepend('<button type="button" class="btn btn-danger" onclick="deletarFoto('+rec.id_foto+')">Deletar</button>');
+            $(".modal-footer").prepend('<button type="button" class="btn btn-danger" onclick="deletarFoto('+rec.id_foto+')"><i class="fas fa-trash-alt"></i></button>');
         }
         $(".modal").modal("show");
     });

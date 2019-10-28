@@ -34,7 +34,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    $error ="Sorry, your file was not uploaded."; //Foda se deu erro
+    $error +="<br>Sorry, your file was not uploaded."; //Foda se deu erro
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -46,15 +46,17 @@ if ($uploadOk == 0) {
 }
 
 include("../res/bd.php");
-$id_aluno = filter_input(INPUT_POST,'id');
+$id_aluno = filter_input(INPUT_POST,'aluno');
+$date = date("d/m/Y H:i");
 $photo_url = $target_file;
-$search = "UPDATE aluno SET profile_pic_url='handler/$target_file' WHERE id='$id_aluno'";
+$txlegenda = filter_input(INPUT_POST,'txlegenda');
+$search = "INSERT INTO aluno_galeria (`id_aluno`, `dtpublicacao`, `txlegenda`, `image_url`) VALUES ('$id_aluno','$date','$txlegenda','handler/$target_file')";
 if($uploadOk == 1 or $aproves == 1) {
     $query = mysqli_query($bd,$search);
 }
 if($uploadOk == 0) {
     $pathmod = "?error=".$error;
 } else {
-
+    $pathmod = "";
 }
-header("Location: ../profile.php?save=handler/".$target_file);
+header("Location: ../profile-pictures.php".$pathmod);
