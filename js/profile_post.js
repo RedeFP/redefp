@@ -1,5 +1,13 @@
 //Initial
 $(function(){
+    if($_GET['error'] != undefined ) {
+        alert($_GET['error']);
+    }
+    if($_GET['save'] != undefined) {
+        obj = parseUser()
+        obj.profile_pic_url = $_GET['save'];
+        localStorage.user = JSON.stringify(obj);
+    }
     loadPerfil();
     $("#commentmodal").on("hide.bs.modal",function() {
         limpaModal();
@@ -14,7 +22,7 @@ $(function(){
 });
 $(document).one("ajaxStop",function(){
     if(md.mobile() != null){
-        $(".col-4").remove();
+        $(".col-4").hide();
         $(".col-8").attr("class","col");
         if(typeof($_GET['id']) != "undefined") {
             id = $_GET['id'];    
@@ -24,6 +32,7 @@ $(document).one("ajaxStop",function(){
         loadNavMob(id);
         
     }
+    $(".user-pic").click(modalFotoPerfil);
 })
 
 $(window).scroll(function() {
@@ -34,6 +43,89 @@ $(window).scroll(function() {
 });
 
 //Builded Functions
+
+function modalFotoPerfil() {
+    hideModal();
+    $(".modal-title").text("Foto de Perfil");
+    $(".modal-footer").append("<button class='btn btn-danger'></button>");
+    $(".modal-footer").append("<button class='btn btn-warning'></button>");
+    $(".modal-footer").append("<button class='btn btn-success'></button>");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").hide();
+    $(".modal .btn-secondary").hide();
+    if(parseUser().profile_pic_url != "") {
+        $(".modal .btn-warning").show().html("<i class='fas fa-sync-alt'></i>").attr("onclick","modalEditFotoPerfil()");
+        $(".modal .modal-body").html("<img src='"+URLBASE+parseUser().profile_pic_url+"' style='width: 60%;'>").attr("align","center");
+        $(".modal .btn-danger").show().html(`<i class="fas fa-trash-alt"></i>`).attr("onclick","modalDeleteFotoPerfil()");
+    } else {
+        $(".modal .modal-body").hide();
+        $(".modal .btn-success").show().html(`<i class="fas fa-plus"></i>`).attr("onclick","modalAddFotoPerfil()");
+    }
+    showModal();
+}
+
+function modalEditFotoPerfil() {
+    $(".modal-title").text("Atualizando a Foto de Perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").show().html(`<i class="fas fa-check"></i>`).attr("onclick","saveEditFotoPerfil()");
+    $(".modal .btn-danger").show().html(`<i class="fas fa-times"></i>`).attr("onclick","").attr("data-dismiss","modal");
+    $(".modal .btn-warning").hide();
+    $(".modal .btn-secondary").hide();
+    $(".modal .modal-body").html(`<form id="dataFoto" enctype="multipart/form-data" name="dataFoto" method="post" action="handler/photo_upload.profile.php"><input type="file" name="fileToUpload" class="form-control">`)
+    showModal();
+}
+
+function saveEditFotoPerfil() {
+    $("#dataFoto").append(`<input type="hidden" name="id" value="`+parseUser().id+`">`);
+    document.getElementById('dataFoto').submit();
+}
+
+function modalDeleteFotoPerfil() {
+    $(".modal-title").text("Removendo a foto de perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-warning").hide();
+    $(".modal .btn-danger").show().html("<i class='fas fa-times'></i>").data("dismiss","modal");
+    $(".modal .btn-success").show().html("<i class='fas fa-check'></i>").attr("onclick","deleteFotoPerfil()");
+    $(".modal .btn-secondary").hide();
+    $(".modal .modal-body").text("Você tem certeza disso?");
+}
+
+function deleteFotoPerfil() {
+    $data = {
+        f: "deleteFotoPerfil",
+        id: parseUser().id
+    };
+    $.get(URLBASE+"gateway/getJSON.php",$data,function(result){
+        if(result == true) {
+            obj = parseUser();
+            obj.profile_pic_url = "";
+            localStorage.user = JSON.stringify(obj);
+            window.location.reload();
+        } else {
+            $(".modal-body").html(result);
+        }
+    })
+}
+
+function showModal() {
+    $(".modal").modal('show');
+}
+
+function hideModal() {
+    $(".modal").modal('hide');
+}
+
+function modalAddFotoPerfil() {
+    $(".modal-title").text("Adicionando uma foto de Perfil");
+    $(".modal-body").show().html(`<form id="addFoto" action="handler/photo_upload.profile.php" method="GET"><input type="file" id="varFoto" class="form-control"></form>`)
+    $(".modal .btn-success").show().html("<i class='fas fa-check'></i>").attr("onclick","addFotoPerfil()");
+}
+
+function addFotoPerfil() {
+    $("#addFoto").append('<input type="hidden" value="'+parseUser().id+'"> id="id" name="id">');
+    $("#addFoto").submit();
+    hideModal();
+}
 
 function morePost()
 {
@@ -93,7 +185,7 @@ function salvaPost()
 {
     txpost = $("#cobox").val();
     user = JSON.parse(localStorage.user)['id'];
-    $.get(URLBASE+"/gateway/getJSON.php",{f:"savePost",id:user,post:txpost}, function(result){
+    $.get(URLBASE+"gateway/getJSON.php",{f:"savePost",id:user,post:txpost}, function(result){
         console.error(result);
         limpaModal();
         $("#commentmodal").modal('hide');
@@ -102,7 +194,7 @@ function salvaPost()
 }
 
 function expandePost(post) {
-    $.get(URLBASE+"/gateway/getJSON.php",{f:"expandePost",id:post},function(result){
+    $.get(URLBASE+"gateway/getJSON.php",{f:"expandePost",id:post},function(result){
         id_final = post;
         post = JSON.parse(result);
         modal = document.getElementsByClassName("modal-body")[0];
@@ -171,7 +263,7 @@ function genComentario(comentario)
 }
       
 function likePost(post) {
-    $.get('/gateway/getJSON.php',{f:"like",id:post}, function (result){
+    $.get(URLBASE+'gateway/getJSON.php',{f:"like",id:post}, function (result){
         console.log(result);
         window.location.reload();
     });
@@ -179,7 +271,7 @@ function likePost(post) {
 
 function deslikePost(post) {
     
-    $.get('/gateway/getJSON.php',{f:"deslike",id:post}, function(result){
+    $.get(URLBASE+'gateway/getJSON.php',{f:"deslike",id:post}, function(result){
         console.log(result);
         window.location.reload();
     });
@@ -188,7 +280,7 @@ function deslikePost(post) {
 function salvaComentario(post) {
     var usuario = parseInt(JSON.parse(localStorage.getItem('user'))['id']);
     var comentario = $("#cobox").val(); 
-    $.get('/gateway/getJSON.php',{f:"comentar",id:post,comentar: comentario,usuario:usuario},function(result){
+    $.get(URLBASE+'gateway/getJSON.php',{f:"comentar",id:post,comentar: comentario,usuario:usuario},function(result){
         console.log(result);
         if(result == "200 OK")
         {
@@ -223,12 +315,12 @@ function montaModal(post) {
 
 function editarPost(post)
 {
-    $(".btn-warning").remove();
-    $(".btn-danger").remove();
+    $(".btn-warning").hide();
+    $(".btn-danger").hide();
     $(".modal-title").html("Editando publicação");
-    $(".cm1").remove();
-    $(".cm2").remove();
-    $(".cm3").remove();
+    $(".cm1").hide();
+    $(".cm2").hide();
+    $(".cm3").hide();
     $(".ori").removeAttr("readonly");
     $(".btn-primary").html("<i class='far fa-save'></i>");
     $(".btn-primary").attr("onclick","sEditPost("+post+")");
@@ -237,8 +329,8 @@ function editarPost(post)
 
 function deletarPost(post)
 {
-    $(".btn-warning").remove();
-    $(".btn-danger").remove();
+    $(".btn-warning").hide();
+    $(".btn-danger").hide();
     $(".modal-footer").append('<button type="button" class="btn btn-success" style="display: initial;" onclick="delPost('+post+')">Confirmar</button>');
     $(".modal-footer").append('<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="$("#commentmodal").modal("hide")">Fechar</button>');
     $(".btn-secondary").css("display","none");

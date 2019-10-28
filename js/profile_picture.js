@@ -68,6 +68,7 @@ $(document).one("ajaxStop",function(){
     $(".user-image-src").click(function(){
         expandePhoto($(this).attr("data-id")); 
     });
+    $(".user-pic").click(modalFotoPerfil);
 });
 
 function limpaModal()
@@ -124,4 +125,85 @@ function delPost(post)
             window.location.reload();
         }
     });
+}
+
+function modalFotoPerfil() {
+    hideModal();
+    $(".modal-title").text("Foto de Perfil");
+
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").hide();
+    $(".modal .btn-secondary").hide();
+    if(parseUser().profile_pic_url != "") {
+        $(".modal .btn-warning").show().html("<i class='fas fa-sync-alt'></i>").attr("onclick","modalEditFotoPerfil()");
+        $(".modal .modal-body").html("<img src='"+URLBASE+parseUser().profile_pic_url+"' style='width: 60%;'>").attr("align","center");
+        $(".modal .btn-danger").show().html(`<i class="fas fa-trash-alt"></i>`).attr("onclick","modalDeleteFotoPerfil()");
+    } else {
+        $(".modal .modal-body").hide();
+        $(".modal .btn-success").show().html(`<i class="fas fa-plus"></i>`).attr("onclick","modalAddFotoPerfil()");
+    }
+    showModal();
+}
+
+function modalEditFotoPerfil() {
+    $(".modal-title").text("Atualizando a Foto de Perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").show().html(`<i class="fas fa-check"></i>`).attr("onclick","saveEditFotoPerfil()");
+    $(".modal .btn-danger").show().html(`<i class="fas fa-times"></i>`).attr("onclick","").attr("data-dismiss","modal");
+    $(".modal .btn-warning").hide();
+    $(".modal .btn-secondary").hide();
+    $(".modal .modal-body").html(`<form id="dataFoto" enctype="multipart/form-data" name="dataFoto" method="post" action="handler/photo_upload.profile.php"><input type="file" name="fileToUpload" class="form-control">`)
+    showModal();
+}
+
+function saveEditFotoPerfil() {
+    $("#dataFoto").append(`<input type="hidden" name="id" value="`+parseUser().id+`">`);
+    document.getElementById('dataFoto').submit();
+}
+
+function modalDeleteFotoPerfil() {
+    $(".modal-title").text("Removendo a foto de perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-warning").hide();
+    $(".modal .btn-danger").show().html("<i class='fas fa-times'></i>").data("dismiss","modal");
+    $(".modal .btn-success").show().html("<i class='fas fa-check'></i>").attr("onclick","deleteFotoPerfil()");
+    $(".modal .btn-secondary").hide();
+    $(".modal .modal-body").text("Você tem certeza disso?");
+}
+
+function deleteFotoPerfil() {
+    $data = {
+        f: "deleteFotoPerfil",
+        id: parseUser().id
+    };
+    $.get(URLBASE+"gateway/getJSON.php",$data,function(result){
+        if(result == true) {
+            obj = parseUser();
+            obj.profile_pic_url = "";
+            localStorage.user = JSON.stringify(obj);
+            window.location.reload();
+        } else {
+            $(".modal-body").html(result);
+        }
+    })
+}
+
+function showModal() {
+    $(".modal").modal('show');
+}
+
+function hideModal() {
+    $(".modal").modal('hide');
+}
+
+function modalAddFotoPerfil() {
+    $(".modal-title").text("Adicionando uma foto de Perfil");
+    $(".modal-body").show().html(`<form id="addFoto" action="handler/photo_upload.profile.php" method="GET"><input type="file" id="varFoto" class="form-control"></form>`)
+    $(".modal .btn-success").show().html("<i class='fas fa-check'></i>").attr("onclick","addFotoPerfil()");
+}
+
+function addFotoPerfil() {
+    $("#addFoto").append('<input type="hidden" value="'+parseUser().id+'"> id="id" name="id">');
+    $("#addFoto").submit();
+    hideModal();
 }

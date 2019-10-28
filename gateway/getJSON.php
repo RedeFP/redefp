@@ -917,7 +917,7 @@ function salvarTelefone($id,$telefone)
     $sql = "UPDATE aluno SET telefone='$telefone' WHERE id='$id'";
     $query = mysqli_query($bd,$sql);
     if($query) {
-        echo $telefones;
+        echo $telefone;
     }
     else {
         echo "false";

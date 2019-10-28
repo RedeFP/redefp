@@ -127,7 +127,7 @@ function montaModal(post) {
 function salvaComentario(post) {
     var usuario = parseInt(JSON.parse(localStorage.getItem('user'))['id']);
     var comentario = $("#cobox").val(); 
-    $.get('/gateway/getJSON.php',{f:"comunity-comentar",id:post,comentar: comentario,usuario:usuario},function(result){
+    $.get(URLBASE+'gateway/getJSON.php',{f:"comunity-comentar",id:post,comentar: comentario,usuario:usuario},function(result){
         console.log(result);
         if(result != "400 ERROR")
         {

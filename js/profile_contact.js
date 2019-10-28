@@ -34,7 +34,7 @@ function loadPerfil()
 function modalEditTelefone() {
     $(".modal-title").text("Editando telefone cadastrado");
     $(".modal-body").html(`Telefone:&nbsp;<input type="tel" id="varTelefone" class="form-control" style="width:50%;display: inline-block"> `);
-    $(".btn-primary").addClass("btn-success").text("Salvar").attr("onclick","salvarTelefone()");
+    $(".btn-success").text("Salvar").attr("onclick","salvarTelefone()");
     $("#varTelefone").val(JSON.parse(localStorage.user)['telefone']).inputmask({mask: "99 99999-9999",autoUnmask:"true"});
     showModal();
 }
@@ -64,14 +64,30 @@ function modalFotoPerfil() {
     $(".modal .btn-success").hide();
     $(".modal .btn-secondary").hide();
     if(parseUser().profile_pic_url != "") {
-        $(".modal .btn-warning").show().html("<i class='fas fa-sync-alt'></i>");
-        $(".modal .modal-body").html("<img src='"+URLBASE+parseUser().profile_pic_url+"' style='width: 100%'>")
+        $(".modal .btn-warning").show().html("<i class='fas fa-sync-alt'></i>").attr("onclick","modalEditFotoPerfil()");
+        $(".modal .modal-body").html("<img src='"+URLBASE+parseUser().profile_pic_url+"' style='width: 60%;'>").attr("align","center");
         $(".modal .btn-danger").show().html(`<i class="fas fa-trash-alt"></i>`).attr("onclick","modalDeleteFotoPerfil()");
     } else {
         $(".modal .modal-body").hide();
         $(".modal .btn-success").show().html(`<i class="fas fa-plus"></i>`).attr("onclick","modalAddFotoPerfil()");
     }
     showModal();
+}
+
+function modalEditFotoPerfil() {
+    $(".modal-title").text("Atualizando a Foto de Perfil");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").show().html(`<i class="fas fa-check"></i>`).attr("onclick","saveEditFotoPerfil()");
+    $(".modal .btn-danger").show().html(`<i class="fas fa-times"></i>`).attr("onclick","").attr("data-dismiss","modal");
+    $(".modal .btn-warning").hide();
+    $(".modal .btn-secondary").hide();
+    $(".modal .modal-body").html(`<form id="dataFoto" enctype="multipart/form-data" name="dataFoto" method="post" action="handler/photo_upload.profile.php"><input type="file" name="fileToUpload" class="form-control">`)
+    showModal();
+}
+
+function saveEditFotoPerfil() {
+    $("#dataFoto").append(`<input type="hidden" name="id" value="`+parseUser().id+`">`);
+    document.getElementById('dataFoto').submit();
 }
 
 function modalDeleteFotoPerfil() {
@@ -101,9 +117,24 @@ function deleteFotoPerfil() {
     })
 }
 
+function showModal() {
+    $(".modal").modal('show');
+}
+
+function hideModal() {
+    $(".modal").modal('hide');
+}
+
 function modalAddFotoPerfil() {
     $(".modal-title").text("Adicionando uma foto de Perfil");
-    $(".modal .btn-primary")
+    $(".modal-body").show().html(`<form id="addFoto" action="handler/photo_upload.profile.php" method="GET"><input type="file" id="varFoto" class="form-control"></form>`)
+    $(".modal .btn-success").show().html("<i class='fas fa-check'></i>").attr("onclick","addFotoPerfil()");
+}
+
+function addFotoPerfil() {
+    $("#addFoto").append('<input type="hidden" value="'+parseUser().id+'"> id="id" name="id">');
+    $("#addFoto").submit();
+    hideModal();
 }
 
 $(function(){

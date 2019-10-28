@@ -11,9 +11,7 @@
             <div class="row">
                 <div class="col-4 profile-list">
                     <div class="user-pic-div">
-                        <a href="<?php echo URL;?>handler/upload-image.php">
                           <img src="css/user.png" class="user-pic">
-                        </a>
                     </div>
                     <div>
                         <center><b><a href="#" id="aluno_id">Fulano</a></b><br />
