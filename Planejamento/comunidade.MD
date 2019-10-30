@@ -1,0 +1,52 @@
+# Comunidades /comunity.php
+
+- [ ] Comunidade
+    - [ ] Notícias
+        - [ ] Create
+        - [ ] Read
+        - [ ] Update
+        - [ ] Delete
+        - [ ] Modal
+        - [ ] API
+        - [ ] JS
+    - [ ] Loja
+        - [ ] 302
+        - [ ] GET?ID
+    - [ ] Galeria
+        - [ ] Create
+        - [ ] Read
+        - [ ] Update
+        - [ ] Delete
+        - [ ] Modal
+        - [ ] API
+        - [ ] JS
+    - [ ] Agenda
+        - [ ] 302
+        - [ ] GET?ID
+    - [ ] Membros
+        - [ ] Create
+        - [ ] Read
+        - [ ] Update
+        - [ ] Delete
+        - [ ] Modal
+        - [ ] API
+        - [ ] JS
+    - [ ] Sobre
+        - [ ] Create
+        - [ ] Read
+        - [ ] Update
+        - [ ] Delete
+        - [ ] Modal
+        - [ ] API
+        - [ ] JS
+- [ ] Comunidades
+    - [ ] Comunidades que eu persigo
+        - [ ] Read
+        - [ ] Delete
+        - [ ] Modal
+        - [ ] API
+        - [ ] JS
+    - [ ] Comunidades próximas
+        - [ ] Read
+        - [ ] API
+        - [ ] JS
