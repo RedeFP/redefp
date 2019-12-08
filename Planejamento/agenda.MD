@@ -1,0 +1,21 @@
+# Agenda dos Alunos
+
+- [ ] Verifica se tem algum parametro definido
+  - [ ] Comunidade
+    - [ ] Create (Assign to me)
+    - [ ] Read
+    - [ ] Update (Opt out of an event)
+    - [ ] Modal (Opt out)
+    - [ ] API
+    - [ ] JS
+  - [ ] Organizador
+    - [ ] Create (Assign to me)
+    - [ ] Read
+    - [ ] Update (Opt out of an event)
+    - [ ] Modal
+    - [ ] API
+    - [ ] JS 
+  - [ ] Aluno
+    - [ ] Create (Private event)
+    - [ ] Read
+    - [ ] Update (Changes)
