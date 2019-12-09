@@ -7,6 +7,7 @@
         <script src="<?php echo URL; ?>vendor/bootstrap/js/bootstrap.js"></script>
         <script src="<?php echo URL; ?>vendor/bootstrap/js/bootstrap.bundle.js"></script>
         <script src="<?php echo URL; ?>js/libGET.js"></script>
+        <script src="<?php echo URL; ?>js/libIS.js"></script>
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap-grid.css">
         <link rel="stylesheet" href="<?php echo URL; ?>vendor/bootstrap/css/bootstrap-reboot.css">

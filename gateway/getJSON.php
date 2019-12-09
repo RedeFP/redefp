@@ -936,7 +936,59 @@ function deleteFotoPerfil($id)
     }
 }
 
+function salvaPostComunidade($id,$idc,$post) {
+    global $bd;
+    $sql = "INSERT INTO comunidade_post (id_aluno,id_comunidade,txpost,nlike,ndeslike) VALUES ('$id','$idc','$post',0,0)";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = array (
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "comunidade_post->store"
+        );
+    } else {
+        $response = array (
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_post->store"
+        );
+    }
+    echo json_encode($response);
+} 
+
+function deletarPostComunidade($id) {
+    global $bd;
+    $sql = "DELETE FROM comunidade_post WHERE id_post = '$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => $id,
+            "error" => false,
+            "operation" => "comunidade_post->delete"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_post->delete"
+        ];
+    }
+    echo json_encode($response);
+}
+
 switch($webservice) {
+    case "deletarPostComunidade":
+    {
+        header('Content-Type: application/json');
+        deletarPostComunidade($id);
+        break;
+    }
+    case "salvaPostComunidade":
+    {
+        header('Content-Type: application/json');
+        salvaPostComunidade($id,filter_input(INPUT_GET,'idc'),filter_input(INPUT_GET,'post'));
+        break;
+    }
     case "deleteFotoPerfil":
     {
         header('Content-Type: application/json');

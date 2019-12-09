@@ -7,6 +7,7 @@ function init_page()
         obj.forEach(searchByUser);
     })
     .done(function(){
+        
         console.info("Iniciando... 100%");
     });
 }
@@ -27,10 +28,30 @@ $(document).on("ajaxStop",function(){
     $(".comment").click(function(){
         montaModal($(this).attr("data-id"))
     });
+});
+
+$(document).one("ajaxStop",function(){
     setInterval(function(){
         autosize($("textarea"))
     },1000);
 });
+
+function ftnSalvaPost() {
+    data = {
+        URL: URLBASE+"gateway/getJSON.php",
+        f: "salvaPostComunidade",
+        id: parseUser().id,
+        idc: $_GET['id'],
+        post: $("#txPost").val()
+    }
+    $.get(data.URL,data,function(result){
+        if(isValid(result)) {
+           window.location.reload(); 
+        } else {
+            alert("Ocorreu um erro: "+result.data);
+        }
+    })
+}
 
 function showComentario(post)
 {
@@ -83,6 +104,13 @@ function generatePost(post,aluno)
         expandePost(this.getAttribute("data-id"));
     });
     
+}
+
+function montaModalAddPost() {
+    $(".modal .modal-title").html("Adicionando publicação");
+    $(".modal .modal-body").html("<input type='text' name='txPost' id='txPost' maxlength='180' style='width: 100% !important' required>");
+    $(".modal .btn-primary").text("Salvar").attr('onclick','ftnSalvaPost()');
+    $(".modal").modal('show');
 }
 
 function likePost(post) {

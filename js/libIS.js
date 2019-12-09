@@ -6,3 +6,11 @@ function isJson(str) {
     }
     return true;
 }
+
+function isValid(val) {
+    if(val.error !== true) {
+        return true;
+    } else {
+        return false;
+    }
+}
