@@ -42,7 +42,7 @@
 		</header>
 		<main role="main" class="container-fluid">
 			<img src="css/logo.png" class="indexlogo">
-			<p style="font-size: medium; text-align: justify">A rede social Centrão está para trazer uma inovação à escola técnica de SP, Fernando Prestes uma experiência imerciva e profunda entre colegas de classe e também facilitar a venda de camisetas da escola.</p>
+			<p style="font-size: medium; text-align: justify">A rede social Centrão está para trazer uma inovação à escola técnica de SP, a ETEC Fernando Prestes, uma experiência imerciva e profunda entre colegas de classe. Onde todos poderão se conectar, compartilhar experiencias e até mesmo conhecer pessoas que nunca virão pelos corredores. Tudo isso de forma intuitiva e segura através de nosso webapp.</p>
 		</main>
 		<footer class="footer">
 			<div class="container">
