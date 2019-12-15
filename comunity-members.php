@@ -5,7 +5,7 @@
     </head>
     <body>
     	<?php include("./res/common/nav.php"); ?>
-		<main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+		<main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
             <div class="container">
                 <?php include("./res/common/comunity-nav.php"); ?>
                 <div class="row" id="import">             

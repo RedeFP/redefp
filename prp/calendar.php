@@ -7,7 +7,7 @@
     </head>
     <body>
         <?php include("../res/common/prp-nav.php"); ?>
-        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+        <main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
             <center>
                 <h1>Calendário</h1>
             </center>

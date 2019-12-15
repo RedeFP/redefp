@@ -7,7 +7,7 @@
     </head>
     <body>
         <?php include("res/common/nav.php"); ?>
-        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+        <main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
             <div class="row">
                 <div class="col-3 profile-list">
                     <div class="user-pic-div">

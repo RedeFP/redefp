@@ -1,6 +1,14 @@
 .si-24 {
     font-size: 24px;
 }
+
+.expandeComFoto {
+    width: 100% !important;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 body {
     background-color: #e6d690;
 }
@@ -173,7 +181,12 @@ div.comunity-list-group {
 }
 
 *, textarea {
-    cursor: pointer !important;
+    cursor: normal !important;
+}
+
+* {
+    text-overflow: ellipsis !important;
+    overflow: hidden;
 }
 
 div.rw18{
@@ -242,6 +255,16 @@ span {
     border-radius: 25px !important;
 }
 
+div.list-group-item {
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+div.list-group-item-hover-danger, div.list-group-item-hover-primary, div.list-group-item-hover-success, div.list-group-item-hover-warning {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 img.a {
     max-width: 100px;
     width: 200%;
@@ -299,3 +322,4 @@ h5 {
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+

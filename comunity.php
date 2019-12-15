@@ -5,7 +5,7 @@
         <script src="js/comunity-home.js"></script>
     </head>
     <?php include("res/common/nav.php"); ?>
-        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+        <main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
             <div class="container">
                 <?php include("./res/common/comunity-nav.php"); ?>
                 <a onclick="montaModalAddPost()"><button class="btn btn-primary"  style="width:100% !important"><i class="fas fa-plus"></i>&nbsp;Adicionar nova publicação</button></a>

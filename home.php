@@ -6,7 +6,7 @@
     </head>
     <body>
     <?php include('./res/common/nav.php'); ?>
-    <main role="main" class="container" style="margin-top: 37px; padding-top: 10px;">
+    <main role="main" class="container-fluid" style="margin-top: 37px; padding-top: 10px;">
         <div class="row">
             <div class="col-8 bk-grey" id="postline">
             </div>

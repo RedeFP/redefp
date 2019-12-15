@@ -953,7 +953,7 @@ function salvaPostComunidade($id,$idc,$post) {
             "operation" => "comunidade_post->store"
         );
     }
-    echo json_encode($response);
+    echo json_encode($response,JSON_PRETTY_PRINT);
 } 
 
 function deletarPostComunidade($id) {
@@ -973,10 +973,88 @@ function deletarPostComunidade($id) {
             "operation" => "comunidade_post->delete"
         ];
     }
+    echo json_encode($response,JSON_PRETTY_PRINT);
+}
+
+function salvarEditarPostComunidade($id,$post) {
+    global $bd;
+    $sql = "UPDATE comunidade_post SET txpost='$post' WHERE id_post='$id' ";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => $id,
+            "error" => false,
+            "operation" => "comunidade_post->update"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_post->update"
+        ];
+    }
+    echo json_encode($response,JSON_PRETTY_PRINT);
+}
+
+function deletarFotoComunidade($id) {
+    global $bd;
+    $sql = "DELETE FROM comunidade_galeria WHERE id_post='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => $id,
+            "error" => false,
+            "operation" => "comunidade_galeria->delete"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_galeria->delete"
+        ];
+    }
     echo json_encode($response);
 }
 
+function editComunidadeLegenda($id,$legenda) {
+    global $bd;
+    $sql = "UPDATE comunidade_galeria SET txlegenda='$legenda' WHERE id_post='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => $sql,
+            "error" => false,
+            "operation" => "comunidade_galeria->update"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_galeria->update"
+        ];
+    }
+    echo json_encode($response,JSON_PRETTY_PRINT);
+}
+
 switch($webservice) {
+    case "editComunidadeLegenda":
+    {
+        header('Content-Type: application/json');
+        editComunidadeLegenda($id,filter_input(INPUT_GET,'legendav'));
+        break;
+    }
+    case "deletarFotoComunidade":
+    {
+        header('Content-Type: application/json');
+        deletarFotoComunidade($id);
+        break;
+    }
+    case "salvarEditarPostComunidade":
+    {
+        header('Content-Type: application/json');
+        salvarEditarPostComunidade($id,filter_input(INPUT_GET,'post'));
+        break;
+    }
     case "deletarPostComunidade":
     {
         header('Content-Type: application/json');

@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php include("./res/common/nav.php"); ?>
-        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+        <main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
 			<div class="jumbotron" style="background-color: #e30613;">
 				<h1 class="display-6" id="event-name">Nome do Evento</h1>
 				<h3 id="event-date">25/12/2011 23:59</h3>

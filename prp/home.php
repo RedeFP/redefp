@@ -9,7 +9,7 @@
     <body>
         <?php include("../res/common/prp-nav.php"); ?>
         
-        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+        <main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
             <div class="container post">
                 
             </div>

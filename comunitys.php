@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php include("./res/common/nav.php");?>
-        <main role="main" class="container" style="margin-top: 71px; padding-top: 10px;">
+        <main role="main" class="container-fluid" style="margin-top: 71px; padding-top: 10px;">
             <div class="container">
                 <h2 id="title1" style="text-align: center">Comunidades que você participa</h2>
                 <div class="row comunity-list-group" id="import1">

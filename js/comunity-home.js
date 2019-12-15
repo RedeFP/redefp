@@ -220,12 +220,31 @@ function expandePost(post) {
     });
 }
 
-function editarPost(){
-    $(".btn-warning").remove();
-    $(".btn-danger").remove();
+function editarPost(id){
+    $(".btn-warning").hide();
+    $(".btn-danger").hide();
+    $(".modal .btn-primary").show().text("Salvar").attr("onclick","salvarEditarPostComunidade("+id+")");
     $(".modal").find("textarea:not(.expande)").remove();
     $(".modal").find("hr").remove();
     $(".modal").find("h6").remove();
+    $(".modal .hitbox").remove();
+    $(".modal textarea").removeAttr("readonly").removeClass("form-control-plaintext").addClass("form-control");
+}
+
+function salvarEditarPostComunidade(id) {
+    data = {
+        URL: URLBASE + "gateway/getJSON.php",
+        f: "salvarEditarPostComunidade",
+        id: id,
+        post: $(".modal textarea.form-control.expande").val()
+    };
+    $.get(data.URL,data,function(result){
+        if(isValid(result)) {
+            window.location.reload();
+        } else {
+            alert("Ocorreu um erro: "+result.data)
+        }
+    });
 }
 
 function genComentario(comentario)
@@ -241,4 +260,19 @@ function genComentario(comentario)
     textarea.setAttribute("style","resize: none;");
     textarea.innerHTML = comentario.txcomentario;
     modal.appendChild(textarea);
+}
+
+function deletarPost(id) {
+    data = {
+        URL: URLBASE + "gateway/getJSON.php",
+        f: "deletarPostComunidade",
+        id: id
+    };
+    $.get(data.URL,data,function(result){
+        if(isValid(result)) {
+            window.location.reload();
+        } else {
+            alert("Ocorreu um erro: "+result.data);
+        }
+    })
 }
