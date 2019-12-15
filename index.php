@@ -36,7 +36,7 @@
 				<div class="col mob2"><img src="css/logo.png" style="width:30vw;max-width: 160px;"></div>
 				<div class="col btnicon">
 					<!-- <a href="auth/register.php"><button class="btn btn-danger">Registrar</button></a> -->
-					<a href="auth/login.php"><button class="btn btn-success">Login</button></a>
+					<!-- <a href="auth/login.php"><button class="btn btn-success">Login</button></a> -->
 				</div>
 			</div>
 		</header>
