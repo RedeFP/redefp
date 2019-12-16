@@ -1036,7 +1036,90 @@ function editComunidadeLegenda($id,$legenda) {
     echo json_encode($response,JSON_PRETTY_PRINT);
 }
 
+function removeComunidadeInscrito() {
+    global $bd;
+    $sql = "DELETE FROM comunidade_inscrito WHERE id_aluno='$id' AND id_comunidade='$cid' ";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => $id,
+            "error" => false,
+            "operation" => "comunidade_inscrito->delete"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_inscrito->delete"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function loadComunidadeDetalhes($id) {
+    global $bd;
+    $sql = "SELECT * FROM comunidade WHERE id='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_fetch_assoc($query),
+            "error" => false,
+            "operation" => "comunidade->find"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade-> find"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function loadInscrito($id) {
+    global $bd;
+    $sql = "SELECT * FROM comunidade_inscrito WHERE id_comunidade='$id'";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $data = [];
+        while($row = mysqli_fetch_assoc($query)) {
+            $row['id_aluno'] = retornaProfile($row['id_aluno']);
+            $data[]=$row;
+        }
+        $response = [
+            "data" => $data,
+            "error" => false,
+            "operation" => "comunidade_inscrito->findAll"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_inscrito->findAll"
+        ];
+    }
+    echo json_encode($response,JSON_PRETTY_PRINT);
+}
+
 switch($webservice) {
+    case "loadInscritos":
+    {
+        header('Content-Type: application/json');
+        loadInscrito($id);
+        break;
+    }
+    case "loadComunidadeDetalhes":
+    {
+        header('Content-Type: application/json');
+        loadComunidadeDetalhes($id);
+        break;
+    }
+    case "removeComunidadeInscrito":
+    {
+        header('Content-Type: application/json');
+        removeComunidadeInscrito($id,filter_input(INPUT_GET,'cid'));
+        break;
+    }
     case "editComunidadeLegenda":
     {
         header('Content-Type: application/json');

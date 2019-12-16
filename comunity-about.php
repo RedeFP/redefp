@@ -1,7 +1,7 @@
 ﻿<html>
 	<head>
     	<?php include("./res/common/head.php"); ?>
-        <script src="js/comunity-store.js"></script>
+        <script src="js/comunity-about.js"></script>
     </head>
     <body>
     	<?php include("./res/common/nav.php"); ?>
@@ -15,10 +15,9 @@
         	            <h5 class="about-description">Esta comunidade reune as donas de escravos</h5>
                         <hr>
                         <h3 class="about-title">Ferramentas de OP</h3>
-                        <h5 class="about-description">
+                        <h5 class="about-description2">
                         	<button class="btn btn-danger">Denunciar membro</button>
                             <button class="btn btn-success">Sair da comunidade</button>
-                            <button class="btn btn-warning">Comunicar administradores</button>
                         </h5>
                     </div>
                 </div>
