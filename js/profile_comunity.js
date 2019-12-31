@@ -148,3 +148,95 @@ $(function(){
 $(document).one("ajaxStop",function(){
     $(".user-pic").click(modalFotoPerfil);
 });
+
+function sugerirTema() {
+    $(".modal .modal-body").html("");
+    $(".modal .modal-title").text("Modal Title")
+    $(".modal .modal-title").text("Sugerindo tema");
+    $(".modal .modal-body").append("Nome: <input type='text' class='form-control' id='txNome' maxlength='50'><br>");
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").show().attr("onclick","sugerirTemaReq()").html("<i class='fas fa-save'></i>");
+    $(".modal .btn-secondary").hide();
+}
+
+function sugerirTemaReq() {
+    data = {
+        url: URLBASE + SERVER,
+        id: $("#txNome").val(),
+        f: "sugerirTema"
+    }
+    $.get(data.url,data,failsafe);
+}
+
+function failsafe(result) {
+    if(isValid(result)) {
+        window.location.reload()
+    } else {
+        alert("Ocorreu um erro: "+result.data);
+    }
+}
+
+function inscreve(result) {
+    data = {
+        url: URLBASE + SERVER,
+        f: "inscreveAdm",
+        id: result.data,
+        idu: parseUser().id
+    }
+    $.get(data.url,data,failsafe)
+}
+
+function addComunidade() {
+    data = {
+        url: URLBASE + SERVER,
+        f: "addComunidade",
+        txNome: $("#txNome").val(),
+        txDescricao: $("#txDescricao").val(),
+        selectIdTema: $("#selectIdTema").val(),
+        selectIdEntrada: $("#selectIdEntrada").val()
+    }
+    $.get(data.url,data,inscreve)
+    return data;
+}
+
+function modalAddComunidade() {
+    $(".modal .modal-body").html("");
+    $(".modal .modal-title").text("Modal title");
+    $(".modal").modal('show');
+    $(".modal .modal-title").text("Criando nova Comunidade");
+    $(".modal .modal-body").append("Nome: <input type='text' class='form-control' id='txNome' maxlength='100' style='width: auto; display: inline-block;' ><br>")
+    $(".modal .modal-body").append("Descrição: <input type='text' class='form-control' id='txDescricao' maxlength='180' style='width: auto; display: inline-block;'><br>")
+    $(".modal .modal-body").append("Tema: <select name='selectIdTema' id='selectIdTema' class='form-control' style='display: inline-block; width: auto;'></select>&nbsp;<button class='btn btn-light' data-toggle='tooltip' data-placement='bottom' title='Tema escolhido para a comunidade' onclick='sugerirTema()'><i class='far fa-question-circle'></i>&nbsp;Sugerir tema</button><br>");
+    $.ajax({
+        url: URLBASE + "gateway/getJSON.php?f=loadTema",
+        global: true,
+        type: "GET",
+        dataType: 'json',
+        async: false,
+        success: function(result) {
+            var index;
+            for(index =0; index < result.data.length; ++index){
+                    option = document.createElement("option");
+                    option.value = result.data[index].id;
+                    option.innerHTML = result.data[index].nome;
+                    $("#selectIdTema").append(option);
+            };
+        }
+    });
+    $(".modal .modal-body").append("Privacidade: <select name='selectIdEntrada' id='selectIdEntrada' class='form-control' style='display: inline-block; width: auto;'></select>&nbsp;<button class='btn btn-light' data-toggle='tooltip' data-placement='bottom' title='Forma que os membros poderam entrar'><i class='far fa-question-circle'></i></button><br>");
+    $.ajax({
+        url: URLBASE + SERVER + "?f=loadEntrada",
+        global: true,
+        type: "GET",
+        dataType: 'json',
+        async: false,
+        success: function(result){
+            var index;
+            for(index=0;index < result.data.length; ++index) {
+                $("#selectIdEntrada").append('<option value="'+result.data[index].id+'">'+result.data[index].nome+'</option>');
+            }
+        }
+    });
+    $(".modal .btn-primary").hide();
+    $(".modal .btn-success").show().text("Criar").off().click(addComunidade);
+}

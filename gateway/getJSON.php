@@ -5,8 +5,18 @@ if(isset($_GET['id'])) {
     $id = filter_input(INPUT_GET, 'id');
 }
 
+unset($_GET['url']);
+
 function error($level) {
     error_reporting($level);
+}
+
+function GET($param) {
+    return filter_input(INPUT_GET,$param);
+}
+
+function headerJSON(){
+    header('Content-Type: application/json');
 }
 
 error(E_ALL);
@@ -1036,7 +1046,7 @@ function editComunidadeLegenda($id,$legenda) {
     echo json_encode($response,JSON_PRETTY_PRINT);
 }
 
-function removeComunidadeInscrito() {
+function removeComunidadeInscrito($id,$cid) {
     global $bd;
     $sql = "DELETE FROM comunidade_inscrito WHERE id_aluno='$id' AND id_comunidade='$cid' ";
     $query = mysqli_query($bd,$sql);
@@ -1101,7 +1111,300 @@ function loadInscrito($id) {
     echo json_encode($response,JSON_PRETTY_PRINT);
 }
 
+function denunciaMembro($id,$uid,$cid,$txDenuncia) {
+    global $bd;
+    $sql = "INSERT INTO comunidade_denuncia (id_aluno,id_acusado,id_comunidade,txdenuncia) VALUES ('$id','$uid','$cid','$txDenuncia')";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "comunidade_denuncia->insert"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_denuncia->insert"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function verificaInscricao($id,$cid) {
+    global $bd;
+    $sql = "SELECT * FROM comunidade_inscrito WHERE id_aluno ='$id' AND id_comunidade = '$cid'";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+        $response = [
+            "data" => mysqli_fetch_assoc($query),
+            "error" => false,
+            "operation" => "comunidade_inscrito->find"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_inscrito->find"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function estaInscrito($id,$cid) {
+    global $bd;
+    $sql = "SELECT * FROM comunidade_inscrito WHERE id_aluno ='$id' AND id_comunidade = '$cid'";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+       return true;
+    } else {
+       return false;
+    }
+}
+
+function criaInscrito($id,$cid) {
+    global $bd;
+    $sql = "INSERT INTO comunidade_inscrito (id_aluno,id_comunidade) VALUES ('$id','$cid')";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "comunidade_inscrito->create"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_inscrito->create"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function loadTema(){
+    global $bd;
+    $sql = "SELECT * FROM comunidade_tema WHERE app = 1";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+        $rows=[];
+        while($row=mysqli_fetch_assoc($query)) {
+            $rows[]=$row;
+        }
+        $response = [
+            "data" => $rows,
+            "error" => false,
+            "operation" => "comunidade_tema->findAll"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => false,
+            "operation" => "comunidade_tema->findAll"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function sugerirTema($id) {
+    global $bd;
+    $sql = "INSERT INTO comunidade_tema (nome,app) VALUES ('$id','0')";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "comunidade_tema->insert"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_tema->insert"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function criaComunidade($nome,$txDescricao,$tema,$entrada) {
+    global $bd;
+    $sql = "INSERT INTO `comunidade`( `nome`, `txDescricao`, `tema`, `entrada`) VALUES ('$nome','$txDescricao','$tema','$entrada')";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "extradata" => $sql,
+            "operation" => "comunidade->create"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error " => true,
+            "extradata" => $sql,
+            "operation" => "comunidade->create"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function loadEntrada() {
+    global $bd;
+    $sql = "SELECT * FROM comunidade_entrada";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+        $rows = [];
+        while($row=mysqli_fetch_assoc($query)) {
+            $rows[]=$row;
+        }
+        $response = [
+            "data" => $rows,
+            "error" => false,
+            "operation" => "comunidade_entrada->findAll"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_entrada->findAll"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function inscreveComunidade($idc,$idu) {
+    global $bd;
+    $sql = "INSERT INTO comunidade_inscrito (id_comunidade,id_aluno,is_Adm) VALUES ('$idc','$idu','0')";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "comunidade_inscrito->insert"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_inscrito->insert"
+        ];
+    }
+    echo json_encode($response);
+} 
+
+function inscreveAdm($idc,$idu) {
+    global $bd;
+    $sql = "INSERT INTO comunidade_inscrito (id_comunidade,id_aluno,is_Adm) VALUES ('$idc','$idu','1')";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "comunidade_inscrito->insert"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade_inscrito->insert"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function listComunidades($id) {
+    global $bd;
+    $sql = "SELECT * FROM comunidade ORDER BY id DESC LIMIT 20";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $rows=[];
+        while($row=mysqli_fetch_assoc($query)):
+            if(!estaInscrito($id,$row['id'])) {
+                $rows[]=$row;
+            }
+        endwhile;
+        $response = [
+            "data" => $rows,
+            "error" => false,
+            "operation" => "comunidade->findAll"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "comunidade->findAll" 
+        ];
+    }
+    echo json_encode($response);
+}
+
 switch($webservice) {
+    case "ComunidadeInscricao":
+    {
+        headerJSON();
+        criaInscrito($id,GET("cid"));
+        break;
+    }
+    case "carregaNovasComunidades":
+    {
+        headerJSON();
+        listComunidades($id);
+        break;
+    }
+    case "inscreveAdm":
+    {
+        headerJSON();
+        inscreveAdm(GET("id"),GET("idu"));
+        break;
+    }
+    case "inscreveComunidade":
+    {
+        headerJSON();
+        inscreveComunidade(GET("json"));
+        break;
+    }
+    case "addComunidade":
+    {
+        headerJSON();
+        criaComunidade(GET("txNome"),GET("txDescricao"),GET("selectIdTema"),GET("selectIdEntrada"));
+        break;
+    }
+    case "sugerirTema":
+    {
+        header('Content-Type: application/json');
+        sugerirTema($id);
+        break;
+    }
+    case "loadEntrada":
+    {
+        header('Content-Type: application/json');
+        loadEntrada();
+        break;
+    }
+    case "criaComunidade":
+    {
+        header('Content-Type: application/json');
+        criaComunidade(GET("json"));
+        break;
+    }
+    case "loadTema":
+    {
+        header('Content-Type: application/json');
+        loadTema();
+        break;
+    }
+    case "verificaInscricao":
+    {
+        header('Content-Type: application/json');
+        verificaInscricao($id,filter_input(INPUT_GET,'cid'));
+        break;
+    }
+    case "denunciaMembro":
+    {
+        header('Content-Type: application/json');
+        denunciaMembro($id,filter_input(INPUT_GET,'uid'),filter_input(INPUT_GET,'cid'),filter_input(INPUT_GET,'txDenuncia'));
+        break;
+    }
     case "loadInscritos":
     {
         header('Content-Type: application/json');
@@ -1422,5 +1725,3 @@ switch($webservice) {
         break;
     }
 }
-
-echo mysqli_error($bd);

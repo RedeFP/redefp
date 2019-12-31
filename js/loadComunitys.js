@@ -1,12 +1,37 @@
 function loadComunitysI()
 {
-    iduser = JSON.parse(localStorage.user)['id'];
-    $.get(URLBASE+"/gateway/getJSON.php",{f:"loadComunitysInscrito",id:iduser},function(result){
+    data = {
+        url: URLBASE + SERVER,
+        id: parseUser().id,
+        f: "loadComunitysInscrito"
+    };
+    $.get(data.url,data,function(result){
         obj = JSON.parse(result);
         obj.forEach(genComunityI);
     });
+    data2 = {
+        url: URLBASE + SERVER,
+        f: "carregaNovasComunidades",
+        id: parseUser().id
+    }
+    $.get(data2.url,data2,function(result){
+        console.log(result);
+        result.data.forEach(genComunity);
+    });
     $(".nav-item")[2].setAttribute("class","nav-item active");
 }
+
+function genComunity(item) 
+{
+    
+    if(item.icon_url == "") {
+        src = URLBASE + "css/user.png";
+    } else {
+        src = URLBASE + icon_url;
+    }
+    $("#import2").append('<a href="comunity.php?id='+item.id+'" style="margin-bottom: 10px;"><div class="comunity-list-item"><img src="'+src+'" width="90px"><br><span>'+item.nome+'</span></div></a>')
+}
+
 function genComunityI(item)
 {
     comunity_link = document.createElement("a");

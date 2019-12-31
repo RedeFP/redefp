@@ -5,6 +5,8 @@ function init_page()
 	//Remoção em breve: console.info("Iniciando... 75%"); Que servia como orientação para identificar estágio dos problemas que ocorrem durante a execução da página.
 	console.info("Iniciando... 75%");
 
+	$.get(joinComunitydata.url,joinComunitydata,joinComunity);
+
 	//Identificação da comunidade, através de parametro passado na URL da página, usando a variavel $)GET inicializada dentro do arquivo libGET.js
 	idc = $_GET['id'];
 

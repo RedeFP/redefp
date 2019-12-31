@@ -1,10 +1,17 @@
+//Função responsavel pelo carregamento do conteudo à página, é chamada apartir do arquivo loadComunity.js
 function init_page()
 {
+    //Orientação ao programador
     console.info("Iniciando... 75%");
+
+    //Orientação ao sistema para se informar apartir dos parametros URL
     var idc = $_GET['id'];
+    
+    //
     $.get(URLBASE+"/gateway/getJSON.php",{f:"loadPostComunity",id:idc}, function(result){
         obj = JSON.parse(result);
         obj.forEach(searchByUser);
+        $.get(joinComunitydata.url,joinComunitydata,joinComunity);
     })
     .done(function(){
         
@@ -108,7 +115,7 @@ function generatePost(post,aluno)
 
 function montaModalAddPost() {
     $(".modal .modal-title").html("Adicionando publicação");
-    $(".modal .modal-body").html("<input type='text' name='txPost' id='txPost' maxlength='180' style='width: 100% !important' required>");
+    $(".modal .modal-body").html("<input type='text' name='txPost' id='txPost' class='form-control' maxlength='180' style='width: 100% !important' required>");
     $(".modal .btn-primary").text("Salvar").attr('onclick','ftnSalvaPost()');
     $(".modal").modal('show');
 }
@@ -140,16 +147,12 @@ function limpaModal()
 }
 
 function montaModal(post) {
-    $("#salvacom").attr("onclick","salvaComentario("+post+")");
-    $(".modal-title").html("Comentar em uma publicação");
-    
-    $(".btn-primary").html("Comentar");
-    $(".modal-body").html("<textarea class='form-control' id='cobox'>");
-    $(".hitbox").remove();
-    $(".btn-primary").attr("onclick","salvaComentario("+post+")"); 
-    $(".btn-primary").css("display","initial");
-    $(".btn-secondary").html("Sair");
-    $("#commentmodal").modal("show");
+    limpaModal();
+    $(".modal .modal-title").html("Comentar em uma publicação");
+    $(".modal .modal-body").html("<textarea class='form-control' id='cobox'>");
+    $(".modal .btn-primary").attr("onclick","salvaComentario("+post+")").show().html("Comentar");
+    $(".modal .btn-secondary").html("Sair");
+    $(".modal").modal("show");
 }
 
 function salvaComentario(post) {
@@ -209,13 +212,12 @@ function expandePost(post) {
             box3.appendChild(img3);
         modal.appendChild(box3);
         post.comentarios.forEach(genComentario);
-        $(".btn-primary").css("display","none");
-        $(".btn-secondary").html("Fechar");
-        $(".btn-secondary").attr("onclick","limpaModal()");
-        $("#commentmodal").modal('show');
+        $(".modal .btn-primary").css("display","none");
+        $(".modal .btn-secondary").html("Fechar").attr("onclick","limpaModal()");
+        $(".modal").modal('show');
         if(JSON.parse(localStorage.user)['id'] == post.post.id_aluno)
         {
-            $(".modal-footer").prepend('<button type="button" class="btn btn-warning" onclick="editarPost('+post.post.id_post+')">Editar</button><button type="button" class="btn btn-danger" onclick="deletarPost('+post.post.id_post+')">Deletar</button>')
+            $(".modal .modal-footer").prepend('<button type="button" class="btn btn-warning" onclick="editarPost('+post.post.id_post+')">Editar</button><button type="button" class="btn btn-danger" onclick="deletarPost('+post.post.id_post+')">Deletar</button>')
         }
     });
 }
@@ -249,17 +251,7 @@ function salvarEditarPostComunidade(id) {
 
 function genComentario(comentario)
 {
-    modal = document.getElementsByClassName("modal-body")[0];
-    hr = document.createElement("hr");
-    modal.appendChild(hr);
-    title = document.createElement("h6");
-    title.innerHTML = comentario.aluno.nome;
-    modal.appendChild(title);
-    textarea = document.createElement("textarea");
-    textarea.setAttribute("class","form-control-plaintext");
-    textarea.setAttribute("style","resize: none;");
-    textarea.innerHTML = comentario.txcomentario;
-    modal.appendChild(textarea);
+    $(".modal .modal-body").append("<hr><h6>"+comentario.aluno.nome+"</h6><textarea class='form-control-plaintext' style='resize: none'>"+comentario.txcomentario);
 }
 
 function deletarPost(id) {

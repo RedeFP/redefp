@@ -13,7 +13,7 @@ else
 	$("#lb1").attr("href","evento.php?id="+ide);
 	$("#lb2").attr("href","evento-chat.php?id="+ide);
 	$("#lb1").attr("class","nav-link active");
-    $.get("/gateway/getJSON.php",{f:"loadEvento",id:ide},function(result){
+    $.get(URLBASE+"gateway/getJSON.php",{f:"loadEvento",id:ide},function(result){
 		console.log(obj = result);
 		//teste
         $("#event-name").html(obj.no_evento);

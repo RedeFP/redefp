@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Eventinhos que persigo</h1>
-                <div class="row evento-row" id="import1">
+                <div class="row evento-row" id="import1" style="margin-left: 10px !important; margin-right: 10px !important;">
                    
                 </div>
             </div>

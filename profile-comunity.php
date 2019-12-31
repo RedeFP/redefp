@@ -26,8 +26,16 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-9" id="import">
-                    
+                <div class="col-9">
+                    <div class="col-12" style="margin-bottom: 5px;">
+                        <script>
+
+                            </script>
+                            <button class='btn btn-success' onclick="modalAddComunidade()"><i class='fas fa-plus'></i>&nbsp;Criar comunidade</button>
+                    </div>    
+                    <div class="col-12" id="import">
+                        <!-- AJax loads in this place -->
+                    </div>
                 </div>
             </div>
         </main>

@@ -12,6 +12,7 @@ function init_page()
     $(".btn-danger").click(denunciaMembro);
     $(".btn-success").click(removeInscrito);
     loadComunidadeDetalhes();
+    $.get(joinComunitydata.url,joinComunitydata,joinComunity);
 }
 
 function loadComunidadeDetalhes() {
@@ -65,6 +66,7 @@ function removeInscritoReq() {
 
 function denunciaMembro() {
     id = $_GET['id'];
+    $(".modal .modal-body").html("<strong>Membro:</strong><br><select name='idAluno' id='idAluno'></select><br><br><strong>Descrição da denuncia: </strong><br><input type='text' name='txDenuncia' id='txDenuncia' maxlength='1000'><br>").attr("align","center");
     $.ajax({
         url: URLBASE + "gateway/getJSON.php?f=loadInscritos&id="+id,
         global: true,
@@ -74,14 +76,36 @@ function denunciaMembro() {
         success: function(result) {
             var index;
             for(index =0; index < result.data.length; ++index){
-                option = document.createElement("option");
-                option.value = result.data[index].id_aluno.id;
-                option.innerHTML = result.data[index].id_aluno.id + " - " + result.data[index].id_aluno.nome;
-                $("#idAluno").append(option);
+                if(result.data[index].id_aluno.id !== parseUser().id){
+                    option = document.createElement("option");
+                    option.value = result.data[index].id_aluno.id;
+                    option.innerHTML = result.data[index].id_aluno.nome;
+                    $("#idAluno").append(option);
+                }
             };
         }
     });
     $(".modal .modal-title").text("Denunciando membros");
-    $(".modal .modal-body").html("<select name='idAluno' id='idAluno'>").append(options);
+    $(".modal .btn-primary").html("<i class='fas fa-paper-plane'></i>").off().click(denunciaMembroReq);
+    $(".modal .btn-secondary").hide();
     $(".modal").modal('show');
+}
+
+function denunciaMembroReq() {
+    data = {
+        url: URLBASE + "gateway/getJSON.php",
+        f: "denunciaMembro",
+        id: parseUser().id,
+        cid: $_GET['id'],
+        uid: $("#idAluno").val(),
+        txDenuncia: $("#txDenuncia").val()
+    };
+    console.dir(data);
+    $.get(data.url,data,function(result){
+        if(isValid(result)) {
+            window.location.reload();
+        } else {
+            alert("Ocorreu um erro: "+result.data);
+        }
+    });
 }

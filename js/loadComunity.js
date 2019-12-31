@@ -26,7 +26,7 @@ function init()
             }
             console.info("Iniciando... 25%");
             $("#lb1").attr("href","comunity.php?id="+obj.id);
-            $("#lb2").attr("href","../store/index.php?c="+obj.id);
+            $("#lb2").attr("href","./store/index.php?c="+obj.id);
             $("#lb3").attr("href","comunity-pictures.php?id="+obj.id);
             $("#lb4").attr("href","diary.php?c="+obj.id);
             $("#lb5").attr("href","comunity-members.php?id="+obj.id);
@@ -36,6 +36,35 @@ function init()
         }
     });
     
+}
+
+joinComunitydata = {
+    url: URLBASE + "gateway/getJSON.php",
+    f: "verificaInscricao",
+    id: parseUser().id,
+    cid: $_GET['id']
+};
+
+function joinComunity(result) {
+    if(!isValid(result)) {
+        $(".comunity-name").append("&nbsp;<button class='btn btn-success' onclick='inscreverComunidade()'><i class='fas fa-plus'></i>&nbsp;Inscrever</button>").css("padding-top","20px").css("padding-bottom","20px");
+    }
+}
+
+function inscreverComunidade() {
+    data = {
+        url: URLBASE + SERVER,
+        f: "ComunidadeInscricao",
+        id: parseUser().id,
+        cid: $_GET['id']
+    };
+    $.get(data.url,data,function(result){
+        if(isValid(result)) {
+            window.location.reload();
+        } else {
+            alert("Ocorreu um erro: " + result.data);
+        }
+    });
 }
 
 $(function(){

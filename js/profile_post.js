@@ -305,11 +305,10 @@ function limpaModal()
 function montaModal(post) {
     $("#salvacom").attr("onclick","salvaComentario("+post+")");
     $(".modal-title").html("Comentar em uma publicação");
-    $(".btn-primary").html("Comentar");
-    $(".btn-primary").css("display","initial");
-    $(".btn-primary").attr("onclick","salvaComentario("+post+")"); 
+    $(".modal .btn").hide();
+    $(".modal .btn-primary").show().html("Comentar").css("display","initial").attr("onclick","salvaComentario("+post+")"); 
     $(".modal-body").html("<textarea type='text' id='cobox' maxlength='1024' width='100vw'>");
-    $(".btn-secondary").html("Sair");
+    $(".btn-secondary").show().html("Sair");
     $("#commentmodal").modal("show");
 }
 

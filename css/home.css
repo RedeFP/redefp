@@ -16,6 +16,7 @@ body {
     background: lightgray; 
     margin-top: 10px; 
     padding-top: 5px;
+    margin-bottom: 5px;
 }
 .user-image-src, .user-plus {
     width: 50%;
@@ -86,9 +87,34 @@ body {
     height: 100%;
     max-width: 200px;
 }
+
+.title-center {
+    text-align: left;
+    text-indent: 5px;
+} 
+
 .cuser-pic {
-	width: 100%;
+    width: 100%;
+    max-width: 100px;
 }
+
+.cuser-name {
+    text-overflow: hidden;
+    overflow: hidden;
+    display: inline-block;
+    max-width: 100px;
+}
+
+#selectIdTema, #selectIdEntrada, #txNome, #txDescricao {
+    margin-bottom: 10px !important;
+    /* width: auto !important; */
+    display: inline-block !important;
+}
+
+select#selectIdTema, select#selectIdEntrada, input#txNome, input#txDescricao {
+    width: max-content !important;
+}
+
 .hitbox {
     border: 0;
     background: none;
@@ -137,6 +163,7 @@ body {
     color: red;
     font-weight: bolder;
     font-size: x-large;
+    margin: 5px;
 }
 
 #lista_produtos {
@@ -184,7 +211,7 @@ div.comunity-list-group {
     cursor: normal !important;
 }
 
-* {
+p, h1, h2, input, textarea {
     text-overflow: ellipsis !important;
     overflow: hidden;
 }
@@ -323,3 +350,7 @@ h5 {
     background: #555; 
   }
 
+
+input[name=txDenuncia] {
+    width: 95% !important;
+}

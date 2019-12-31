@@ -5,6 +5,8 @@ function init_page()
        obj = JSON.parse(result);
        obj.forEach(genProduto);
     });
+
+    $.get(joinComunitydata.url,joinComunitydata,joinComunity);
 }
 
 function genProduto(item)

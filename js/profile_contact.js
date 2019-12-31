@@ -34,7 +34,9 @@ function loadPerfil()
 function modalEditTelefone() {
     $(".modal-title").text("Editando telefone cadastrado");
     $(".modal-body").html(`Telefone:&nbsp;<input type="tel" id="varTelefone" class="form-control" style="width:50%;display: inline-block"> `);
-    $(".btn-success").text("Salvar").attr("onclick","salvarTelefone()");
+    $(".btn-success").show().html("<i class='fas fa-save'></i>").attr("onclick","salvarTelefone()");
+    $(".btn-primary").hide();
+    $(".btn-secondary").hide();
     $("#varTelefone").val(JSON.parse(localStorage.user)['telefone']).inputmask({mask: "99 99999-9999",autoUnmask:"true"});
     showModal();
 }
