@@ -1,19 +1,54 @@
 $(function(){
     $(".nav-item")[3].setAttribute("class","nav-item active");
-	ide = JSON.parse(localStorage.user).id;
-	$.get(URLBASE+"gateway/getJSON.php",{f:"eventoPerseguidos",id:ide},function(result){
+    ide = JSON.parse(localStorage.user).id;
+    data = {
+        f: "eventoPerseguidos",
+        id: parseUser().id,
+        url: URLBASE + SERVER
+    };
+	$.get(data.url,data,function(result){
         console.log(result)
         result.forEach(genEventoPerseguido);
         if(result == []) {
             $("#import1").hide();
+            $("").hide();
         }
-		
-	});
+    });
+    data1 = {
+        f: "carregaNovosEventos",
+        id: parseUser().id,
+        url: URLBASE + SERVER
+    };
+    $.get(data1.url,data1,function(result){
+        if(result.data.length > 0) {
+            result.data.forEach(genEventoNovo);
+        }
+    });
 });
+
+function genEventoNovo(item) {
+    if(item.img_url == "") {
+        src = URLBASE + "css/camiseta_3em1.png";
+    } else {
+        src = URLBASE + item.img_url;
+    }
+    $("#import2").append(`
+<div class="col-2 evento">
+    <div class="row">
+        <div class="col-12 evento-inner">
+            <center>
+                <img src="`+src+`" class="evento-img"><br>
+                <button class="btn btn-danger btn-evento" onclick="window.location='evento.php?id=`+item.id_evento+`'">`+item.no_evento+`</button>
+            </center>
+        </div>
+    </div>
+</div>
+`);
+}
 
 function genEventoPerseguido(perseguicao) {
     colfull = document.createElement("div");
-    colfull.setAttribute("class","col-3 evento");
+    colfull.setAttribute("class","col-2 evento");
         row = document.createElement("div");
         row.setAttribute("class","row");
             inner = document.createElement("div");

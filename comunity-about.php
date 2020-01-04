@@ -13,8 +13,8 @@
 	                <div class="col-10">
 	                	<h3 class="about-title">Descrição</h3>
         	            <h5 class="about-description">Esta comunidade reune as donas de escravos</h5>
-                        <hr>
-                        <h3 class="about-title">Ferramentas de OP</h3>
+                        <hr class="about2">
+                        <h3 class="about-title2">Ferramentas de OP</h3>
                         <h5 class="about-description2">
                         	<button class="btn btn-danger">Denunciar membro</button>
                             <button class="btn btn-success">Sair da comunidade</button>

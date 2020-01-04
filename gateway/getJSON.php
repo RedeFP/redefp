@@ -1,8 +1,8 @@
 <?php
-$webservice = filter_input(INPUT_GET, 'f');
+$webservice = GET( 'f');
 include('../res/bd.php');
 if(isset($_GET['id'])) {
-    $id = filter_input(INPUT_GET, 'id');
+    $id = GET( 'id');
 }
 
 unset($_GET['url']);
@@ -63,7 +63,7 @@ function readPost($id,$mult = 0)
 {
     global $bd;
     $array = [];
-    $search = "SELECT * FROM comunidade_post WHERE id_comunidade = '$id'";
+    $search = "SELECT * FROM comunidade_post WHERE id_comunidade = '$id' ORDER BY id_post DESC LIMIT 20";
     $query = mysqli_query($bd,$search);
     if($query)
     {
@@ -561,7 +561,7 @@ function retornaEventoAvisos($id)
 {
     global $bd;
     $array = [];
-    $query = mysqli_query($bd, "SELECT * FROM evento_avisos WHERE id_evento = '$id'");
+    $query = mysqli_query($bd, "SELECT * FROM evento_avisos WHERE id_evento = '$id' ORDER BY id_aviso DESC LIMIT 5");
     if($query) { 
         while($row = mysqli_fetch_assoc($query))
         {
@@ -578,7 +578,7 @@ function retornaEventoPubAdm($id)
 {
     global $bd;
     $array = [];
-    $query = mysqli_query($bd, "SELECT * FROM evento_pub_adm WHERE id_evento = '$id'");
+    $query = mysqli_query($bd, "SELECT * FROM evento_pub_adm WHERE id_evento = '$id' ORDER BY id_pub DESC LIMIT 10");
     if($query) { 
         while($row = mysqli_fetch_assoc($query))
         {
@@ -595,7 +595,7 @@ function retornaEventoPubMem($id)
 {
     global $bd;
     $array = [];
-    $query = mysqli_query($bd, "SELECT * FROM evento_pub_mem WHERE id_evento = '$id'");
+    $query = mysqli_query($bd, "SELECT * FROM evento_pub_mem WHERE id_evento = '$id' ORDER BY id_pub DESC LIMIT 10");
     if($query) { 
         while($row = mysqli_fetch_assoc($query))
         {
@@ -728,15 +728,19 @@ function retornaEvento($id)
 
 function loadEventosPerseguidos($id)
 {
-	global $bd; $array = [];
+    global $bd; $array = [];
+    $datanow = new DateTime();
+    $datanow = $datanow->format("Y-m-d H:i");
 	$query = mysqli_query($bd, "SELECT * FROM perseguicao WHERE id_perseguidor = '$id' AND tp_perseguidor = '0' AND tp_perseguido = '2'");
 	if($query)
 	{
 		while($row = mysqli_fetch_assoc($query))
 		{
-			$row['id_perseguidor'] = retornaProfile($row['id_perseguidor']);
-			$row['id_perseguido'] = retornaEvento($row['id_perseguido']);
-			$array[]=$row;
+            if($row['dt_evento'] > $datanow) {
+                $row['id_perseguidor'] = retornaProfile($row['id_perseguidor']);
+                $row['id_perseguido'] = retornaEvento($row['id_perseguido']);
+                $array[]=$row;
+            }
 		}
 		echo json_encode($array, JSON_PRETTY_PRINT);
 	}
@@ -1338,7 +1342,108 @@ function listComunidades($id) {
     echo json_encode($response);
 }
 
+function verificaPerseguiçãoUserEvento($eid,$uid) {
+    global $bd;
+    $sql = "SELECT * FROM perseguicao WHERE tp_perseguido = '2' AND tp_perseguidor = '0' AND id_perseguido = '$eid' AND id_perseguidor='$uid' ";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function listEventos($id) {
+    global $bd;
+    $datanow = new DateTime();
+    $datanow = $datanow->format("Y-m-d H:i");
+    $sql = "SELECT * FROM evento ORDER BY id_evento DESC LIMIT 4";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+        $rows=[];
+        while($row=mysqli_fetch_assoc($query)) {
+            if(!verificaPerseguiçãoUserEvento($row['id_evento'],$id) and $row['dt_evento'] > $datanow) {
+                $rows[]=$row;
+            }
+        }
+        $response = [ 
+            "data" => $rows,
+            "error" => false,
+            "operation" => "evento->findAll"
+        ];
+    } else {
+        $response = [ 
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "evento->findAll"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function loadLocais() {
+    global $bd;
+    $sql = "SELECT * FROM local";
+    $query = mysqli_query($bd,$sql);
+    if(mysqli_num_rows($query) > 0) {
+        $rows=[];
+        while($row=mysqli_fetch_assoc($query)) {
+            $rows[]=$row;
+        }
+        $response = [
+            "data" => $rows,
+            "error" => false,
+            "operation" => "local->findAll"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "local->findAll"
+        ];
+    }
+    echo json_encode($response);
+}
+
+function addAlunoEvento($id,$no,$dt,$idl) {
+    global $bd;
+    $sql = "INSERT INTO aluno_evento (id_organizador,no_evento,dt_evento,id_local) VALUES ('$id','$no','$dt','$idl') ";
+    $query = mysqli_query($bd,$sql);
+    if($query) {
+        $response = [
+            "data" => mysqli_insert_id($bd),
+            "error" => false,
+            "operation" => "aluno_evento->insert"
+        ];
+    } else {
+        $response = [
+            "data" => mysqli_error($bd),
+            "error" => true,
+            "operation" => "aluno_evento->insert"
+        ];
+    }
+    echo json_encode($response);
+}
+
 switch($webservice) {
+    case "addAlunoEvento":
+    {
+        headerJSON();
+        addAlunoEvento($id,GET("no_evento"),GET("dt_evento"),GET("id_local"));
+        break;
+    }
+    case "loadLocais":
+    {
+        headerJSON();
+        loadLocais();
+        break;
+    }
+    case "carregaNovosEventos":
+    {
+        headerJSON();
+        listEventos($id);
+        break;
+    }
     case "ComunidadeInscricao":
     {
         headerJSON();
@@ -1371,157 +1476,157 @@ switch($webservice) {
     }
     case "sugerirTema":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         sugerirTema($id);
         break;
     }
     case "loadEntrada":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadEntrada();
         break;
     }
     case "criaComunidade":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         criaComunidade(GET("json"));
         break;
     }
     case "loadTema":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadTema();
         break;
     }
     case "verificaInscricao":
     {
-        header('Content-Type: application/json');
-        verificaInscricao($id,filter_input(INPUT_GET,'cid'));
+        headerJSON();
+        verificaInscricao($id,GET('cid'));
         break;
     }
     case "denunciaMembro":
     {
-        header('Content-Type: application/json');
-        denunciaMembro($id,filter_input(INPUT_GET,'uid'),filter_input(INPUT_GET,'cid'),filter_input(INPUT_GET,'txDenuncia'));
+        headerJSON();
+        denunciaMembro($id,GET('uid'),GET('cid'),GET('txDenuncia'));
         break;
     }
     case "loadInscritos":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadInscrito($id);
         break;
     }
     case "loadComunidadeDetalhes":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadComunidadeDetalhes($id);
         break;
     }
     case "removeComunidadeInscrito":
     {
-        header('Content-Type: application/json');
-        removeComunidadeInscrito($id,filter_input(INPUT_GET,'cid'));
+        headerJSON();
+        removeComunidadeInscrito($id,GET('cid'));
         break;
     }
     case "editComunidadeLegenda":
     {
-        header('Content-Type: application/json');
-        editComunidadeLegenda($id,filter_input(INPUT_GET,'legendav'));
+        headerJSON();
+        editComunidadeLegenda($id,GET('legendav'));
         break;
     }
     case "deletarFotoComunidade":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         deletarFotoComunidade($id);
         break;
     }
     case "salvarEditarPostComunidade":
     {
-        header('Content-Type: application/json');
-        salvarEditarPostComunidade($id,filter_input(INPUT_GET,'post'));
+        headerJSON();
+        salvarEditarPostComunidade($id,GET('post'));
         break;
     }
     case "deletarPostComunidade":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         deletarPostComunidade($id);
         break;
     }
     case "salvaPostComunidade":
     {
-        header('Content-Type: application/json');
-        salvaPostComunidade($id,filter_input(INPUT_GET,'idc'),filter_input(INPUT_GET,'post'));
+        headerJSON();
+        salvaPostComunidade($id,GET('idc'),GET('post'));
         break;
     }
     case "deleteFotoPerfil":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         deleteFotoPerfil($id);
         break;
     }
     case "saveTelefone":
     {
-        header('Content-Type: application/json');
-        salvarTelefone($id,filter_input(INPUT_GET,'telefone')); 
+        headerJSON();
+        salvarTelefone($id,GET('telefone')); 
         break;
     }
     case "deleteComunidadeEntrada":
     {
-        header('Content-Type: application/json');
-        deleteComunidadeEntrada($id,filter_input(INPUT_GET,'idaluno'));
+        headerJSON();
+        deleteComunidadeEntrada($id,GET('idaluno'));
         break;
     }
     case "editReuniao":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         editReuniao($id,$_GET['a'],$_GET['b'],$_GET['c']);
         break;
     }
     case "findReuniao":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         findReuniao($id);
         break;
     }
     case "deleteReuniao":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         deleteReuniao($id);
         break;
     
     }
     case "saveReuniao":
     {
-        $e = filter_input(INPUT_GET,'id_professor');
-        $a = filter_input(INPUT_GET,'title_reuniao');
-        $b = filter_input(INPUT_GET,'date_reuniao');
-        $c = filter_input(INPUT_GET,'txpost_reuniao');
-        $d = filter_input(INPUT_GET,'id_local');
-        header('Content-Type: application/json');
+        $e = GET('id_professor');
+        $a = GET('title_reuniao');
+        $b = GET('date_reuniao');
+        $c = GET('txpost_reuniao');
+        $d = GET('id_local');
+        headerJSON();
         saveReuniao($a,$b,$c,$d,$e);
         break;
     }
     case "loadLocal":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadLocal();
         break;
     }
     case "loadCalendar":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadCalendar($id);
         break;
     }
     case "editNote":
     {
-        $note = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
+        $note = GET('input',FILTER_SANITIZE_STRING);
         editNote($id,$note);
         break;
     }
     case "salvarNote":
     {
-        $note = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
+        $note = GET('input',FILTER_SANITIZE_STRING);
         saveNote($id,$note);
         break;
     }
@@ -1532,13 +1637,13 @@ switch($webservice) {
     }
     case "saveAviso":
     {
-        $aviso = filter_input(INPUT_GET,'input',FILTER_SANITIZE_STRING);
+        $aviso = GET('input',FILTER_SANITIZE_STRING);
         saveAviso($id,$aviso);
         break;
     }
     case "viewNote":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         findAnotacoes($id);
         break;
     }
@@ -1559,13 +1664,13 @@ switch($webservice) {
     }
     case "sEditPost":
     {
-        $comentario = filter_input(INPUT_GET,'comentario');
+        $comentario = GET('comentario');
         sEditPost($id,$comentario);
         break;
     }
     case "reservaItem":
     {
-        $aluno = filter_input(INPUT_GET, 'aluno');
+        $aluno = GET( 'aluno');
         reservaItem($id,$aluno);
         break;
     }
@@ -1697,25 +1802,25 @@ switch($webservice) {
     }
     case "loadEvento":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadEvento($id);
         break;
     }
 	case "eventoPerseguidos":
 	{
-		header('Content-Type: application/json');
+		headerJSON();
 		loadEventosPerseguidos($id);
 		break;
     }
     case "avisosLoad":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         prp_avisos_load();
         break;
     }
     case "notesload":
     {
-        header('Content-Type: application/json');
+        headerJSON();
         loadAnotacoes($id);
         break;
     }

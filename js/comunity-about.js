@@ -1,9 +1,8 @@
 function init_page()
 {
+    var app;
+    //Remoção em breve:  Orientação ao programador através do console do navegador
     
-
-    //Remoção em breve: console.info("Iniciando... 75%"); Orientação ao programador através do console do navegador
-    console.info("Iniciando... 75%");
     //Indicação visual no menu, da página em que está sendo exibido.
     $("#lb1").parent().removeClass("active");
     $("#lb6").addClass("active");
@@ -12,7 +11,15 @@ function init_page()
     $(".btn-danger").click(denunciaMembro);
     $(".btn-success").click(removeInscrito);
     loadComunidadeDetalhes();
-    $.get(joinComunitydata.url,joinComunitydata,joinComunity);
+    $.get(joinComunitydata.url,joinComunitydata,joinComunity)
+    .done(function(){
+        if(app == undefined) {
+            $(".about-description2").hide();
+            $(".about2").hide();
+            $(".about-title2").hide();
+        }
+        
+    });
 }
 
 function loadComunidadeDetalhes() {
