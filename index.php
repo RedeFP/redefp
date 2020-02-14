@@ -36,15 +36,15 @@
 				<div class="col mob2"><img src="css/logo.png" style="width:30vw;max-width: 160px;"></div>
 				<div class="col btnicon">
 					<!-- <a href="auth/register.php"><button class="btn btn-danger">Registrar</button></a> -->
-					<!-- <a href="auth/login.php"><button class="btn btn-success">Login</button></a> -->
+					<a href="auth/login.php"><button class="btn btn-success">Login</button></a>
 				</div>
 			</div>
 		</header>
 		<main role="main" class="container-fluid">
 			<img src="css/logo.png" class="indexlogo">
-			<p style="font-size: medium; text-align: justify">A rede social Centrão está para trazer uma inovação à escola técnica de SP, a ETEC Fernando Prestes, uma experiência imerciva e profunda entre colegas de classe. Onde todos poderão se conectar, compartilhar experiencias e até mesmo conhecer pessoas que nunca virão pelos corredores. Tudo isso de forma intuitiva e segura através de nosso webapp.</p>
+			<p style="font-size: medium; text-align: justify">A rede social Centrão está para trazer uma inovação à todos os usuários deste projeto, o qual surgiu como uma forma menos invasiva e respeitosa que redes sociais maiores, pois não coletamos dados dos usuários, e pretendemos melhorar constantemente a segurança, para tornar a experiência o mais transparente possivel. Tudo isso de forma intuitiva e segura através de nosso webapp. E para desenvolvedores e pessoas que queiram entender um pouco mais como funciona o webapp, pode consultar nosso repositório no <a href="https://github.com/d3cr1pt/redefp">GitHub</a>.</p>
 		</main>
-		<footer class="footer">
+		<footer class="footer"  style="display: none">
 			<div class="container">
 				<center><span class="text-muted">O software Centrão está sob licenciamento: <a href="LICENSE.md"><img src="css/MIT.png" style="width:30px"></a>. O código fonte está disponivel em <a href="https://github.com/d3cr1pt/redefp">GitHub</a>.</span></center>
 			</div>
