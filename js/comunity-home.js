@@ -1,22 +1,31 @@
 //Função responsavel pelo carregamento do conteudo à página, é chamada apartir do arquivo loadComunity.js
 function init_page()
 {
+    var app;
     //Orientação ao programador
-    console.info("Iniciando... 75%");
+    
 
     //Orientação ao sistema para se informar apartir dos parametros URL
     var idc = $_GET['id'];
     
-    //
-    $.get(URLBASE+"/gateway/getJSON.php",{f:"loadPostComunity",id:idc}, function(result){
-        obj = JSON.parse(result);
-        obj.forEach(searchByUser);
-        $.get(joinComunitydata.url,joinComunitydata,joinComunity);
-    })
-    .done(function(){
-        
-        console.info("Iniciando... 100%");
-    });
+    $.get(joinComunitydata.url,joinComunitydata,joinComunity);
+    if(app == 1) {
+        data1 = {
+            f:"loadPostComunity",
+            id:idc,
+            url: URLBASE + SERVER
+        }
+        $.get(data1.url,data1,function(result){
+            obj = JSON.parse(result);
+            obj.forEach(searchByUser);
+        })
+        .done(function(){
+            
+            
+        });
+    } else {
+        $("#addPostBtn").remove();
+    }
 }
 
 $(function(){

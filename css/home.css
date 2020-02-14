@@ -9,6 +9,14 @@
     margin-right: auto;
 }
 
+.btn-evento {
+    text-overflow: ellipsis !important;
+    max-width: 150px !important;
+    overflow: hidden !important; 
+    white-space: nowrap !important; 
+    display: block !important;
+}
+
 body {
     background-color: #e6d690;
 }
@@ -269,6 +277,10 @@ span {
     padding: 2px !important;
 }
 
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .evento-img {
     margin-bottom: 5px !important;
     border-radius: 50% !important;
@@ -280,6 +292,10 @@ span {
     background-color: orange !important; 
     padding: 10px !important;
     border-radius: 25px !important;
+    margin-left: 10px !important; 
+    margin-right: 10px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 }
 
 div.list-group-item {

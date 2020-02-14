@@ -10,7 +10,7 @@
     - [ ] JS
   - [ ] Organizador
     - [ ] Create (Assign to me)
-    - [ ] Read
+    - [x] Read
     - [ ] Update (Opt out of an event)
     - [ ] Modal
     - [ ] API
@@ -19,3 +19,47 @@
     - [ ] Create (Private event)
     - [ ] Read
     - [ ] Update (Changes)
+- [ ] Evento (Organizador)
+  - [ ] Informações principais
+    - [ ] Create
+    - [x] Read 
+    - [ ] Update
+    - [ ] Delete
+    - [ ] API
+  - [ ] Avisos de Administrador
+    - [ ] Create
+    - [x] Read
+    - [ ] Update
+    - [ ] Delete 
+    - [ ] API
+  - [ ] Perseguidores
+    - [ ] Create
+    - [ ] Auto-Perseguir se for dono
+    - [ ] Auto-Perseguir se tiver convite
+    - [x] Read
+    - [ ] Delete
+  - [ ] Convite
+    - [ ] Create
+    - [ ] Comprar
+    - [ ] Auto-Convite se evento vl_preco == 0 & if_doacao == false, para perseguidores
+    - [ ] Read
+    - [ ] Delete (Organizador)
+    - [ ] API
+  - [ ] Publicações ADM
+    - [ ] Create
+    - [ ] Read (rev)
+    - [ ] Update
+    - [ ] Delete
+    - [ ] API
+  - [ ] Publicações Membros
+    - [ ] Create
+    - [ ] Read (rev)
+    - [ ] Update
+    - [ ] Delete
+    - [ ] API
+  - Galeria
+    - [ ] Create
+    - [ ] Read (rev)
+    - [ ] Update
+    - [ ] Delete
+    - [ ] API

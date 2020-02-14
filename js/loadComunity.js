@@ -1,10 +1,15 @@
 function init()
 {
-    console.info("Iniciando... 0%");
+    
     var idc = $_GET['id'];
-    $.get(URLBASE+"/gateway/getJSON.php",{f:"one-comunity", id: idc}, function(result){
+    data = {
+        url: URLBASE + SERVER,
+        f:"one-comunity",
+        id: idc
+    }
+    $.get(data.url,data, function(result){
         if(result == "400 ERROR") {
-            console.error("Erro não foi possivel carregar esta comunidade, verifique");
+            alert("Erro não foi possivel carregar esta comunidade, verifique");
         } else {
             var obj = JSON.parse(result);
             $(".comunity-name").html(obj.nome);
@@ -24,14 +29,14 @@ function init()
             {
                 $(".comunity-pic").attr("src",URLBASE+obj.icon_url);
             }
-            console.info("Iniciando... 25%");
+            
             $("#lb1").attr("href","comunity.php?id="+obj.id);
             $("#lb2").attr("href","./store/index.php?c="+obj.id);
             $("#lb3").attr("href","comunity-pictures.php?id="+obj.id);
             $("#lb4").attr("href","diary.php?c="+obj.id);
             $("#lb5").attr("href","comunity-members.php?id="+obj.id);
             $("#lb6").attr("href","comunity-about.php?id="+obj.id);
-            console.info("Iniciando... 50%");
+            
             init_page();
         }
     });
@@ -47,7 +52,10 @@ joinComunitydata = {
 
 function joinComunity(result) {
     if(!isValid(result)) {
+        app = 0;
         $(".comunity-name").append("&nbsp;<button class='btn btn-success' onclick='inscreverComunidade()'><i class='fas fa-plus'></i>&nbsp;Inscrever</button>").css("padding-top","20px").css("padding-bottom","20px");
+    } else {
+        app = 1;
     }
 }
 

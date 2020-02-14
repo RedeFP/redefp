@@ -4,13 +4,16 @@ if($_GET['id'] == undefined)
 }
 else
 {
-	var ide = $_GET['id'];
-	$("#lb1").attr("href","evento.php?id="+ide);
-	$("#lb2").attr("href","evento-chat.php?id="+ide);
+	$("#lb1").attr("href","evento.php?id="+$_GET['id']);
+	$("#lb2").attr("href","evento-chat.php?id="+$_GET['id']);
 	$("#lb2").attr("class","nav-link active");
-
-    $.get("/gateway/getJSON.php",{f:"loadEvento",id:ide},function(result){
-        console.log(obj = result);
+	data = {
+		url: URLBASE + SERVER,
+		f: "loadEvento",
+		id: $_GET['id']
+	}
+    $.get(data.url,data,function(result){
+        obj = result;
         $("#event-name").html(obj.no_evento);
         $("#event-date").html(new Date(obj.dt_evento).toLocaleString());
         $("#place-name").html(obj.id_local.no_local);
@@ -48,26 +51,6 @@ function genPubAdm(item)
 		textarea.setAttribute("width","100vh");
 		textarea.innerText = item.tx_post;
 		container.appendChild(textarea);
-		hit1 = document.createElement("button");
-		hit1.setAttribute("class","hitbox");
-		hit1.setAttribute("onclick","likePost("+item.id_pub+")");
-			pic1 = document.createElement("img");
-			pic1.setAttribute("class","hitpic");
-			pic1.setAttribute("src","./vendor/custom-icons/like.png");
-			hit1.appendChild(pic1);
-			like = document.createTextNode("10");
-			hit1.appendChild(like);
-		container.appendChild(hit1);
-		hit2 = document.createElement("button");
-		hit2.setAttribute("class","hitbox");
-		hit2.setAttribute("onclick","deslikePost("+item.id_pub+")");
-			pic2 = document.createElement("img");
-			pic2.setAttribute("class","hitpic");
-			pic2.setAttribute("src","./vendor/custom-icons/deslike.png");
-			deslike = document.createTextNode(item.nr_deslike);
-			hit2.appendChild(pic2);
-			hit2.appendChild(deslike);
-		container.appendChild(hit2);
 	document.getElementById("import1").appendChild(container);
 }
 
@@ -97,20 +80,18 @@ function genPubMem(item)
 		hit1 = document.createElement("button");
 		hit1.setAttribute("class","hitbox");
 		hit1.setAttribute("onclick","likePost("+item.id_pub+")");
-			pic1 = document.createElement("img");
-			pic1.setAttribute("class","hitpic");
-			pic1.setAttribute("src","./vendor/custom-icons/like.png");
+			pic1 = document.createElement("i");
+			pic1.setAttribute("class","fas fa-thumbs-up");
 			hit1.appendChild(pic1);
-			like = document.createTextNode("10");
+			like = document.createTextNode(" "+item.nr_like);
 			hit1.appendChild(like);
 		container.appendChild(hit1);
 		hit2 = document.createElement("button");
 		hit2.setAttribute("class","hitbox");
 		hit2.setAttribute("onclick","deslikePost("+item.id_pub+")");
-			pic2 = document.createElement("img");
-			pic2.setAttribute("class","hitpic");
-			pic2.setAttribute("src","./vendor/custom-icons/deslike.png");
-			deslike = document.createTextNode(item.nr_deslike);
+			pic2 = document.createElement("i");
+			pic2.setAttribute("class","fas fa-thumbs-down");
+			deslike = document.createTextNode(" "+item.nr_deslike);
 			hit2.appendChild(pic2);
 			hit2.appendChild(deslike);
 		container.appendChild(hit2);

@@ -21,6 +21,7 @@
                         <ul class="list-group">
                             <a href="profile.php" id="l1"><li class="list-group-item list-group-item-danger" style="margin-top:2px; ">Publicações</li></a>
                             <a href="profile-pictures.php" id="l2"><li class="list-group-item list-group-item-hover-success" style="margin-top:2px; " id="l3">Fotos</li></a>
+                            <a href="profile-events.php" id="l5"><li class="list-group-item list-group-hover-primary" style="margin-top:2px;" id="b5">Eventos</li></a>
                             <a href="profile-comunity.php" id="l3"><li class="list-group-item list-group-item-hover-warning" style="margin-top: 2px;">Comunidades</li></a>
                             <a href="profile-contact.php" id="l4"><li class="list-group-item list-group-item-hover-primary" style="margin-top:2px; ">Contato</li></a>
                         </ul>

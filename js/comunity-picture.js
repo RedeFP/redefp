@@ -1,34 +1,41 @@
 //Função executada externamente pelo loadComunity.js que carrega o conteudo do JSON para a visualizaçõo.
 function init_page()
 {
+	var app;
+	//Remoção em breve:  Que servia como orientação para identificar estágio dos problemas que ocorrem durante a execução da página.
 	
-	//Remoção em breve: console.info("Iniciando... 75%"); Que servia como orientação para identificar estágio dos problemas que ocorrem durante a execução da página.
-	console.info("Iniciando... 75%");
 
 	$.get(joinComunitydata.url,joinComunitydata,joinComunity);
 
 	//Identificação da comunidade, através de parametro passado na URL da página, usando a variavel $)GET inicializada dentro do arquivo libGET.js
 	idc = $_GET['id'];
 
-	//Requisição assincrona para o controlador do banco de dados, que em breve será o URLBASE+gateway/BDController.php, e então passa o conteudo para as funções responsaveis por carregar o conteudo para a visualização.
-	$.get(URLBASE+"/gateway/getJSON.php",{f:"comunity-pictures",id:idc},function(result){
-
-		//Transformação do conteudo obtido por requisição em um objeto
-		var obj = JSON.parse(result);
-		//Callback do conteudo nódo por nódo através da função genImages
-		obj.forEach(genImages);
-		//Remoção em breve: console.info("Iniciando... 90%"); Que serve como orientação de estágio de execução da página
-		console.info("Iniciando... 90%");
-
-	});
+	//Requisição assincrona para o controlador do banco de dados, que em breve será o gateway/BDController.php, e então passa o conteudo para as funções responsaveis por carregar o conteudo para a visualização.
+	data = {
+		url: URLBASE + SERVER,
+		f: "comunity-pictures",
+		id: $_GET['id']
+	};
+	if(app == 1) {
+		$.get(data.url,data,function(result){
+	
+			//Transformação do conteudo obtido por requisição em um objeto
+			var obj = JSON.parse(result);
+			//Callback do conteudo nódo por nódo através da função genImages
+			obj.forEach(genImages);
+			//Remoção em breve: console.info("Iniciando... 90%"); Que serve como orientação de estágio de execução da página
+			console.info("Iniciando... 90%");
+	
+		});
+		//Criação de um botão suspenso na parte de cima às publicações permitindo que o usuário crie uma publicação
+	// Tal verificação deverá ocorrer no momento, da inicialização do item abaixo, no momento de permitir que a janela suspensa crie o formulário de envio, e no servidor antes de registrar o arquivo em nossa base de dados.
+		$("#import").prepend("<div id='add' class='col-12'><button class='btn btn-primary' style='width:100% !important'><i class='fas fa-plus'></i>&nbsp;Adicionar nova publicação</button></div>");
+	} 
 	//Remoção da classe de identificação visual no item do menu
 	$("#lb1").parent().removeClass("active");
 	//Adição da classe de identificação do item em visualização no menu
 	$("#lb3").parent().addClass("active");
-	//Criação de um botão suspenso na parte de cima às publicações permitindo que o usuário crie uma publicação
-	//Em breve é necessário criar um metodo para verificação se o usuário já está inscrito nesta comunidade para poder então liberar que o mesmo crie publicações
-	// Tal verificação deverá ocorrer no momento, da inicialização do item abaixo, no momento de permitir que a janela suspensa crie o formulário de envio, e no servidor antes de registrar o arquivo em nossa base de dados.
-	$("#import").prepend("<div id='add' class='col-12'><button class='btn btn-primary' style='width:100% !important'><i class='fas fa-plus'></i>&nbsp;Adicionar nova publicação</button></div>");
+	
 }
 
 //Execução de rotinas após requisições assíncronas.
@@ -41,7 +48,7 @@ $(document).on("ajaxStop",function(){
 
 //Remoção em breve: bloco de código abaixo; Serve como orientação para os estágios de carregamento da página
 $(document).one("ajaxStop",function(){
-	console.info("Iniciando... 100%");
+	
 });
 
 function startAddFotoComunidade(){
